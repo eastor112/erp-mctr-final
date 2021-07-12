@@ -9,7 +9,6 @@ import { MainContainerPanel } from './components/MainContainerPanel'
 export const PanelMainScreen = () => {
 
   const { location } = useParams();
-  console.log(location);
 
   return (
     <>

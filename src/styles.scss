@@ -320,6 +320,19 @@ footer {
       color: $color-primario;
     }
 
+    .logout {
+      outline: none;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-left: 15px;
+
+      &:hover {
+        color: $color-primario;
+      }
+    }
+
     .seleccionado {
       font-weight: 500;
       color: $color-primario;

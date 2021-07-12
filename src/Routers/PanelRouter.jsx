@@ -1,18 +1,27 @@
 //react
-import React from 'react'
+import React, { useEffect } from 'react'
+
 //third
 import {
   Switch,
-  Route
+  Route,
+  useLocation
 } from "react-router-dom";
-import { HeaderPanel } from '../modules/panel/components/HeaderPanel';
+
 //local
+import { HeaderPanel } from '../modules/panel/components/HeaderPanel';
 import { PanelMainScreen } from '../modules/panel/main/PanelMainScreen';
 import { SyllabesAppRouter } from './SyllabesAppRouter';
 
 
 //component
 export const PanelRouter = () => {
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    localStorage.setItem('lastpath', pathname);
+  }, [pathname])
 
 
   return (

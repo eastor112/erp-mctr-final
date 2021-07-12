@@ -1,7 +1,34 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+//react
+import React, { useEffect } from 'react'
 
+//third
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useHistory } from 'react-router-dom'
+
+//local
+import { startGoogleLogout } from '../../../actions/auth-actions'
+
+
+//component
 export const Sidebar = () => {
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector(state => state.auth);
+
+  const history = useHistory();
+
+  const handleLogout = () => {
+
+    localStorage.removeItem('lastpath');
+    dispatch(startGoogleLogout());
+  }
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      history.push('/');
+    }
+  }, [isAuthenticated]);
+
+
   return (
     <div className="panel__sidebar">
       <div className="sidebar__top">
@@ -42,12 +69,15 @@ export const Sidebar = () => {
             </NavLink>
           </li>
 
-          <li>
-            <NavLink to='/' >
-              <i className="fas fa-sign-out-alt"></i>Salir
-            </NavLink>
-          </li>
+          <button
+            className='logout'
+            onClick={handleLogout}
+          >
+            <li><i className="fas fa-sign-out-alt"></i>Salir</li>
+          </button>
+
         </ul>
+
       </div>
 
       <div className="sidebar__bottom">
