@@ -5,32 +5,34 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { HeaderPanel } from '../modules/panel/components/HeaderPanel';
 //local
 import { PanelMainScreen } from '../modules/panel/main/PanelMainScreen';
-import { PanelProfileScreen } from '../modules/panel/profile/PanelProfileScreen';
-import { PanelUsersScreen } from '../modules/panel/users/PanelUsersScreen';
 import { SyllabesAppRouter } from './SyllabesAppRouter';
 
 
 //component
 export const PanelRouter = () => {
+
+
   return (
-    <Switch>
-      <Route path='/panel/syllabes'>
-        <SyllabesAppRouter />
-      </Route>
+    <>
+      <HeaderPanel />
 
-      <Route path='/panel/users'>
-        <PanelUsersScreen />
-      </Route>
+      <Switch>
+        <Route exact path='/panel/syllabes'>
+          <SyllabesAppRouter />
+        </Route>
 
-      <Route path='/panel/profile'>
-        <PanelProfileScreen />
-      </Route>
+        <Route path='/panel/:location'>
+          <PanelMainScreen />
+        </Route>
 
-      <Route path='/panel'>
-        <PanelMainScreen />
-      </Route>
-    </Switch>
+        <Route path='/panel'>
+          <PanelMainScreen />
+        </Route>
+      </Switch>
+    </>
+
   );
 }

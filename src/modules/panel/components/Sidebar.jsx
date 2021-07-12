@@ -25,7 +25,9 @@ export const Sidebar = () => {
         <ul className="sidebar__menu">
 
           <li>
-            <NavLink to='/panel' activeClassName="seleccionado"><i className="fas fa-th-large"></i>Panel de control</NavLink>
+            <NavLink to='/panel' activeClassName="seleccionado">
+              <i className="fas fa-th-large"></i>Panel de control
+            </NavLink>
           </li>
 
           <li>
@@ -39,6 +41,7 @@ export const Sidebar = () => {
               <i className="fas fa-users"></i>Cuentas de usuario
             </NavLink>
           </li>
+
           <li>
             <NavLink to='/' >
               <i className="fas fa-sign-out-alt"></i>Salir

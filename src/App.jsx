@@ -1,9 +1,10 @@
 //react
 import React from 'react'
 //third
-
+import { Provider } from 'react-redux';
 //local
 import { AppRouter } from './Routers/AppRouter'
+import { store } from './store/store';
 import './styles.scss';
 
 
@@ -11,6 +12,8 @@ import './styles.scss';
 export const App = () => {
 
   return (
-    <AppRouter />
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
   )
 }

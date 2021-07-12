@@ -1,75 +1,36 @@
 import React from 'react'
-import { HeaderPanel } from '../components/HeaderPanel'
+import { useParams } from 'react-router-dom'
 import { MenuTopPanel } from '../components/MenuTopPanel'
 import { Sidebar } from '../components/Sidebar'
+import { PanelProfileScreen } from '../profile/PanelProfileScreen'
+import { PanelUsersScreen } from '../users/PanelUsersScreen'
+import { MainContainerPanel } from './components/MainContainerPanel'
 
 export const PanelMainScreen = () => {
+
+  const { location } = useParams();
+  console.log(location);
+
   return (
     <>
-      <HeaderPanel />
-
       <div className="panel__container">
 
         <Sidebar />
 
         <main className="panel__main">
+          {
+            !location && <MainContainerPanel />
+          }
 
-          <MenuTopPanel />
+          {
+            location === 'users' && <PanelUsersScreen />
+          }
 
-          <section className="panel__contenedor__cards">
-
-            <div className="card__modulo">
-              <figure>
-                <img src="./assets/curso.jpg" alt="" />
-              </figure>
-              <i className="fas fa-check-double"></i>
-              <h3>SILABOS</h3>
-              <p>
-                Módulo para elaboración, visado y visualización de silabos del Programa de Ingeniería Mecatrónica
-              </p>
-              <button onClick={() => { hist.push('/panel/silabos') }}>INGRESAR</button>
-            </div>
-
-            <div className="card__modulo disable">
-              <figure>
-                <img src="./assets/curso.jpg" alt="" />
-              </figure>
-              <i className="fas fa-cogs"></i>
-              <h3>EVALUACION</h3>
-              <p>
-                Módulo para elaboración, visado y visualización de silabos del Programa de Ingeniería Mecatrónica
-              </p>
-              <button disabled>INGRESAR</button>
-            </div>
-
-            <div className="card__modulo disable">
-              <figure>
-                <img src="./assets/curso.jpg" alt="" />
-              </figure>
-              <i className="fas fa-cogs"></i>
-              <h3>RUBRICAS</h3>
-              <p>
-                Módulo para elaboración, visado y visualización de silabos del Programa de Ingeniería Mecatrónica
-              </p>
-              <button disabled>INGRESAR</button>
-            </div>
-
-            <div className="card__modulo disable">
-              <figure>
-                <img src="./assets/curso.jpg" alt="" />
-              </figure>
-              <i className="fas fa-cogs"></i>
-              <h3>HORARIOS</h3>
-              <p>
-                Módulo para elaboración, visado y visualización de silabos del Programa de Ingeniería Mecatrónica
-              </p>
-              <button disabled>INGRESAR</button>
-            </div>
-
-          </section>
+          {
+            location === 'profile' && <PanelProfileScreen />
+          }
 
         </main>
-
       </div>
     </>
   )

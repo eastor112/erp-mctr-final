@@ -5,14 +5,9 @@ import { Sidebar } from '../components/Sidebar'
 export const PanelProfileScreen = () => {
   return (
     <>
-      <HeaderPanel />
 
-      <div className="panel__container">
-
-        <Sidebar />
-
-        <main className="panel__main">
-          {/* {
+      <h1>USER PROFILE</h1>
+      {/* {
             datosUsuario &&
             <>
               <h3 className="perfil__usuario__titulo">PERFIL DE {`${datosUsuario.nombres} ${datosUsuario.apellido_paterno} ${datosUsuario.apellido_materno}`.toUpperCase()}</h3>
@@ -56,10 +51,6 @@ export const PanelProfileScreen = () => {
             </>
           } */}
 
-
-        </main>
-
-      </div>
     </>
   )
 }
