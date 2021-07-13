@@ -1,7 +1,7 @@
 import { types } from "../types";
 
 
-export const authReducer = (state = { isAuthenticated: false }, action) => {
+export const authFirebaseReducer = (state = { isAuthenticated: false }, action) => {
   switch (action.type) {
 
     case types.login:

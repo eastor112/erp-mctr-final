@@ -8,13 +8,14 @@ import { useHistory } from 'react-router-dom'
 //local
 import { startGoogleLogin } from '../../actions/auth-actions'
 
+
 //component
 export const LoginScreen = () => {
 
   const history = useHistory()
 
   const dispatch = useDispatch();
-  const { uid } = useSelector(state => state.auth);
+  const auth = useSelector(state => state.auth);
 
   const [waiting, setWaiting] = useState(false);
 
@@ -25,7 +26,10 @@ export const LoginScreen = () => {
 
   useEffect(() => {
     setWaiting(false);
-    if (uid) {
+    if (auth?.uid) {
+
+      // dispatch(getToken(auth.email, auth.uid));
+
       const lastpath = localStorage.getItem('lastpath');
 
       if (lastpath) {
@@ -34,7 +38,7 @@ export const LoginScreen = () => {
         history.replace('/panel');
       }
     }
-  }, [uid])
+  }, [auth])
 
 
   return (

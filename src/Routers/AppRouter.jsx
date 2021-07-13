@@ -16,6 +16,7 @@ import firebase from '../firebase/firebase-config'
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../actions/auth-actions';
 import PrivateRoute from './PrivateRoute';
+import { loginOrCreateUserApiHelper } from '../helpers/auth-helpers';
 
 
 
@@ -32,8 +33,19 @@ export const AppRouter = () => {
     firebase.auth().onAuthStateChanged((user) => {
 
       if (user?.uid) {
-        dispatch(login(user.uid, user.displayName));
+        loginOrCreateUserApiHelper(user.email, user.uid)
+          .then((response) => {
+
+            dispatch(login(
+              user.uid,
+              user.email,
+              user.displayName,
+              user.photoURL,
+              response.data.user,
+              response.data.token));
+          })
       }
+
       setWaiting(false);
     });
   }, [])
