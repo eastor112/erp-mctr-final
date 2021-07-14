@@ -1,56 +1,201 @@
-import React from 'react'
-import { HeaderPanel } from '../components/HeaderPanel'
-import { Sidebar } from '../components/Sidebar'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { capitalizeString } from '../../../helpers/general-helpers';
+import { getAllSchools } from '../../../helpers/schools-helpers';
+import { updateUser } from '../../../helpers/users-helpers';
+import { useForm } from '../../../hooks/useForm'
 
 export const PanelProfileScreen = () => {
+
+  const { user, token } = useSelector(state => state.auth);
+  const [formValues, handleInputChange] = useForm({
+    'id': user.id,
+    'names': user.names,
+    'fathername': user.fathername,
+    'mothername': user.mothername,
+    'email': user.email,
+    'accesslevel': user.accesslevel,
+    'mobilenumber': user.mobilenumber,
+    'school': user.schoolInfo.id
+  });
+
+  const [state, setState] = useState({
+    schools: {}
+  });
+
+  const {
+    names,
+    fathername,
+    mothername,
+    email,
+    accesslevel,
+    mobilenumber,
+    school } = formValues;
+
+  useEffect(() => {
+    getAllSchools(token).then((schools) => {
+      setState({ ...state, schools: schools });
+    });
+  }, [user.schoolInfo.id])
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+
+    updateUser(formValues, token).then((data) => {
+      // TODO crear accion para actualizar información de los usuarios
+      console.log(data);
+    })
+  };
+
+  //TODO Poner sweetalert2 cuando se hace el envío del formulario
+  // TODO Agregar formulario condicional para cuando son docentes y estudiantes
+
   return (
     <>
+      <h3 className="perfil__usuario__titulo">{`${names} ${fathername} ${mothername}`.toUpperCase()}</h3>
 
-      <h1>USER PROFILE</h1>
-      {/* {
-            datosUsuario &&
-            <>
-              <h3 className="perfil__usuario__titulo">PERFIL DE {`${datosUsuario.nombres} ${datosUsuario.apellido_paterno} ${datosUsuario.apellido_materno}`.toUpperCase()}</h3>
-              <form className="perfil__form" action="">
-                <label htmlFor="">Foto de perfil: <input type="file" /></label>
+      <form
+        className="perfil__form"
+        action=""
+        onSubmit={handleSubmit}
+      >
 
-                <input type="text" placeholder="Nombres" value={datosUsuario.nombres} />
-                <input type="text" placeholder="Apellido paterno" value={datosUsuario.apellido_paterno} />
-                <input type="text" placeholder="Apellido materno" value={datosUsuario.apellido_materno} />
-                <input type="email" placeholder="Email institucional" value={datosUsuario.email_unitru} />
 
-                <select name="select">
-                  <option value="value0" defaultValue>{datosUsuario.tipo_usuario}</option>
-                  <option value="value1">Jefe de práctica</option>
-                  <option value="value2">Docente auxiliar</option>
-                  <option value="value3">Docente asociado</option>
-                  <option value="value4">Docente principal</option>
-                </select>
-                <input type="number" placeholder="Código docente  ó matrícula estudiante" value={datosUsuario.codigo} />
-                <input type="text" placeholder="Cargo administrativo (opcional)" value={datosUsuario.cargo} />
-                <input type="text" placeholder="Facultad a la que pertenece" value={'Facultad de ' + datosUsuario.facultad} />
-                <input type="text" placeholder="Departamento al que pertenece" value={'Departamento de ' + datosUsuario.departamento} />
-                <input type="text" placeholder="Escuela a la que pertenece" value={'Escuela académico profesional de ' + datosUsuario.escuela} />
-                <input type="text" placeholder="Profesión" value={datosUsuario.profesion} />
+        {/*  */}
+        <label htmlFor="accesslevel">Nivel de acceso:</label>
+        <select
+          id='accesslevel'
+          name="accesslevel"
+          onChange={handleInputChange}
+          value={accesslevel}
+          disabled
+          readOnly
+        >
+          <option value="estudiante">Estudiante</option>
+          <option value="docente">Docente</option>
+          <option value="director">Director</option>
+        </select>
 
-                <select name="select">
-                  <option value="value0" defaultValue>{datosUsuario.grado_academico}</option>
-                  <option value="value1">Estudiante</option>
-                  <option value="value2">Bachiller</option>
-                  <option value="value3">Titulado o licenciado</option>
-                  <option value="value4">Magister</option>
-                  <option value="value5">Doctor</option>
-                  <option value="value6">Philosophie Doctor</option>
-                </select>
-                <label htmlFor="">Firma digital: <input type="file" /></label>
-                <button type="submit">
-                  <i className="fa fa-save" aria-hidden="true"></i>
-                  &nbsp;&nbsp;GUARDAR CAMBIOS
-                </button>
-              </form>
-            </>
-          } */}
 
+        {/*  */}
+        <label htmlFor="email">Email institucional:</label>
+        <input
+          id='email'
+          type="email"
+          placeholder="Escriba..."
+          name='email'
+          onChange={handleInputChange}
+          value={email}
+          autoComplete='off'
+          readOnly
+          disabled
+        />
+
+
+        {/*  */}
+        <label htmlFor="names">Nombres:</label>
+        <input
+          id='names'
+          type="text"
+          placeholder="Escriba..."
+          name='names'
+          onChange={handleInputChange}
+          value={names}
+          autoComplete='off'
+        />
+
+
+        {/*  */}
+        <label htmlFor="fathername">Apellido paterno:</label>
+        <input
+          id='fathername'
+          type="text"
+          placeholder="Escriba..."
+          name='fathername'
+          onChange={handleInputChange}
+          value={fathername}
+          autoComplete='off'
+        />
+
+
+        {/*  */}
+        <label htmlFor="mothername">Apellido materno:</label>
+        <input
+          id='mothername'
+          type="text"
+          placeholder="Escriba..."
+          name='mothername'
+          onChange={handleInputChange}
+          value={mothername}
+          autoComplete='off'
+        />
+
+
+
+        {/*  */}
+        <label htmlFor="photo">Foto perfil: </label>
+        <input id='photo' type="file" />
+
+
+        {/*  */}
+        <label htmlFor="">Firma para la exportación de documentos: </label>
+        <input type="file" />
+
+
+        {/*  */}
+        <label htmlFor="school">Escuela a la que brinda servicios:</label>
+        <select
+          name="school"
+          id="school"
+          value={school}
+          onChange={handleInputChange}
+        >
+          {
+            state.schools.length > 0 && (
+              state.schools.map((schoolObj) => {
+                return <option value={schoolObj.id} key={schoolObj.id}> {schoolObj.name} </option>
+              })
+            )
+          }
+        </select>
+
+
+        {/*  */}
+        <label htmlFor="mobilenumber">Numero de celular:</label>
+        <input
+          id='mobilenumber'
+          type="text"
+          placeholder="Escriba..."
+          name='mobilenumber'
+          onChange={handleInputChange}
+          value={mobilenumber}
+          autoComplete='off'
+        />
+
+
+        {/* <input type="number" placeholder="Código docente  ó matrícula estudiante" value={user.codeprofessor} />
+        <input type="text" placeholder="Cargo administrativo (opcional)" value={user.supportposition} />
+        <input type="text" placeholder="Facultad a la que pertenece" value={'Facultad de ' + user.schoolInfo.faculty} />
+        <input type="text" placeholder="Departamento al que pertenece" value={'Departamento de ' + user.schoolInfo.department} />
+        <input type="text" placeholder="Profesión" value={user.career} />
+
+        <select name="select">
+          <option value="value0" defaultValue>{user.grade}</option>
+          <option value="value1">Estudiante</option>
+          <option value="value2">Bachiller</option>
+          <option value="value3">Titulado o licenciado</option>
+          <option value="value4">Magister</option>
+          <option value="value5">Doctor</option>
+          <option value="value6">Philosophie Doctor</option>
+        </select> */}
+
+        <button type="submit">
+          <i className="fa fa-save" aria-hidden="true"></i>
+          &nbsp;&nbsp;GUARDAR CAMBIOS
+        </button>
+      </form>
     </>
   )
 }

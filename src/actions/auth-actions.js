@@ -1,6 +1,5 @@
 import { types } from "../types";
 import firebase, { googleAuthProvider } from '../firebase/firebase-config'
-import axios from "axios";
 import { loginOrCreateUserApiHelper } from "../helpers/auth-helpers";
 
 
@@ -27,9 +26,6 @@ export const isAdminToggle = (value) => ({
   type: types.isadmin,
   payload: value
 })
-
-
-
 
 // Acciones con Google
 export const startGoogleLogin = () => {
