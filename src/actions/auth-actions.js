@@ -1,24 +1,33 @@
 import { types } from "../types";
 import firebase, { googleAuthProvider } from '../firebase/firebase-config'
 import axios from "axios";
-import { createUserApiHelper, loginApiHelper, loginOrCreateUserApiHelper } from "../helpers/auth-helpers";
+import { loginOrCreateUserApiHelper } from "../helpers/auth-helpers";
+
 
 // Acciones con el store
-export const login = (uid, email, displayName, photoURL, user = {}, token) => ({
-  type: types.login,
-  payload: {
-    uid,
-    email,
-    displayName,
-    photoURL,
-    user,
-    token
+export const login = (uid, email, displayName, photoURL, user = {}, token) => {
+  return {
+    type: types.login,
+    payload: {
+      uid,
+      email,
+      displayName,
+      photoURL,
+      user,
+      token
+    }
   }
-})
+}
 
 export const logout = () => ({
   type: types.logout
 })
+
+export const isAdminToggle = (value) => ({
+  type: types.isadmin,
+  payload: value
+})
+
 
 
 

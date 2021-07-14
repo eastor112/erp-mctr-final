@@ -1,6 +1,5 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { MenuTopPanel } from '../components/MenuTopPanel'
 import { Sidebar } from '../components/Sidebar'
 import { PanelProfileScreen } from '../profile/PanelProfileScreen'
 import { PanelUsersScreen } from '../users/PanelUsersScreen'

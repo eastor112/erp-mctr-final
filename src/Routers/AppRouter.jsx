@@ -6,6 +6,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from "react-router-dom";
 import { HomeScreen } from '../modules/home/HomeScreen';
 import { LoginScreen } from '../modules/login/LoginScreen';
@@ -17,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../actions/auth-actions';
 import PrivateRoute from './PrivateRoute';
 import { loginOrCreateUserApiHelper } from '../helpers/auth-helpers';
+import PublicRoute from './PublicRoute';
 
 
 
@@ -28,13 +30,15 @@ export const AppRouter = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setWaiting(true);
-
     firebase.auth().onAuthStateChanged((user) => {
+
+      setWaiting(true);
 
       if (user?.uid) {
         loginOrCreateUserApiHelper(user.email, user.uid)
           .then((response) => {
+
+            setWaiting(false);
 
             dispatch(login(
               user.uid,
@@ -43,10 +47,13 @@ export const AppRouter = () => {
               user.photoURL,
               response.data.user,
               response.data.token));
+
           })
+
+      } else {
+        setWaiting(false);
       }
 
-      setWaiting(false);
     });
   }, [])
 
@@ -54,13 +61,17 @@ export const AppRouter = () => {
     return <h2>Espere...</h2>
   }
 
+
+
   return (
     <Router>
       <Switch>
 
-        <Route path="/login">
-          <LoginScreen />
-        </Route>
+        <PublicRoute
+          path="/login"
+          isAuthenticated={isAuthenticated}
+          component={LoginScreen}
+        />
 
         <PrivateRoute
           path="/panel"
@@ -71,6 +82,7 @@ export const AppRouter = () => {
         <Route path="/">
           <HomeScreen />
         </Route>
+
       </Switch>
     </Router>
   )

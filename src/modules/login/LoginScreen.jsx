@@ -1,9 +1,9 @@
 //react
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 //third
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+
 
 //local
 import { startGoogleLogin } from '../../actions/auth-actions'
@@ -12,33 +12,15 @@ import { startGoogleLogin } from '../../actions/auth-actions'
 //component
 export const LoginScreen = () => {
 
-  const history = useHistory()
-
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth);
 
-  const [waiting, setWaiting] = useState(false);
+  const [isLogging, setIsLogging] = useState(false);
 
   const handleLoginGoogle = () => {
-    setWaiting(true);
+    setIsLogging(true);
+    localStorage.removeItem('lastpath');
     dispatch(startGoogleLogin());
   }
-
-  useEffect(() => {
-    setWaiting(false);
-    if (auth?.uid) {
-
-      // dispatch(getToken(auth.email, auth.uid));
-
-      const lastpath = localStorage.getItem('lastpath');
-
-      if (lastpath) {
-        history.push(lastpath);
-      } else {
-        history.replace('/panel');
-      }
-    }
-  }, [auth])
 
 
   return (
@@ -57,7 +39,7 @@ export const LoginScreen = () => {
         <button
           className="ingresar"
           onClick={handleLoginGoogle}
-          disabled={waiting}
+          disabled={isLogging}
         >
           <img src={"./assets/icon__google.png"} alt="" />
           &nbsp;&nbsp; Ingresa con Google

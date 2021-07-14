@@ -7,12 +7,19 @@ export const authFirebaseReducer = (state = { isAuthenticated: false }, action) 
     case types.login:
       return {
         ...action.payload,
-        isAuthenticated: true
+        isAuthenticated: true,
+        isAdmin: false
       }
 
     case types.logout:
       return {
         isAuthenticated: false
+      }
+
+    case types.isadmin:
+      return {
+        ...state,
+        isAdmin: action.payload
       }
 
     default:
