@@ -20,7 +20,6 @@ export const getShoolData = async (schoolId, token) => {
 }
 
 
-
 export const getAllSchools = async (token) => {
   const schoolListUrl = `${BACKEND_URL}/unt-structure-api/v1.0/school`;
 

@@ -3,7 +3,7 @@ import firebase, { googleAuthProvider } from '../firebase/firebase-config'
 import { loginOrCreateUserApiHelper } from "../helpers/auth-helpers";
 
 
-// Acciones con el store
+// Acciones de autentificacion sincronas
 export const login = (uid, email, displayName, photoURL, user = {}, token) => {
   return {
     type: types.login,
@@ -22,12 +22,8 @@ export const logout = () => ({
   type: types.logout
 })
 
-export const isAdminToggle = (value) => ({
-  type: types.isadmin,
-  payload: value
-})
 
-// Acciones con Google
+// Acciones de autentificacion asincronas con google
 export const startGoogleLogin = () => {
   return async (dispatch) => {
     const { user } = await firebase.auth().signInWithPopup(googleAuthProvider);
@@ -51,3 +47,14 @@ export const startGoogleLogout = () => {
     dispatch(logout())
   }
 }
+
+//Otras acciones sincronas
+export const isAdminToggle = (value) => ({
+  type: types.isadmin,
+  payload: value
+})
+
+export const updateUserStore = (user) => ({
+  type: types.updateUser,
+  payload: user
+})

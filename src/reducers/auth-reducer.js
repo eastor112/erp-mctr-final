@@ -22,6 +22,12 @@ export const authFirebaseReducer = (state = { isAuthenticated: false }, action) 
         isAdmin: action.payload
       }
 
+    case types.updateUser:
+      return {
+        ...state,
+        user: action.payload
+      }
+
     default:
       return state;
   }
