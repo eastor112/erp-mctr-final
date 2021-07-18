@@ -18,28 +18,53 @@ export const PanelProfileScreen = () => {
   const dispatch = useDispatch()
   const { user, token } = useSelector(state => state.auth);
   const [formValues, handleInputChange] = useForm({
+    //General profile
     'id': user.id,
     'names': user.names,
     'fathername': user.fathername,
     'mothername': user.mothername,
     'email': user.email,
-    'accesslevel': user.accesslevel,
+    'typeuser': user.typeuser,
     'mobilenumber': user.mobilenumber,
-    'school': user.schoolInfo.id
+    'school': user.schoolInfo.id,
+    //Student profile
+    'codestudent': user.codestudent,
+    'graduate': user.graduate,
+    //Professor profile
+    'codeprofessor': user.codeprofessor,
+    'category': user.category,
+    'career': user.career,
+    'grade': user.grade,
+    'typeServices': user.typeServices,
+    'dedication': user.dedication,
+    'supportposition': user.supportposition,
   });
+
+  const {
+    id,
+    names,
+    fathername,
+    mothername,
+    email,
+    typeuser,
+    mobilenumber,
+    school,
+    codestudent,
+    graduate,
+    codeprofessor,
+    category,
+    career,
+    grade,
+    typeServices,
+    dedication,
+    supportposition } = formValues
+
+
 
   const [state, setState] = useState({
     schools: {}
   });
 
-  const {
-    names,
-    fathername,
-    mothername,
-    email,
-    accesslevel,
-    mobilenumber,
-    school } = formValues;
 
   // agregar limpieza
   useEffect(() => {
@@ -52,23 +77,23 @@ export const PanelProfileScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    updateUser(formValues, token).then((data) => {
-      dispatch(updateUserStore(data));
-    })
+    updateUser(
+      { ...formValues },
+      user.student,
+      user.professor,
+      user.director,
+      user.boss,
+      token).then((data) => {
+        dispatch(updateUserStore(data));
+      });
+
   };
 
   //TODO Poner sweetalert2 cuando se hace el envío del formulario
 
+
   return (
     <>
-
-      <h3 className="perfil__usuario__titulo">{`${names} ${fathername} ${mothername}`.toUpperCase()}</h3>
-
-      <div>
-        <button>General</button>
-        <button>Estudiante</button>
-        <button>Docente</button>
-      </div>
 
       {/* Formulario datos generales */}
       <form
@@ -78,17 +103,49 @@ export const PanelProfileScreen = () => {
         {/* Datos generales */}
         <ProfileGeneralFields
           {...formValues}
+          id={id}
+          names={names}
+          fathername={fathername}
+          mothername={mothername}
+          email={email}
+          typeuser={typeuser}
+          mobilenumber={mobilenumber}
+          school={school}
           handleInputChange={handleInputChange}
-          state={state}
+          state={state} //Pra mostrar la lista de escuelas
         />
 
 
+
         {/* Datos estudiante */}
-        <ProfileStudentFields />
+        {
+          user.student
+          &&
+          <ProfileStudentFields
+            codestudent={codestudent}
+            graduate={graduate}
+            handleInputChange={handleInputChange}
+          />
+        }
+
 
 
         {/* Datos docente */}
-        <ProfileProfessorFields />
+        {
+          (user.professor || user.boss || user.director)
+          &&
+          <ProfileProfessorFields
+            codeprofessor={codeprofessor}
+            category={category}
+            career={career}
+            grade={grade}
+            typeServices={typeServices}
+            dedication={dedication}
+            supportposition={supportposition}
+            handleInputChange={handleInputChange}
+          />
+        }
+
 
         {/* Botton enviar */}
         <div className='perfil__form__button'>

@@ -34,7 +34,12 @@ export const Sidebar = () => {
           photoURL={photoURL}
           displayName={displayName}
           department={user.schoolInfo.department}
+          director={user.director}
+          professor={user.professor}
+          student={user.student}
+          school={user.schoolInfo.school}
           category={user.category}
+
         />
 
         <SidebarMenu adminView={isAdmin} />
@@ -48,6 +53,7 @@ export const Sidebar = () => {
           boss={user.boss}
           adminView={isAdmin}
           handleAdminview={handleAdminview}
+          director={user.director}
         />
 
         <SidebarCopyright />

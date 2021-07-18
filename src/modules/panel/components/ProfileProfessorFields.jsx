@@ -1,14 +1,39 @@
 import React from 'react'
 
-export const ProfileProfessorFields = () => {
+export const ProfileProfessorFields = ({
+  codeprofessor,
+  category,
+  career,
+  grade,
+  typeServices,
+  dedication,
+  supportposition,
+  handleInputChange }) => {
   return (
     <>
-      <h4>Datos de Docente:</h4>
+      <h4>Datos de Docente</h4>
       <div className="perfil__form__docente">
 
         <div>
+          <label htmlFor="codeprofessor">Código docente</label>
+          <input
+            type="text"
+            placeholder='Escriba...'
+            id='codeprofessor'
+            name='codeprofessor'
+            value={codeprofessor}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div>
           <label htmlFor="category">Categoría docente:</label>
-          <select id='category' name="category">
+          <select
+            id='category'
+            name="category"
+            value={category}
+            onChange={handleInputChange}
+          >
             <option value="ayudante catedra">Ayudante de cátedra</option>
             <option value="jefe practica">Jefe de práctica</option>
             <option value="auxiliar">Auxiliar</option>
@@ -22,12 +47,25 @@ export const ProfileProfessorFields = () => {
 
         <div>
           <label htmlFor="career">Profesión:</label>
-          <input id='career' type="text" placeholder="Escriba..." name='career' />
+          <input
+            id='career'
+            type="text"
+            placeholder="Escriba..."
+            name='career'
+            value={career}
+            onChange={handleInputChange}
+          />
         </div>
+
 
         <div>
           <label htmlFor="grade">Grado académico:</label>
-          <select id='grade' name="grade">
+          <select
+            id='grade'
+            name="grade"
+            value={grade}
+            onChange={handleInputChange}
+          >
             <option value="estudiante">Estudiante</option>
             <option value="bachiller">Bachiller</option>
             <option value="maestro">Maestro</option>
@@ -38,8 +76,14 @@ export const ProfileProfessorFields = () => {
 
 
         <div>
-          <label htmlFor="type">Tipo de contrato:</label>
-          <select name="type" id="type">
+          <label htmlFor="typeServices">Tipo de contrato:</label>
+          <select
+            name="typeServices"
+            id="typeServices"
+            value={typeServices}
+            onChange={handleInputChange}
+          >
+            <option value="indefinido">No definido</option>
             <option value="recibos">Recibos por honorarios</option>
             <option value="contratado">Contratado</option>
             <option value="nombrado">Nombrado</option>
@@ -49,7 +93,13 @@ export const ProfileProfessorFields = () => {
 
         <div>
           <label htmlFor="dedication">Dedicación:</label>
-          <select name="dedication" id="dedication">
+          <select
+            name="dedication"
+            id="dedication"
+            value={dedication}
+            onChange={handleInputChange}
+          >
+            <option value="indefinido">No definido</option>
             <option value="tc40h">Tiempo completo 40 horas</option>
             <option value="tp20h">Tiempo parcial 20 horas</option>
             <option value="tp12h">Tiempo parcias 12 horas</option>
@@ -68,14 +118,23 @@ export const ProfileProfessorFields = () => {
         {/* Agregar ninguno a opciones back y establecer como default */}
         <div>
           <label htmlFor="supportposition">Cargo de apoyo:</label>
-          <select name="supportposition" id="supportposition">
-            <option value="ninguno">Ninguno</option>
+          <select
+            name="supportposition"
+            id="supportposition"
+            value={supportposition}
+            onChange={handleInputChange}
+          >
+            <option value="indefinido">No definido</option>
             <option value="presidente calidad">Presidente comité de Calidad</option>
             <option value="miembro calidad">Miembro comité calidad</option>
             <option value="presidente coteccu">Presidente de COTECCU</option>
             <option value="miembro coteccu">Miembro de COTECCU</option>
             <option value="otro">Otro</option>
           </select>
+        </div>
+
+        <div>
+
         </div>
 
       </div>

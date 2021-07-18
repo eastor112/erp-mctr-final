@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { capitalizeString, shortNameDepartment } from '../../../helpers/general-helpers'
 import { getShoolData } from '../../../helpers/schools-helpers'
 
-export const SidebarProfile = ({ photoURL, displayName, department, category }) => {
+export const SidebarProfile = ({ photoURL, displayName, department, category, director, professor, student, school }) => {
 
   return (
     <div className="sidebar__perfil">
@@ -14,8 +14,29 @@ export const SidebarProfile = ({ photoURL, displayName, department, category }) 
           displayName
         }
       </h3>
-      <p className="perfil__departamento">{shortNameDepartment(department)}</p>
-      <p className="perfil__categoria">Docente {capitalizeString(category)}</p>
+      <div className="perfil__categoria">
+        {
+          director ?
+            <>
+              <p className="perfil__departamento">{shortNameDepartment(department)}</p>
+              Director
+            </>
+            :
+            professor ?
+              <>
+                <p className="perfil__departamento">{shortNameDepartment(department)}</p>
+                Docente {capitalizeString(category)}
+              </>
+              :
+              student ?
+                <>
+                  <p className="perfil__departamento">{school}</p>
+                  Estudiante
+                </>
+                :
+                'Externo'
+        }
+      </div>
     </div>
   )
 }

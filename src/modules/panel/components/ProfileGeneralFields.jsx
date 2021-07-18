@@ -5,11 +5,12 @@ export const ProfileGeneralFields = ({
   fathername,
   mothername,
   email,
-  accesslevel,
+  typeuser,
   mobilenumber,
   school,
   handleInputChange,
   state }) => {
+
   return (
     <>
       <h4>Información general</h4>
@@ -60,43 +61,6 @@ export const ProfileGeneralFields = ({
         </div>
 
 
-        {/* Escuela */}
-        <div>
-          <label htmlFor="school">Escuela a la que brinda servicios:</label>
-          <select
-            name="school"
-            id="school"
-            value={school}
-            onChange={handleInputChange}
-          >
-            {
-              state.schools.length > 0 && (
-                state.schools.map((schoolObj) => {
-                  return <option value={schoolObj.id} key={schoolObj.id}> {schoolObj.name} </option>
-                })
-              )
-            }
-          </select>
-        </div>
-
-
-        {/* Nivel de acceso */}
-        <div>
-          <label htmlFor="accesslevel">Nivel de acceso:</label>
-          <select
-            id='accesslevel'
-            name="accesslevel"
-            onChange={handleInputChange}
-            value={accesslevel}
-            disabled
-            readOnly
-          >
-            <option value="estudiante">Estudiante</option>
-            <option value="docente">Docente</option>
-            <option value="director">Director</option>
-          </select>
-        </div>
-
 
         {/* Email */}
         <div>
@@ -115,12 +79,56 @@ export const ProfileGeneralFields = ({
         </div>
 
 
+
+        {/* Escuela */}
+        <div>
+          <label htmlFor="school">Escuela a la que brinda servicios:</label>
+          <select
+            name="school"
+            id="school"
+            value={school}
+            onChange={handleInputChange}
+          >
+
+            <option value=''> No especificado </option>
+            {
+              state.schools.length > 0 && (
+                state.schools.map((schoolObj) => {
+                  return <option value={schoolObj.id} key={schoolObj.id}> {schoolObj.name} </option>
+                })
+              )
+            }
+          </select>
+        </div>
+
+
+        {/* Tipo de usuario */}
+        <div>
+          <label htmlFor="typeuser">Tipo de usuario:</label>
+          <select
+            id='typeuser'
+            name="typeuser"
+            onChange={handleInputChange}
+            value={typeuser}
+          >
+            <option value='externo'> externo </option>
+            <option value="estudiante">Estudiante</option>
+            <option value="docente">Docente</option>
+            <option value="director">Director</option>
+
+          </select>
+        </div>
+
+
+
+
+
         {/* Número movil */}
         <div>
           <label htmlFor="mobilenumber">Numero de celular:</label>
           <input
             id='mobilenumber'
-            type="text"
+            type="number"
             placeholder="Escriba..."
             name='mobilenumber'
             onChange={handleInputChange}

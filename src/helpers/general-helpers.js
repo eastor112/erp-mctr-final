@@ -1,8 +1,8 @@
 export const capitalizeString = (string) => {
-  if (string) {
+  if (string !== 'indefinido' && string.length > 2) {
     return string[0].toUpperCase() + string.substring(1)
   }
-  return '*No especificado'
+  return ''
 }
 
 

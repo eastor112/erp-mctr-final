@@ -26,7 +26,9 @@ export const logout = () => ({
 // Acciones de autentificacion asincronas con google
 export const startGoogleLogin = () => {
   return async (dispatch) => {
+
     const { user } = await firebase.auth().signInWithPopup(googleAuthProvider);
+
 
     const response = await loginOrCreateUserApiHelper(user.email, user.uid)
 
