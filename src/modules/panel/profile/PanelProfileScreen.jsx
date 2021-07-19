@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 // third
 import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
 //local
 import { updateUserStore } from '../../../actions/auth-actions';
 import { getAllSchools } from '../../../helpers/schools-helpers';
@@ -17,7 +18,8 @@ export const PanelProfileScreen = () => {
 
   const dispatch = useDispatch()
   const { user, token } = useSelector(state => state.auth);
-  const [formValues, handleInputChange] = useForm({
+  const [formValues, handleInputChange, handleInputFileChange] = useForm({
+
     //General profile
     'id': user.id,
     'names': user.names,
@@ -27,9 +29,11 @@ export const PanelProfileScreen = () => {
     'typeuser': user.typeuser,
     'mobilenumber': user.mobilenumber,
     'school': user.schoolInfo.id,
+
     //Student profile
     'codestudent': user.codestudent,
     'graduate': user.graduate,
+
     //Professor profile
     'codeprofessor': user.codeprofessor,
     'category': user.category,
@@ -38,6 +42,9 @@ export const PanelProfileScreen = () => {
     'typeServices': user.typeServices,
     'dedication': user.dedication,
     'supportposition': user.supportposition,
+    'signature': '',
+    'photo': ''
+
   });
 
   const {
@@ -62,20 +69,36 @@ export const PanelProfileScreen = () => {
 
 
   const [state, setState] = useState({
-    schools: {}
+    schools: {},
+    loading: false
   });
 
 
-  // agregar limpieza
   useEffect(() => {
-    getAllSchools(token).then((schools) => {
+
+    const schools = JSON.parse(localStorage.getItem('schools'))
+    if (schools) {
       setState({ ...state, schools: schools });
-    });
-  }, [user.schoolInfo.id])
+    } else {
+      getAllSchools(token).then((schools) => {
+        setState({ ...state, schools: schools });
+        localStorage.setItem('schools', JSON.stringify(schools));
+      });
+    }
+
+  }, [])
 
 
   const handleSubmit = (e) => {
+    Swal.fire(
+      'The Internet?',
+      'That thing is still around?',
+      'question'
+    )
+
+
     e.preventDefault();
+    setState({ ...state, loading: true })
 
     updateUser(
       { ...formValues },
@@ -83,13 +106,16 @@ export const PanelProfileScreen = () => {
       user.professor,
       user.director,
       user.boss,
+      user.media,
       token).then((data) => {
         dispatch(updateUserStore(data));
+        setState({ ...state, loading: false })
       });
 
   };
 
-  //TODO Poner sweetalert2 cuando se hace el envío del formulario
+
+
 
 
   return (
@@ -111,7 +137,9 @@ export const PanelProfileScreen = () => {
           typeuser={typeuser}
           mobilenumber={mobilenumber}
           school={school}
+          media={user.media}
           handleInputChange={handleInputChange}
+          handleInputFileChange={handleInputFileChange}
           state={state} //Pra mostrar la lista de escuelas
         />
 

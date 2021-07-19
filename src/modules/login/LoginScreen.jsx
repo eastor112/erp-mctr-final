@@ -17,9 +17,10 @@ export const LoginScreen = () => {
   const [isLogging, setIsLogging] = useState(false);
 
   const handleLoginGoogle = () => {
-    setIsLogging(true);
     localStorage.removeItem('lastpath');
+    localStorage.removeItem('schools');
     dispatch(startGoogleLogin());
+    setIsLogging(true);
   }
 
 

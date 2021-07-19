@@ -1,9 +1,8 @@
 //react
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 //third
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { isAdminToggle } from '../../../actions/auth-actions'
 
 //local
@@ -39,6 +38,7 @@ export const Sidebar = () => {
           student={user.student}
           school={user.schoolInfo.school}
           category={user.category}
+          media={user.media}
 
         />
 

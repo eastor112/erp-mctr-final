@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const ProfileStudentFields = ({
   codestudent,
@@ -6,13 +6,30 @@ export const ProfileStudentFields = ({
   handleInputChange,
 }) => {
 
-  console.log(graduate);
-  if (graduate) {
-    const asdf = '1'
+  const [state, setState] = useState(graduate ? '1' : '0')
+
+  const handleChange = (e) => {
+    setState(e.target.value)
+
+    // e.target.value = !!e.target.value;
+    if (e.target.value === '1') {
+      handleInputChange({
+        target: {
+          name: e.target.name,
+          value: true,
+        }
+      })
+    } else {
+      handleInputChange({
+        target: {
+          name: e.target.name,
+          value: false,
+        }
+      })
+
+    }
   }
-  else {
-    asdf = '0'
-  }
+
 
   return (
     <>
@@ -35,8 +52,8 @@ export const ProfileStudentFields = ({
           <select
             id="graduate"
             name="graduate"
-            value={graduate}
-            onChange={handleInputChange}
+            value={state}
+            onChange={handleChange}
           >
             <option value="1">Egresado</option>
             <option value="0">Estudios no concluidos</option>

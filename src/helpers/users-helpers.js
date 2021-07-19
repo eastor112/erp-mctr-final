@@ -21,10 +21,12 @@ export const getUserDetail = async (id, token) => {
 }
 
 
-export const updateUser = async (user, student, professor, director, boss, token) => {
+export const updateUser = async (user, student, professor, director, boss, media, token) => {
   const upadateUserUrl = `${BACKEND_URL}/users-api/v1.0/user/${user.id}`
   const updateStudentUrl = `${BACKEND_URL}/users-api/v1.0/student/${user.id}`
   const updateProfessorUrl = `${BACKEND_URL}/users-api/v1.0/professor/${user.id}`
+  const createMediaUrl = `${BACKEND_URL}/users-api/v1.0/user/media/create`
+  const updateMediaUrl = `${BACKEND_URL}/users-api/v1.0/user/media/${user.id}`
 
   const {
     id,
@@ -43,7 +45,9 @@ export const updateUser = async (user, student, professor, director, boss, token
     grade,
     typeServices,
     dedication,
-    supportposition } = user
+    supportposition,
+    signature,
+    photo } = user
 
   const generalData = {//general user data
     id,
@@ -77,13 +81,19 @@ export const updateUser = async (user, student, professor, director, boss, token
   }
 
 
+
+  const formdata = new FormData();
+  formdata.append('user', id);
+  formdata.append('signature', signature);
+  formdata.append('profile', photo)
+
   const config = {
     headers: {
       'Authorization': `token ${token}`
     }
   }
 
-  const response1 = await axios.patch(upadateUserUrl, generalData, config);
+  await axios.patch(upadateUserUrl, generalData, config);
 
 
   if (professor || director || boss) {
@@ -94,12 +104,19 @@ export const updateUser = async (user, student, professor, director, boss, token
     await axios.patch(updateStudentUrl, studentData, config);
   }
 
+  if (signature !== '' || photo !== '') {
+    if (media.signature || media.profile) {
+      await axios.patch(updateMediaUrl, formdata, config);
+    } else {
+      await axios.post(createMediaUrl, formdata, config);
+    }
+  }
+
   const response = await getUserDetail(user.id, token)
   try {
     return response.user;
   } catch (error) {
     return response.response;
-    console.log('error fatal');
   }
 
 
@@ -108,28 +125,4 @@ export const updateUser = async (user, student, professor, director, boss, token
   // } else {
   //   student.graduate = !!'0'
   // }
-}
-
-
-export const updateStudent = async (student, token) => {
-  const updateStudentUrl = `${BACKEND_URL}/users-api/v1.0/student/{id}${student.id}`
-
-  const data = student;
-
-  const config = {
-    headers: {
-      'Authorization': `token ${token}`
-    }
-  }
-
-  const response = await axios.patch(updateStudentUrl, data, config);
-
-  if (response.status === 200) {
-
-    const response = await getUserDetail(user.id, token)
-    return response.user;
-
-  } else {
-    return response.response;
-  }
 }

@@ -1,13 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import { capitalizeString, shortNameDepartment } from '../../../helpers/general-helpers'
-import { getShoolData } from '../../../helpers/schools-helpers'
 
-export const SidebarProfile = ({ photoURL, displayName, department, category, director, professor, student, school }) => {
+export const SidebarProfile = ({ photoURL, displayName, department, category, director, professor, student, school, media }) => {
 
   return (
     <div className="sidebar__perfil">
       <figure>
-        <img src={photoURL} alt="" />
+        <img
+          src={(media.profile === '') ? photoURL : import.meta.env.VITE_MEDIA_URL + media.profile}
+          alt=""
+        />
       </figure>
       <h3 className="perfil__nombre">
         {

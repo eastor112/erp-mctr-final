@@ -1,4 +1,5 @@
 import React from 'react'
+import { onlyNameImage } from '../../../helpers/general-helpers'
 
 export const ProfileGeneralFields = ({
   names,
@@ -8,7 +9,9 @@ export const ProfileGeneralFields = ({
   typeuser,
   mobilenumber,
   school,
+  media,
   handleInputChange,
+  handleInputFileChange,
   state }) => {
 
   return (
@@ -89,7 +92,6 @@ export const ProfileGeneralFields = ({
             value={school}
             onChange={handleInputChange}
           >
-
             <option value=''> No especificado </option>
             {
               state.schools.length > 0 && (
@@ -98,6 +100,8 @@ export const ProfileGeneralFields = ({
                 })
               )
             }
+
+
           </select>
         </div>
 
@@ -120,9 +124,6 @@ export const ProfileGeneralFields = ({
         </div>
 
 
-
-
-
         {/* Número movil */}
         <div>
           <label htmlFor="mobilenumber">Numero de celular:</label>
@@ -136,22 +137,46 @@ export const ProfileGeneralFields = ({
             autoComplete='off'
           />
         </div>
+        <div></div>
 
 
         {/* Foto perfil */}
         <div>
-          <label htmlFor="photo">Foto perfil: </label>
-          <input id='photo' type="file" />
+          <label htmlFor="">Foto perfil: </label>
+          {
+            (media.signature.length > 0)
+            &&
+            <img src={`${import.meta.env.VITE_MEDIA_URL}/${media.profile}`} alt="" height='50' />
+          }
+          <small style={{ color: 'green', fontSize: '12px', alignSelf: 'flex-end' }}>{onlyNameImage(media.profile)}</small>
+          <input
+            type="file"
+            id='photo'
+            name='photo'
+            accept="image/*"
+            onChange={handleInputFileChange}
+          />
+
         </div>
 
 
         {/* Firma */}
         <div>
           <label htmlFor="">Firma para la exportación de documentos: </label>
-          <input type="file" />
+          {
+            (media.signature.length > 0)
+            &&
+            <img src={`${import.meta.env.VITE_MEDIA_URL}/${media.signature}`} alt="" height='50' />
+          }
+          <small style={{ color: 'green', fontSize: '12px', alignSelf: 'flex-end' }}> {onlyNameImage(media.signature)}</small>
+          <input
+            type="file"
+            id='signature'
+            name='signature'
+            accept="image/*"
+            onChange={handleInputFileChange}
+          />
         </div>
-
-        <div></div>
 
       </div>
     </>

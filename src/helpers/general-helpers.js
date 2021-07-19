@@ -13,3 +13,12 @@ export const shortNameDepartment = (longNameDepartment) => {
     return `Dep. ${segments.slice(2).join(" ")}`
   }
 }
+
+export const onlyNameImage = (url) => {
+  if (url.length > 3) {
+    const lastSegment = url.split('/').slice(-1);
+    return lastSegment
+  } else {
+    return 'Cargue una imagen'
+  }
+}

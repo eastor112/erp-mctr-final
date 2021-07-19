@@ -37,17 +37,16 @@ export const AppRouter = () => {
       if (user?.uid) {
         loginOrCreateUserApiHelper(user.email, user.uid)
           .then((response) => {
+            response &&
+              dispatch(login(
+                user.uid,
+                user.email,
+                user.displayName,
+                user.photoURL,
+                response.data.user,
+                response.data.token));
 
             setWaiting(false);
-
-            dispatch(login(
-              user.uid,
-              user.email,
-              user.displayName,
-              user.photoURL,
-              response.data.user,
-              response.data.token));
-
           })
 
       } else {
