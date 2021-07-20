@@ -35,7 +35,7 @@ export const ProfileStudentFields = ({
     <>
       <h4>Datos de estudiante</h4>
       <div className='perfil__form__estudiante'>
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="codestudent">Código de estudiante</label>
           <input
             type="text"
@@ -47,7 +47,7 @@ export const ProfileStudentFields = ({
           />
         </div>
 
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="graduate">Estado</label>
           <select
             id="graduate"

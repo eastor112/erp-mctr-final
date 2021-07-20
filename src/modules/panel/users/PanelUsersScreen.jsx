@@ -9,19 +9,21 @@ import { ProfileGeneralFields } from '../components/ProfileGeneralFields';
 import { ProfileProfessorFields } from '../components/ProfileProfessorFields';
 import { useForm } from '../../../hooks/useForm';
 import { getAllSchools } from '../../../helpers/schools-helpers';
+import { onlyNameImage } from '../../../helpers/general-helpers';
+import { ProfileAdminFields } from '../components/ProfileAdminFields';
 
 
 const customStyles = {
   overlay: {
     zIndex: '10',
-    // backgroundColor: 'transparent'
+    backgroundColor: '#999b'
   },
   content: {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '80%',
-    height: '60%'
+    right: 'auto',
+    bottom: 'auto',
   },
 };
 
@@ -46,7 +48,6 @@ export const PanelUsersScreen = () => {
     const schoolsAll = JSON.parse(localStorage.getItem('schools'))
 
     getAllUser(token).then(({ data }) => {
-      console.log('assdfdf');
       if (schoolsAll) {
         setState({
           ...state,
@@ -96,42 +97,109 @@ export const PanelUsersScreen = () => {
         onRequestClose={() => setState({ ...state, showModal: false })}
         shouldCloseOnOverlayClick={false}
       >
+        <h2>Modificar datos de usuario</h2>
+        <div className='admin__users__modal'>
 
-        <button
-          onClick={() => setState({ ...state, showModal: false })}
-        >
-          X
-        </button>
+          {
+            state.selectedUser.media
+            &&
+            <div className='admin__users__modal__section'>
+              <figure>
+                <img
+                  src={
+                    (state.selectedUser.media.profile === '')
+                      ?
+                      '/assets/profile.jpg'
+                      :
+                      import.meta.env.VITE_MEDIA_URL + state.selectedUser.media.profile
+                  }
+                  alt=""
+                />
+              </figure>
+              <p>
+                {
+                  (state.selectedUser.media.signature === '')
+                    ?
+                    <small className='highlight_not_ok'>
+                      <i className="fas fa-times-circle"></i>
+                      'El usuario aun no ha guardado una firma'
+                    </small>
 
-        <ProfileGeneralFields
-          names={state.selectedUser.names}
-          fathername={state.selectedUser.fathername}
-          mothername={state.selectedUser.mothername}
-          email={state.selectedUser.email}
-          typeuser={state.selectedUser.typeuser}
-          mobilenumber={state.selectedUser.mobilenumber}
-          school={state.selectedUser.school}
-          media={state.selectedUser.media}
-          handleInputChange={handleInputChange}
-          handleInputFileChange={handleInputFileChange}
-          state={state}
-        />
+                    :
+                    <small className='highlight_ok'>
+                      <i className="fas fa-check-circle"> </i>
+                      Firma: {onlyNameImage(state.selectedUser.media.signature)}
+                    </small>
+                }
+              </p>
 
-        <ProfileProfessorFields
-          codeprofessor={state.selectedUser.codeprofessor}
-          category={state.selectedUser.category}
-          career={state.selectedUser.career}
-          grade={state.selectedUser.grade}
-          typeServices={state.selectedUser.typeServices}
-          dedication={state.selectedUser.dedication}
-          supportposition={state.selectedUser.supportposition}
-          handleInputChange={handleInputChange}
-        />
-        <ProfileStudentFields
-          codestudent={state.selectedUser.codestudent}
-          graduate={state.selectedUser.graduate}
-          handleInputChange={handleInputChange}
-        />
+              <div>
+                <button className='warning'>
+                  <p>Guardar</p>
+                  <i class="fas fa-save"> </i>
+                </button>
+
+                <button className='danger'>
+                  <p>Eliminar</p>
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+
+                <button
+                  className='safe'
+                  onClick={() => setState({ ...state, showModal: false })}
+                >
+                  <p>Salir</p>
+                  <i class="fas fa-backspace"></i>
+                </button>
+              </div>
+            </div>
+          }
+
+          <div className='admin__users__modal__section'>
+            <ProfileAdminFields />
+
+          </div>
+
+
+          <div className='admin__users__modal__section'>
+            <ProfileGeneralFields
+              names={state.selectedUser.names}
+              fathername={state.selectedUser.fathername}
+              mothername={state.selectedUser.mothername}
+              email={state.selectedUser.email}
+              typeuser={state.selectedUser.typeuser}
+              mobilenumber={state.selectedUser.mobilenumber}
+              school={state.selectedUser.school}
+              media={state.selectedUser.media}
+              handleInputChange={handleInputChange}
+              handleInputFileChange={handleInputFileChange}
+              state={state}
+            />
+
+          </div>
+
+
+          <div className='admin__users__modal__section'>
+            <ProfileProfessorFields
+              codeprofessor={state.selectedUser.codeprofessor}
+              category={state.selectedUser.category}
+              career={state.selectedUser.career}
+              grade={state.selectedUser.grade}
+              typeServices={state.selectedUser.typeServices}
+              dedication={state.selectedUser.dedication}
+              supportposition={state.selectedUser.supportposition}
+              handleInputChange={handleInputChange}
+            />
+
+            <ProfileStudentFields
+              codestudent={state.selectedUser.codestudent}
+              graduate={state.selectedUser.graduate}
+              handleInputChange={handleInputChange}
+            />
+          </div>
+        </div>
+
+
 
       </Modal>
 

@@ -21,7 +21,7 @@ export const ProfileGeneralFields = ({
       <div className='perfil__form__general'>
 
         {/* Nombres */}
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="names">Nombres:</label>
           <input
             id='names'
@@ -36,7 +36,7 @@ export const ProfileGeneralFields = ({
 
 
         {/* Apellido paterno */}
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="fathername">Apellido paterno:</label>
           <input
             id='fathername'
@@ -51,7 +51,7 @@ export const ProfileGeneralFields = ({
 
 
         {/* Apellido Materno */}
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="mothername">Apellido materno:</label>
           <input
             id='mothername'
@@ -67,7 +67,7 @@ export const ProfileGeneralFields = ({
 
 
         {/* Email */}
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="email">Email institucional:</label>
           <input
             id='email'
@@ -85,7 +85,7 @@ export const ProfileGeneralFields = ({
 
 
         {/* Escuela */}
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="school">Escuela a la que brinda servicios:</label>
           <select
             name="school"
@@ -108,7 +108,7 @@ export const ProfileGeneralFields = ({
 
 
         {/* Tipo de usuario */}
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="typeuser">Tipo de usuario:</label>
           <select
             id='typeuser'
@@ -126,7 +126,7 @@ export const ProfileGeneralFields = ({
 
 
         {/* Número movil */}
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="mobilenumber">Numero de celular:</label>
           <input
             id='mobilenumber'
@@ -142,7 +142,7 @@ export const ProfileGeneralFields = ({
 
 
         {/* Foto perfil */}
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="">Foto perfil: </label>
           {
             (media.signature.length > 0)
@@ -162,8 +162,8 @@ export const ProfileGeneralFields = ({
 
 
         {/* Firma */}
-        <div>
-          <label htmlFor="">Firma para la exportación de documentos: </label>
+        <div className='admin__user__modal__field'>
+          <label htmlFor="">Firma para documentos: </label>
           {
             (media.signature.length > 0)
             &&

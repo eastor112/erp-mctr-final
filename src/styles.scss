@@ -1717,6 +1717,130 @@ footer {
   }
 }
 
-.no-activo-modal {
-  display: none;
+
+.admin__users__modal {
+  display: flex;
+
+
+  .admin__users__modal__section {
+    width: 250px;
+    padding: 15px 20px 15px;
+
+
+    label {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    figure {
+      width: 100%;
+      // height: 280px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .perfil__form__general,
+    .perfil__form__docente,
+    .perfil__form__estudiante,
+    .perfil__form__admin {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .admin__user__modal__field {
+      display: flex;
+      flex-direction: column;
+
+      img,
+      small {
+        display: none;
+      }
+    }
+
+    button {
+      align-items: center;
+      background-color: $color-primario;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      font-weight: 500;
+      font-size: 14px;
+      height: 2rem;
+      justify-content: center;
+      margin-top: 10px;
+      width: 100%;
+      gap: 5px;
+
+      i {
+        font-size: 1rem;
+      }
+    }
+
+    .warning {
+      background-color: $color-peligro;
+      color: rgb(255, 255, 255);
+
+      &:hover {
+        background-color: lighten($color: $color-peligro, $amount: 10);
+      }
+    }
+
+    .danger {
+      background-color: $color-secundario;
+
+      &:hover {
+        background-color: lighten($color: $color-secundario, $amount: 10);
+      }
+    }
+
+    .safe {
+      background-color: $color-primario;
+
+      &:hover {
+        background-color: lighten($color: $color-primario, $amount: 10);
+      }
+    }
+
+  }
+}
+
+//============ GENERALES ================
+.highlight_ok {
+  color: $color-teciario;
+}
+
+.highlight_not_ok {
+  color: $color-secundario;
+}
+
+.alert_warning {
+  background-color: lighten($color: $color-peligro, $amount: 20);
+  border-radius: 3px;
+  font-size: 0.7rem;
+  padding: 6px;
+  text-align: center;
+
+  i {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+}
+
+.warning {
+  background-color: #FFC107;
+}
+
+.danger {
+  background-color: #F44336;
+}
+
+.safe {
+  background-color: $color-teciario;
 }

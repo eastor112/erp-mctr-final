@@ -14,7 +14,7 @@ export const ProfileProfessorFields = ({
       <h4>Datos de Docente</h4>
       <div className="perfil__form__docente">
 
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="codeprofessor">Código docente</label>
           <input
             type="text"
@@ -26,7 +26,7 @@ export const ProfileProfessorFields = ({
           />
         </div>
 
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="category">Categoría docente:</label>
           <select
             id='category'
@@ -45,7 +45,7 @@ export const ProfileProfessorFields = ({
         </div>
 
 
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="career">Profesión:</label>
           <input
             id='career'
@@ -58,7 +58,7 @@ export const ProfileProfessorFields = ({
         </div>
 
 
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="grade">Grado académico:</label>
           <select
             id='grade'
@@ -75,7 +75,7 @@ export const ProfileProfessorFields = ({
         </div>
 
 
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="typeServices">Tipo de contrato:</label>
           <select
             name="typeServices"
@@ -91,7 +91,7 @@ export const ProfileProfessorFields = ({
         </div>
 
 
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="dedication">Dedicación:</label>
           <select
             name="dedication"
@@ -115,8 +115,7 @@ export const ProfileProfessorFields = ({
 
 
 
-        {/* Agregar ninguno a opciones back y establecer como default */}
-        <div>
+        <div className='admin__user__modal__field'>
           <label htmlFor="supportposition">Cargo de apoyo:</label>
           <select
             name="supportposition"
