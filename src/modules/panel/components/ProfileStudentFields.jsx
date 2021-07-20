@@ -11,7 +11,7 @@ export const ProfileStudentFields = ({
   const handleChange = (e) => {
     setState(e.target.value)
 
-    // e.target.value = !!e.target.value;
+
     if (e.target.value === '1') {
       handleInputChange({
         target: {

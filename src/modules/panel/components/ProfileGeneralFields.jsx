@@ -14,6 +14,7 @@ export const ProfileGeneralFields = ({
   handleInputFileChange,
   state }) => {
 
+
   return (
     <>
       <h4>Información general</h4>

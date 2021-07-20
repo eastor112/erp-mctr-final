@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = 'http://localhost:8000';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const getUserDetail = async (id, token) => {
   const detailUserUrl = `${BACKEND_URL}/users-api/v1.0/user/${id}/detail`;
@@ -119,10 +119,19 @@ export const updateUser = async (user, student, professor, director, boss, media
     return response.response;
   }
 
-
-  // if (student.graduate === '1') {
-  //   student.graduate = !!'1'
-  // } else {
-  //   student.graduate = !!'0'
-  // }
 }
+
+
+export const getAllUser = (token) => {
+  const allUsersUrl = `${BACKEND_URL}/users-api/v1.0/list`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  return axios.get(allUsersUrl, config)
+
+}
+

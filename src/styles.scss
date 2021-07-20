@@ -1681,18 +1681,15 @@ footer {
 
 .admin__modal__editar {
   padding: 15px;
-  border: 1px solid gray;
   width: 600px;
 
   .perfil__form {
-    margin-top: 20px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    // justify-content: center;
+    // align-items: center;
 
     label {
-      width: 90%;
+      width: 350px;
       font-size: 14px;
 
       input {

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 // third
 import { useDispatch, useSelector } from 'react-redux'
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 //local
 import { updateUserStore } from '../../../actions/auth-actions';
 import { getAllSchools } from '../../../helpers/schools-helpers';
@@ -90,12 +90,6 @@ export const PanelProfileScreen = () => {
 
 
   const handleSubmit = (e) => {
-    Swal.fire(
-      'The Internet?',
-      'That thing is still around?',
-      'question'
-    )
-
 
     e.preventDefault();
     setState({ ...state, loading: true })
@@ -114,9 +108,21 @@ export const PanelProfileScreen = () => {
 
   };
 
-
-
-
+  useEffect(() => {
+    if (state.loading) {
+      Swal.fire({
+        title: 'Uploading...',
+        html: 'Please wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
+      });
+    } else {
+      Swal.close();
+    }
+  }, [state.loading])
 
   return (
     <>
