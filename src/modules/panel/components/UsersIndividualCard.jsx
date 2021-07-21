@@ -1,27 +1,72 @@
 import React from 'react'
 
-export const UsersIndividualCard = ({ user, setState }) => {
+export const UsersIndividualCard = ({ user, setState, allUpdateFields }) => {
+
+  const userDataReturn = {
+    //General profile
+    'id': user.id,
+    'names': user.names,
+    'fathername': user.fathername,
+    'mothername': user.mothername,
+    'email': user.email,
+    'typeuser': user.typeuser,
+    'mobilenumber': user.mobilenumber,
+    'school': user.schoolInfo.id,
+    'media': user.media,
+
+    //Student profile
+    'codestudent': user.codestudent,
+    'graduate': user.graduate,
+
+    //Professor profile
+    'codeprofessor': user.codeprofessor,
+    'category': user.category,
+    'career': user.career,
+    'grade': user.grade,
+    'typeServices': user.typeServices,
+    'dedication': user.dedication,
+    'supportposition': user.supportposition,
+    'signature': '',
+    'photo': '',
+    'is_active': user.is_active,
+    'external': user.external,
+    'professor': user.professor,
+    'student': user.student,
+    'boss': user.boss,
+    'director': user.director,
+  }
 
   const handleClick = () => {
     setState(prev => ({
       ...prev,
-      showModal: true,
-      selectedUser: user
+      showModal: true
     }));
 
+    allUpdateFields(userDataReturn);
   }
+
+
+
+
 
   return (
     <>
       {
         <div className="card__user">
+
           <figure>
-            <img
-              src={(user.media.profile !== '') ? import.meta.env.VITE_MEDIA_URL + user.media.profile : '/assets/profile.jpg'}
+            <img src={
+              (user.media.profile !== '')
+                ?
+                import.meta.env.VITE_MEDIA_URL + user.media.profile
+                :
+                '/assets/profile.jpg'
+            }
               alt=""
               width="200"
             />
           </figure>
+
           <div className="user__datos">
             <div className="datos__docente">
               <h3><i className="fas fa-user-tie"></i>{user.names.split(' ').slice(-2, -1) + " " + user.fathername}</h3>

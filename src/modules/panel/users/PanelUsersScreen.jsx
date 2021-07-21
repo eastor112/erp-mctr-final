@@ -1,18 +1,24 @@
+//react
 import React, { useEffect, useState } from 'react'
+//third
 import { useSelector } from 'react-redux'
-import { getAllUser } from '../../../helpers/users-helpers'
-import { UsersIndividualCard } from '../components/UsersIndividualCard'
 import Modal from 'react-modal';
-import { UsersAdminFilters } from '../components/UsersAdminFilters';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js'
+//local
+import { getAllUser, updateUser } from '../../../helpers/users-helpers'
+import { getAllSchools } from '../../../helpers/schools-helpers';
+import { ProfileAdminFields } from '../components/ProfileAdminFields';
 import { ProfileStudentFields } from '../components/ProfileStudentFields';
 import { ProfileGeneralFields } from '../components/ProfileGeneralFields';
 import { ProfileProfessorFields } from '../components/ProfileProfessorFields';
 import { useForm } from '../../../hooks/useForm';
-import { getAllSchools } from '../../../helpers/schools-helpers';
-import { onlyNameImage } from '../../../helpers/general-helpers';
-import { ProfileAdminFields } from '../components/ProfileAdminFields';
+import { UsersAdminControls } from '../components/UsersAdminControls';
+import { UsersAdminFilters } from '../components/UsersAdminFilters';
+import { UsersAdminSignatureConfirm } from '../components/UsersAdminSignatureConfirm';
+import { UsersAdminPhotoModal } from '../components/UsersAdminPhotoModal';
+import { UsersIndividualCard } from '../components/UsersIndividualCard'
 
-
+//modal styles
 const customStyles = {
   overlay: {
     zIndex: '10',
@@ -30,20 +36,59 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 
+
+//component
 export const PanelUsersScreen = () => {
   const [state, setState] = useState({
     users: [],
     showModal: false,
-    selectedUser: {},
-    schools: []
+    schools: [],
+    loading: false
   })
 
-  const [formValues, handleInputChange, handleInputFileChange,] = useForm()
+  const [formValues,
+    handleInputChange,
+    handleInputFileChange,
+    allUpdateFields] = useForm({
+      //General profile
+      'id': '',
+      'names': '',
+      'fathername': '',
+      'mothername': '',
+      'email': '',
+      'typeuser': '',
+      'mobilenumber': '',
+      'school': '',
+      'media': '',
+
+      //Student profile
+      'codestudent': '',
+      'graduate': '',
+
+      //Professor profile
+      'codeprofessor': '',
+      'category': '',
+      'career': '',
+      'grade': '',
+      'typeServices': '',
+      'dedication': '',
+      'supportposition': '',
+      'signature': '',
+      'photo': '',
+
+      //Permissions data
+      'is_active': '',
+      'external': '',
+      'professor': '',
+      'student': '',
+      'boss': '',
+      'director': '',
+    });
 
   const { token } = useSelector(state => state.auth)
 
 
-  // 
+  // Trae todas las escuelas y todos los usuarios de la API
   useEffect(() => {
     const schoolsAll = JSON.parse(localStorage.getItem('schools'))
 
@@ -69,6 +114,43 @@ export const PanelUsersScreen = () => {
     })
   }, [])
 
+
+  const closeModal = () => {
+    setState({ ...state, showModal: false })
+  }
+
+  const handleUpdateData = () => {
+    setState({
+      ...state,
+      loading: true
+    });
+
+    Swal.fire({
+      title: 'Uploading...',
+      html: 'Please wait...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
+    updateUser({ ...formValues }, formValues.media, token)
+      .then(() => {
+
+        getAllUser(token).then(({ data }) => {
+          setState({
+            ...state,
+            users: data,
+            showModal: false,
+            loading: false
+          });
+          Swal.close();
+        });
+      });
+  }
+
+
   return (
     <>
       <UsersAdminFilters />
@@ -82,13 +164,11 @@ export const PanelUsersScreen = () => {
               key={user.id}
               user={user}
               setState={setState}
-
+              allUpdateFields={allUpdateFields}
             />
           })
         }
       </section>
-
-
 
 
       <Modal
@@ -101,105 +181,73 @@ export const PanelUsersScreen = () => {
         <div className='admin__users__modal'>
 
           {
-            state.selectedUser.media
+            formValues.email !== ''
             &&
-            <div className='admin__users__modal__section'>
-              <figure>
-                <img
-                  src={
-                    (state.selectedUser.media.profile === '')
-                      ?
-                      '/assets/profile.jpg'
-                      :
-                      import.meta.env.VITE_MEDIA_URL + state.selectedUser.media.profile
-                  }
-                  alt=""
-                />
-              </figure>
-              <p>
-                {
-                  (state.selectedUser.media.signature === '')
-                    ?
-                    <small className='highlight_not_ok'>
-                      <i className="fas fa-times-circle"></i>
-                      'El usuario aun no ha guardado una firma'
-                    </small>
+            <>
+              <div className='admin__users__modal__section'>
+                <UsersAdminPhotoModal profile={formValues.media.profile} />
 
-                    :
-                    <small className='highlight_ok'>
-                      <i className="fas fa-check-circle"> </i>
-                      Firma: {onlyNameImage(state.selectedUser.media.signature)}
-                    </small>
-                }
-              </p>
+                <UsersAdminSignatureConfirm signature={formValues.media.signature} />
 
-              <div>
-                <button className='warning'>
-                  <p>Guardar</p>
-                  <i class="fas fa-save"> </i>
-                </button>
+                <UsersAdminControls closeModal={closeModal} handleUpdateData={handleUpdateData} />
 
-                <button className='danger'>
-                  <p>Eliminar</p>
-                  <i class="fas fa-trash-alt"></i>
-                </button>
-
-                <button
-                  className='safe'
-                  onClick={() => setState({ ...state, showModal: false })}
-                >
-                  <p>Salir</p>
-                  <i class="fas fa-backspace"></i>
-                </button>
               </div>
-            </div>
+
+              <div className='admin__users__modal__section'>
+                <ProfileAdminFields
+                  id={formValues.id}
+                  is_active={formValues.is_active}
+                  external={formValues.external}
+                  student={formValues.student}
+                  professor={formValues.professor}
+                  director={formValues.director}
+                  boss={formValues.boss}
+                  handleInputChange={handleInputChange}
+                />
+
+              </div>
+
+              {/*  */}
+              <div className='admin__users__modal__section'>
+                <ProfileGeneralFields
+                  names={formValues.names}
+                  fathername={formValues.fathername}
+                  mothername={formValues.mothername}
+                  email={formValues.email}
+                  typeuser={formValues.typeuser}
+                  mobilenumber={formValues.mobilenumber}
+                  school={formValues.school}
+                  media={formValues.media}
+                  handleInputChange={handleInputChange}
+                  handleInputFileChange={handleInputFileChange}
+                  state={state}
+                />
+
+              </div>
+
+
+              <div className='admin__users__modal__section'>
+                <ProfileProfessorFields
+                  codeprofessor={formValues.codeprofessor}
+                  category={formValues.category}
+                  career={formValues.career}
+                  grade={formValues.grade}
+                  typeServices={formValues.typeServices}
+                  dedication={formValues.dedication}
+                  supportposition={formValues.supportposition}
+                  handleInputChange={handleInputChange}
+                />
+
+                <ProfileStudentFields
+                  codestudent={formValues.codestudent}
+                  graduate={formValues.graduate}
+                  handleInputChange={handleInputChange}
+                />
+              </div>
+            </>
           }
 
-          <div className='admin__users__modal__section'>
-            <ProfileAdminFields />
-
-          </div>
-
-
-          <div className='admin__users__modal__section'>
-            <ProfileGeneralFields
-              names={state.selectedUser.names}
-              fathername={state.selectedUser.fathername}
-              mothername={state.selectedUser.mothername}
-              email={state.selectedUser.email}
-              typeuser={state.selectedUser.typeuser}
-              mobilenumber={state.selectedUser.mobilenumber}
-              school={state.selectedUser.school}
-              media={state.selectedUser.media}
-              handleInputChange={handleInputChange}
-              handleInputFileChange={handleInputFileChange}
-              state={state}
-            />
-
-          </div>
-
-
-          <div className='admin__users__modal__section'>
-            <ProfileProfessorFields
-              codeprofessor={state.selectedUser.codeprofessor}
-              category={state.selectedUser.category}
-              career={state.selectedUser.career}
-              grade={state.selectedUser.grade}
-              typeServices={state.selectedUser.typeServices}
-              dedication={state.selectedUser.dedication}
-              supportposition={state.selectedUser.supportposition}
-              handleInputChange={handleInputChange}
-            />
-
-            <ProfileStudentFields
-              codestudent={state.selectedUser.codestudent}
-              graduate={state.selectedUser.graduate}
-              handleInputChange={handleInputChange}
-            />
-          </div>
         </div>
-
-
 
       </Modal>
 

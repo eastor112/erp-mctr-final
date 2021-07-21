@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { useBooleanFields } from '../../../hooks/useBooleanField'
 
 export const ProfileStudentFields = ({
   codestudent,
@@ -6,30 +7,7 @@ export const ProfileStudentFields = ({
   handleInputChange,
 }) => {
 
-  const [state, setState] = useState(graduate ? '1' : '0')
-
-  const handleChange = (e) => {
-    setState(e.target.value)
-
-
-    if (e.target.value === '1') {
-      handleInputChange({
-        target: {
-          name: e.target.name,
-          value: true,
-        }
-      })
-    } else {
-      handleInputChange({
-        target: {
-          name: e.target.name,
-          value: false,
-        }
-      })
-
-    }
-  }
-
+  const [state, handleChange] = useBooleanFields(graduate, handleInputChange);
 
   return (
     <>

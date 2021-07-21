@@ -21,12 +21,13 @@ export const getUserDetail = async (id, token) => {
 }
 
 
-export const updateUser = async (user, student, professor, director, boss, media, token) => {
-  const upadateUserUrl = `${BACKEND_URL}/users-api/v1.0/user/${user.id}`
-  const updateStudentUrl = `${BACKEND_URL}/users-api/v1.0/student/${user.id}`
-  const updateProfessorUrl = `${BACKEND_URL}/users-api/v1.0/professor/${user.id}`
-  const createMediaUrl = `${BACKEND_URL}/users-api/v1.0/user/media/create`
-  const updateMediaUrl = `${BACKEND_URL}/users-api/v1.0/user/media/${user.id}`
+export const updateUser = async (user, media = null, token) => {
+  const upadateUserUrl = `${BACKEND_URL}/users-api/v1.0/user/${user.id}`;
+  const updateStudentUrl = `${BACKEND_URL}/users-api/v1.0/student/${user.id}`;
+  const updateProfessorUrl = `${BACKEND_URL}/users-api/v1.0/professor/${user.id}`;
+  const createMediaUrl = `${BACKEND_URL}/users-api/v1.0/user/media/create`;
+  const updateMediaUrl = `${BACKEND_URL}/users-api/v1.0/user/media/${user.id}`;
+  const updatePermissionsURL = `${BACKEND_URL}/users-api/v1.0/user/${user.id}/admin`;
 
   const {
     id,
@@ -47,7 +48,14 @@ export const updateUser = async (user, student, professor, director, boss, media
     dedication,
     supportposition,
     signature,
-    photo } = user
+    photo,
+    professor,
+    student,
+    boss,
+    director,
+    external,
+    is_active } = user
+
 
   const generalData = {//general user data
     id,
@@ -80,7 +88,14 @@ export const updateUser = async (user, student, professor, director, boss, media
     supportposition
   }
 
-
+  const permissionsData = {
+    id,
+    is_active,
+    director,
+    professor,
+    student,
+    external
+  }
 
   const formdata = new FormData();
   formdata.append('user', id);
@@ -96,13 +111,21 @@ export const updateUser = async (user, student, professor, director, boss, media
   await axios.patch(upadateUserUrl, generalData, config);
 
 
+
+  if (boss) {
+    await axios.patch(updatePermissionsURL, permissionsData, config);
+  }
+
+
   if (professor || director || boss) {
     await axios.patch(updateProfessorUrl, professorData, config);
-
   }
+
+
   if (student) {
     await axios.patch(updateStudentUrl, studentData, config);
   }
+
 
   if (signature !== '' || photo !== '') {
     if (media.signature || media.profile) {
@@ -111,6 +134,7 @@ export const updateUser = async (user, student, professor, director, boss, media
       await axios.post(createMediaUrl, formdata, config);
     }
   }
+
 
   const response = await getUserDetail(user.id, token)
   try {

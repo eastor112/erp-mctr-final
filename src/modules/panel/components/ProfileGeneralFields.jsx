@@ -74,8 +74,8 @@ export const ProfileGeneralFields = ({
             type="email"
             placeholder="Escriba..."
             name='email'
-            onChange={handleInputChange}
             value={email}
+            onChange={handleInputChange}
             autoComplete='off'
             readOnly
             disabled

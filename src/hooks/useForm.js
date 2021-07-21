@@ -21,10 +21,17 @@ export const useForm = (initialState = {}) => {
     });
   }
 
+  const allUpdateFields = (user) => {
+    setState({
+      ...user
+    })
+  }
+
   return [
     state,
     handleInputChange,
     handleInputFileChange,
+    allUpdateFields,
     reset
   ]
 }

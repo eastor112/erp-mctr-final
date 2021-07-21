@@ -43,9 +43,18 @@ export const PanelProfileScreen = () => {
     'dedication': user.dedication,
     'supportposition': user.supportposition,
     'signature': '',
-    'photo': ''
+    'photo': '',
+
+    //Permissions data
+    'is_active': user.is_active,
+    'external': user.external,
+    'professor': user.professor,
+    'student': user.student,
+    'boss': user.boss,
+    'director': user.director,
 
   });
+
 
   const {
     id,
@@ -65,7 +74,6 @@ export const PanelProfileScreen = () => {
     typeServices,
     dedication,
     supportposition } = formValues
-
 
 
   const [state, setState] = useState({
@@ -96,10 +104,6 @@ export const PanelProfileScreen = () => {
 
     updateUser(
       { ...formValues },
-      user.student,
-      user.professor,
-      user.director,
-      user.boss,
       user.media,
       token).then((data) => {
         dispatch(updateUserStore(data));
