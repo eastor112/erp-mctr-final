@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import Modal from 'react-modal';
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 //local
-import { deleteUserAccount, getAllUser, updateUser } from '../../../helpers/users-helpers'
+import { deleteUserAccount, filterUsersBySchoolAndLastname, getAllUser, updateUser } from '../../../helpers/users-helpers'
 import { getAllSchools } from '../../../helpers/unt-structure-helpers';
 import { ProfileAdminFields } from '../components/ProfileAdminFields';
 import { ProfileStudentFields } from '../components/ProfileStudentFields';
@@ -17,6 +17,7 @@ import { UsersAdminFilters } from '../components/UsersAdminFilters';
 import { UsersAdminSignatureConfirm } from '../components/UsersAdminSignatureConfirm';
 import { UsersAdminPhotoModal } from '../components/UsersAdminPhotoModal';
 import { UsersIndividualCard } from '../components/UsersIndividualCard'
+import { useHistory } from 'react-router-dom';
 
 
 //modal styles
@@ -39,13 +40,25 @@ Modal.setAppElement('#root');
 
 //component
 export const PanelUsersScreen = () => {
+
+  const { token, user, isAdmin } = useSelector(state => state.auth);
+
+  const history = useHistory()
+  if (!isAdmin) {
+    history.push('/panel')
+  }
+
   const [state, setState] = useState({
     users: [],
     showModal: false,
     schools: [],
     departments: [],
     faculty: [],
-    loading: false
+    loading: false,
+    filterValues: {
+      'school': 'all',
+      'search': '',
+    }
   })
 
   const [formValues,
@@ -87,15 +100,13 @@ export const PanelUsersScreen = () => {
       'director': '',
     });
 
-  const { token, user } = useSelector(state => state.auth)
-
 
   // Trae todas las escuelas y todos los usuarios de la API
   useEffect(() => {
 
     const schoolsAll = JSON.parse(localStorage.getItem('schools'));
 
-    getAllUser(token).then(({ data }) => {
+    getAllUser(user.schoolInfo.id, token).then(({ data }) => {
 
       if (schoolsAll) {
 
@@ -118,7 +129,7 @@ export const PanelUsersScreen = () => {
         });
       }
     })
-  }, [])
+  }, []);
 
 
   const closeModal = () => {
@@ -144,15 +155,16 @@ export const PanelUsersScreen = () => {
     updateUser({ ...formValues }, formValues.media, token)
       .then(() => {
 
-        getAllUser(token).then(({ data }) => {
-          setState({
-            ...state,
-            users: data,
-            showModal: false,
-            loading: false
+        filterUsersBySchoolAndLastname(state.filterValues.school, state.filterValues.search, token)
+          .then((filteredUsers) => {
+            setState({
+              ...state,
+              users: filteredUsers,
+              showModal: false,
+              loading: false
+            });
+            Swal.close();
           });
-          Swal.close();
-        });
       });
   }
 
@@ -168,29 +180,29 @@ export const PanelUsersScreen = () => {
       confirmButtonText: 'Si, eliminar!',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUserAccount(id, token).then((status) => {
 
-      deleteUserAccount(id, token).then((status) => {
+          if (status === 204) {
 
-        if (status === 204) {
+            const restUsers = state.users.filter((userObj) => {
+              return userObj.id !== id
+            });
 
-          const restUsers = state.users.filter((userObj) => {
-            return userObj.id !== id
-          });
+            setState({
+              ...state,
+              users: restUsers,
+              showModal: false
+            });
 
-          setState({
-            ...state,
-            users: restUsers,
-            showModal: false
-          });
-
-          Swal.fire(
-            'Eliminado!',
-            'El usuario ha sido eliminado con éxito',
-            'success'
-          )
-        }
-      });
-
+            Swal.fire(
+              'Eliminado!',
+              'El usuario ha sido eliminado con éxito',
+              'success'
+            )
+          }
+        });
+      }
     })
   }
 
@@ -198,8 +210,10 @@ export const PanelUsersScreen = () => {
   return (
     <>
       <UsersAdminFilters
+        token={token}
         schools={state.schools}
         userSchoolId={user.schoolInfo.id}
+        setState={setState}
       />
 
       <section className="admin__contenedor__user__card">

@@ -1578,7 +1578,7 @@ footer {
   justify-content: space-between;
   position: fixed;
 
-  input,
+
   select {
     border: none;
     border-bottom: 1px solid gray;
@@ -1601,7 +1601,20 @@ footer {
 
     input {
       padding-left: 25px;
-      width: 250px;
+      width: 200px;
+      height: 1.5rem;
+    }
+
+    button {
+      width: 100px;
+      padding: 2px 0;
+      border-radius: 2px;
+      background-color: transparent;
+      font-weight: bold;
+      cursor: pointer;
+      color: $color-teciario;
+      border-color: $color-teciario;
+      outline: none;
     }
   }
 }
@@ -1783,11 +1796,11 @@ footer {
     }
 
     .warning {
-      background-color: $color-peligro;
+      background-color: $color-primario;
       color: rgb(255, 255, 255);
 
       &:hover {
-        background-color: lighten($color: $color-peligro, $amount: 10);
+        background-color: lighten($color: $color-primario, $amount: 10);
       }
     }
 
@@ -1800,10 +1813,10 @@ footer {
     }
 
     .safe {
-      background-color: $color-primario;
+      background-color: $color-teciario;
 
       &:hover {
-        background-color: lighten($color: $color-primario, $amount: 10);
+        background-color: lighten($color: $color-teciario, $amount: 10);
       }
     }
 

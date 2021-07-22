@@ -7,6 +7,7 @@ export const useForm = (initialState = {}) => {
     setValues(newFormState);
   }
 
+  //Para manejo de entradas
   const handleInputChange = ({ target }) => {
     setState({
       ...state,
@@ -14,6 +15,7 @@ export const useForm = (initialState = {}) => {
     });
   }
 
+  //Para manejo de archivos
   const handleInputFileChange = ({ target }) => {
     setState({
       ...state,
@@ -21,11 +23,14 @@ export const useForm = (initialState = {}) => {
     });
   }
 
+  //Para actualizar todos los campos de usuario
   const allUpdateFields = (user) => {
     setState({
       ...user
     })
   }
+
+
 
   return [
     state,

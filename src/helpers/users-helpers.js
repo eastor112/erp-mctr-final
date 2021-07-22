@@ -146,8 +146,8 @@ export const updateUser = async (user, media = null, token) => {
 }
 
 
-export const getAllUser = (token) => {
-  const allUsersUrl = `${BACKEND_URL}/users-api/v1.0/list`
+export const getAllUser = (school, token) => {
+  const allUsersUrl = `${BACKEND_URL}/users-api/v1.0/list?school=${school}`
 
   const config = {
     headers: {
@@ -158,6 +158,7 @@ export const getAllUser = (token) => {
   return axios.get(allUsersUrl, config)
 
 }
+
 
 export const deleteUserAccount = async (id, token) => {
   const deleteUserUrl = `${BACKEND_URL}/users-api/v1.0/user/${id}`;
@@ -178,3 +179,20 @@ export const deleteUserAccount = async (id, token) => {
 
 }
 
+
+export const filterUsersBySchoolAndLastname = async (school, lastname, token) => {
+  const allUsersUrl = `${BACKEND_URL}/users-api/v1.0/list?school=${school}&lastname=${lastname}`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.get(allUsersUrl, config);
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
