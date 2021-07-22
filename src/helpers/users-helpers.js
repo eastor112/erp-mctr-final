@@ -159,3 +159,22 @@ export const getAllUser = (token) => {
 
 }
 
+export const deleteUserAccount = async (id, token) => {
+  const deleteUserUrl = `${BACKEND_URL}/users-api/v1.0/user/${id}`;
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  };
+
+  const response = await axios.delete(deleteUserUrl, config);
+
+  if (response.status === 204) {
+    return response.status;
+  } else {
+    return response.response;
+  }
+
+}
+

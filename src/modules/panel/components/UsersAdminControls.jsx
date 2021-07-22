@@ -1,6 +1,17 @@
 import React from 'react'
 
-export const UsersAdminControls = ({ closeModal, handleUpdateData }) => {
+export const UsersAdminControls = ({
+  closeModal,
+  handleUpdateData,
+  handleDeleteUser,
+  userEmail,
+  userId }) => {
+
+  const handleDelete = () => {
+    handleDeleteUser(userEmail, userId)
+  }
+
+
   return (
     <div>
       <button
@@ -12,7 +23,10 @@ export const UsersAdminControls = ({ closeModal, handleUpdateData }) => {
         <i className="fas fa-save"> </i>
       </button>
 
-      <button className='danger'>
+      <button
+        className='danger'
+        onClick={handleDelete}
+      >
         <p>Eliminar</p>
         <i className="fas fa-trash-alt"></i>
       </button>

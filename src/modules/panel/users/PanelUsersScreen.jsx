@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 import Modal from 'react-modal';
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 //local
-import { getAllUser, updateUser } from '../../../helpers/users-helpers'
-import { getAllSchools } from '../../../helpers/schools-helpers';
+import { deleteUserAccount, getAllUser, updateUser } from '../../../helpers/users-helpers'
+import { getAllSchools } from '../../../helpers/unt-structure-helpers';
 import { ProfileAdminFields } from '../components/ProfileAdminFields';
 import { ProfileStudentFields } from '../components/ProfileStudentFields';
 import { ProfileGeneralFields } from '../components/ProfileGeneralFields';
@@ -17,6 +17,7 @@ import { UsersAdminFilters } from '../components/UsersAdminFilters';
 import { UsersAdminSignatureConfirm } from '../components/UsersAdminSignatureConfirm';
 import { UsersAdminPhotoModal } from '../components/UsersAdminPhotoModal';
 import { UsersIndividualCard } from '../components/UsersIndividualCard'
+
 
 //modal styles
 const customStyles = {
@@ -36,13 +37,14 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 
-
 //component
 export const PanelUsersScreen = () => {
   const [state, setState] = useState({
     users: [],
     showModal: false,
     schools: [],
+    departments: [],
+    faculty: [],
     loading: false
   })
 
@@ -85,15 +87,18 @@ export const PanelUsersScreen = () => {
       'director': '',
     });
 
-  const { token } = useSelector(state => state.auth)
+  const { token, user } = useSelector(state => state.auth)
 
 
   // Trae todas las escuelas y todos los usuarios de la API
   useEffect(() => {
-    const schoolsAll = JSON.parse(localStorage.getItem('schools'))
+
+    const schoolsAll = JSON.parse(localStorage.getItem('schools'));
 
     getAllUser(token).then(({ data }) => {
+
       if (schoolsAll) {
+
         setState({
           ...state,
           users: data,
@@ -101,7 +106,9 @@ export const PanelUsersScreen = () => {
         });
 
       } else {
+
         getAllSchools(token).then((schoolsAll) => {
+
           setState({
             ...state,
             users: data,
@@ -110,7 +117,6 @@ export const PanelUsersScreen = () => {
           localStorage.setItem('schools', JSON.stringify(schoolsAll));
         });
       }
-
     })
   }, [])
 
@@ -150,10 +156,51 @@ export const PanelUsersScreen = () => {
       });
   }
 
+  const handleDeleteUser = (email, id) => {
+
+    Swal.fire({
+      title: `Esta seguro de eliminar a ${email}?`,
+      text: "No podrá revertir esta acción luego!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+
+      deleteUserAccount(id, token).then((status) => {
+
+        if (status === 204) {
+
+          const restUsers = state.users.filter((userObj) => {
+            return userObj.id !== id
+          });
+
+          setState({
+            ...state,
+            users: restUsers,
+            showModal: false
+          });
+
+          Swal.fire(
+            'Eliminado!',
+            'El usuario ha sido eliminado con éxito',
+            'success'
+          )
+        }
+      });
+
+    })
+  }
+
 
   return (
     <>
-      <UsersAdminFilters />
+      <UsersAdminFilters
+        schools={state.schools}
+        userSchoolId={user.schoolInfo.id}
+      />
 
       <section className="admin__contenedor__user__card">
         {
@@ -165,6 +212,7 @@ export const PanelUsersScreen = () => {
               user={user}
               setState={setState}
               allUpdateFields={allUpdateFields}
+              handleDeleteUser={handleDeleteUser}
             />
           })
         }
@@ -189,7 +237,13 @@ export const PanelUsersScreen = () => {
 
                 <UsersAdminSignatureConfirm signature={formValues.media.signature} />
 
-                <UsersAdminControls closeModal={closeModal} handleUpdateData={handleUpdateData} />
+                <UsersAdminControls
+                  closeModal={closeModal}
+                  handleUpdateData={handleUpdateData}
+                  handleDeleteUser={handleDeleteUser}
+                  userEmail={formValues.email}
+                  userId={formValues.id}
+                />
 
               </div>
 

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 //local
 import { updateUserStore } from '../../../actions/auth-actions';
-import { getAllSchools } from '../../../helpers/schools-helpers';
+import { getAllSchools } from '../../../helpers/unt-structure-helpers';
 import { updateUser } from '../../../helpers/users-helpers';
 import { useForm } from '../../../hooks/useForm'
 import { ProfileGeneralFields } from '../components/ProfileGeneralFields';
