@@ -7,6 +7,7 @@ export const SyllabeDetailScreen = () => {
       <MenuTopPanel />
       <div className="silabo__completo">
         <section className="silabo__encabezado">
+
           <div className="silabo__detalle__logos">
             <div className="header__derecha">
               <figure>

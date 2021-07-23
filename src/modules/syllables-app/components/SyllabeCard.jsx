@@ -32,9 +32,9 @@ export const SyllabeCard = ({
           {
             syllabe_editable
               ?
-              <i class="fas fa-pencil-alt"></i>
+              <i className="fas fa-pencil-alt"></i>
               :
-              <i class="fas fa-lock"></i>
+              <i className="fas fa-lock"></i>
           }
         </h4>
 

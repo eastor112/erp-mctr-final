@@ -143,8 +143,8 @@ export const PanelUsersScreen = () => {
     });
 
     Swal.fire({
-      title: 'Uploading...',
-      html: 'Please wait...',
+      title: 'Actualizando...',
+      html: 'Espere...',
       allowEscapeKey: false,
       allowOutsideClick: false,
       didOpen: () => {

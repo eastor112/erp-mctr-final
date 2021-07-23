@@ -6,6 +6,7 @@ import { PanelUsersScreen } from '../users/PanelUsersScreen'
 import { MainContainerPanel } from '../components/MainContainerPanel'
 import { SyllabeDetailScreen } from '../../syllables-app/SyllabeDetailScreen'
 import { SyllabesListScreen } from '../../syllables-app/SyllabesListScreen'
+import { SyllabeCreateScreen } from '../../syllables-app/SyllabeCreateScreen'
 
 export const PanelMainScreen = () => {
 
@@ -38,7 +39,13 @@ export const PanelMainScreen = () => {
           {
             (location == 'syllabes' && syllabe_action == 'detail') && <SyllabeDetailScreen />
           }
+          {
+            (location == 'syllabes' && syllabe_action == 'create') && <SyllabeCreateScreen />
 
+          }
+          {
+            (location == 'syllabes' && syllabe_action == 'update') && <SyllabeCreateScreen />
+          }
         </main>
       </div>
     </>

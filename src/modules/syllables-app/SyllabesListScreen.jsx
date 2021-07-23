@@ -8,11 +8,16 @@ import { SyllabeFilters } from './components/SyllabeFilters'
 export const SyllabesListScreen = () => {
   const { token } = useSelector(state => state.auth);
 
+
+
   const [state, setState] = useState({
-    syllabes: []
+    syllabes: [],
+    schools: [],
+    loading: false
   })
 
   useEffect(() => {
+
     getAllSyllabesSummary(token)
       .then((syllabesData) => {
         setState({
@@ -20,15 +25,50 @@ export const SyllabesListScreen = () => {
           syllabes: syllabesData
         })
       })
+
   }, [])
 
+
+
+  useEffect(() => {
+
+    const schools = JSON.parse(localStorage.getItem('schools'));
+
+    if (schools) {
+      getAllSyllabesSummary(token)
+        .then((syllabesData) => {
+          setState({
+            ...state,
+            syllabes: syllabesData,
+            schools: schools
+          })
+        })
+
+    } else {
+      getAllSchools(token)
+        .then((schools) => {
+          localStorage.setItem('schools', JSON.stringify(schools));
+
+          getAllSyllabesSummary(token)
+            .then((syllabesData) => {
+              setState({
+                ...state,
+                syllabes: syllabesData,
+                schools: schools
+              })
+            })
+        });
+
+    }
+
+  }, [])
 
   return (
     <>
 
       <MenuTopPanel />
 
-      <SyllabeFilters />
+      <SyllabeFilters token={token} setState={setState} schools={state.schools} />
 
       <section className="contenedor__silabos__cards">
         {
@@ -40,7 +80,6 @@ export const SyllabesListScreen = () => {
           })
         }
       </section>
-
     </>
   )
 }
