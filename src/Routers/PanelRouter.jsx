@@ -29,9 +29,6 @@ export const PanelRouter = () => {
       <HeaderPanel />
 
       <Switch>
-        <Route exact path='/panel/syllabes'>
-          <SyllabesAppRouter />
-        </Route>
 
         <Route path='/panel/:location'>
           <PanelMainScreen />

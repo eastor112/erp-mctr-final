@@ -496,13 +496,17 @@ footer {
     }
 
     button {
-      width: 106px;
+      width: 100px;
       padding: 10px 0;
       background-color: $color-primario;
       color: white;
       border-radius: 5px;
       margin-bottom: 10px;
       cursor: pointer;
+
+      &:hover {
+        background-color: lighten($color: $color-primario, $amount: 10);
+      }
     }
   }
 
@@ -517,6 +521,11 @@ footer {
     button {
       background-color: gray;
       cursor: initial;
+
+      &:hover {
+        background-color: gray;
+
+      }
     }
   }
 }
@@ -752,6 +761,12 @@ footer {
 
   .observado {
     color: $color-peligro;
+  }
+
+  small {
+    margin-top: 5px;
+    // font-style: italic;
+    text-decoration: underline;
   }
 }
 

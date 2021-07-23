@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom'
 import { Sidebar } from '../components/Sidebar'
 import { PanelProfileScreen } from '../profile/PanelProfileScreen'
 import { PanelUsersScreen } from '../users/PanelUsersScreen'
-import { MainContainerPanel } from './components/MainContainerPanel'
+import { MainContainerPanel } from '../components/MainContainerPanel'
+import { SyllabesList } from '../../syllables-app/SyllabesList'
 
 export const PanelMainScreen = () => {
 
@@ -26,6 +27,10 @@ export const PanelMainScreen = () => {
 
           {
             location === 'profile' && <PanelProfileScreen />
+          }
+
+          {
+            location == 'syllabes' && <SyllabesList />
           }
 
         </main>

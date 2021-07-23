@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 //local
 import { AppRouter } from './Routers/AppRouter'
 import { store } from './store/store';
-import './styles.scss';
+import '/src/styles.scss';
 
 
 //Component
