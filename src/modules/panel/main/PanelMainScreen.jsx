@@ -4,11 +4,13 @@ import { Sidebar } from '../components/Sidebar'
 import { PanelProfileScreen } from '../profile/PanelProfileScreen'
 import { PanelUsersScreen } from '../users/PanelUsersScreen'
 import { MainContainerPanel } from '../components/MainContainerPanel'
-import { SyllabesList } from '../../syllables-app/SyllabesList'
+import { SyllabeDetailScreen } from '../../syllables-app/SyllabeDetailScreen'
+import { SyllabesListScreen } from '../../syllables-app/SyllabesListScreen'
 
 export const PanelMainScreen = () => {
 
-  const { location } = useParams();
+  const { location, syllabe_action } = useParams();
+  // console.log(location, syllabe_action);
 
   return (
     <>
@@ -30,7 +32,11 @@ export const PanelMainScreen = () => {
           }
 
           {
-            location == 'syllabes' && <SyllabesList />
+            (location == 'syllabes' && !syllabe_action) && <SyllabesListScreen />
+          }
+
+          {
+            (location == 'syllabes' && syllabe_action == 'detail') && <SyllabeDetailScreen />
           }
 
         </main>

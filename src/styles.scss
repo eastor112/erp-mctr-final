@@ -436,7 +436,6 @@ footer {
   }
 
   .seleccionado {
-
     border-bottom: 3px $color-secundario solid;
     font-weight: bold;
   }
@@ -445,7 +444,17 @@ footer {
     border-bottom: 3px $color-secundario solid;
     font-weight: 500;
 
+
   }
+
+  .disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+
+
 }
 
 .panel__contenedor__cards {
@@ -647,7 +656,7 @@ footer {
 }
 
 .contenedor__silabos__cards {
-  margin-top: 115px;
+  margin-top: 130px;
 
   .silabo__card {
     display: flex;
@@ -655,14 +664,20 @@ footer {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 15px;
+    height: 140px;
+    position: relative;
+
+    i {
+      margin-right: 2px;
+    }
 
     figure {
       padding: 0;
-      height: 130px;
+      width: 150px;
     }
 
     img {
-      height: 100%;
+      max-height: 100%;
     }
   }
 }
@@ -672,11 +687,16 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 15px;
+  padding: 15px 15px;
   background-color: $color-cuaternario;
 
   h4 {
     margin-bottom: 10px;
+
+    i {
+      margin-left: 5px;
+      font-size: 11px;
+    }
   }
 
   .columnas {
@@ -685,8 +705,8 @@ footer {
 
     .columna,
     .acciones {
-      line-height: 25px;
-      font-size: 13px;
+      line-height: 20px;
+      font-size: 12px;
 
       span {
         font-weight: 700;
@@ -701,7 +721,7 @@ footer {
 
     button {
       font-size: 11px;
-      width: 48%;
+      width: 47%;
       padding: 4px;
       margin-bottom: 10px;
       border-radius: 5px;
@@ -745,7 +765,7 @@ footer {
     }
   }
 
-  .terminado {
+  .completado {
     color: gray;
     font-weight: bold;
   }
@@ -765,7 +785,6 @@ footer {
 
   small {
     margin-top: 5px;
-    // font-style: italic;
     text-decoration: underline;
   }
 }

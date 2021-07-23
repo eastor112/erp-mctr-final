@@ -1,6 +1,10 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 
 export const SyllabeFilters = () => {
+  const history = useHistory();
+
+
   return (
     <div className="silabos__filtros">
       <div className="izquierda">
@@ -46,7 +50,11 @@ export const SyllabeFilters = () => {
           <input type="text" placeholder="buscar" />
           <i className="fa fa-search" aria-hidden="true"></i>
         </div>
-        <button><a href="./silabo__crear.html">CREAR NUEVO SILABO</a></button>
+        <button
+          onClick={() => { history.push('/panel/syllabes/create') }}
+        >
+          CREAR NUEVO SILABO
+        </button>
       </div>
     </div>
   )

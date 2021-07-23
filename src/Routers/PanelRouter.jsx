@@ -29,6 +29,9 @@ export const PanelRouter = () => {
       <HeaderPanel />
 
       <Switch>
+        <Route path='/panel/:location/:syllabe_action'>
+          <PanelMainScreen />
+        </Route>
 
         <Route path='/panel/:location'>
           <PanelMainScreen />

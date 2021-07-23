@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { getAllSyllabes } from '../../helpers/syllabes-helpers'
+import { getAllSyllabesSummary } from '../../helpers/syllabes-helpers'
 import { MenuTopPanel } from '../panel/components/MenuTopPanel'
 import { SyllabeCard } from './components/SyllabeCard'
 import { SyllabeFilters } from './components/SyllabeFilters'
 
-export const SyllabesList = () => {
+export const SyllabesListScreen = () => {
   const { token } = useSelector(state => state.auth);
 
   const [state, setState] = useState({
@@ -13,7 +13,7 @@ export const SyllabesList = () => {
   })
 
   useEffect(() => {
-    getAllSyllabes(token)
+    getAllSyllabesSummary(token)
       .then((syllabesData) => {
         setState({
           ...state,
@@ -34,10 +34,8 @@ export const SyllabesList = () => {
         {
           state.syllabes.map((syllabeObj) => {
             return <SyllabeCard
-              key={syllabeObj.id}
-              token={token}
+              key={syllabeObj.syllabe_id}
               {...syllabeObj}
-
             />
           })
         }

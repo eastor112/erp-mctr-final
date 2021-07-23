@@ -4,8 +4,8 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 
 
-export const getAllSyllabes = async (token) => {
-  const getAllSyllabesUrl = `${BACKEND_URL}/syllabes-api/v1.0/`;
+export const getAllSyllabesSummary = async (token) => {
+  const getAllSyllabesUrl = `${BACKEND_URL}/syllabes-api/v1.0/summary`;
 
   const config = {
     headers: {
