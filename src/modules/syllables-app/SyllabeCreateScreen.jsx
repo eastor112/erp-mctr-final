@@ -8,33 +8,33 @@ export const SyllabeCreateScreen = () => {
 
       <MenuTopPanel />
 
-      <div class="crear__silabo">
+      <div className="crear__silabo">
 
         <h2>CREANDO NUEVO SILABO</h2>
-        <section class="crear__datos">
+        <section className="crear__datos">
 
 
-          <div class="datos__identificacion__titulo">
+          <div className="datos__identificacion__titulo">
             <h3>DATOS DE IDENTIFICACIÓN</h3>
             <div>
-              <a href="!#"><button class="revisar__btn__"><i class="fa fa-circle" aria-hidden="true"></i></button></a>
-              <a href="!#"><button class="revisar__btn__"><i class="fa fa-check-circle"
+              <a href="!#"><button className="revisar__btn__"><i className="fa fa-circle" aria-hidden="true"></i></button></a>
+              <a href="!#"><button className="revisar__btn__"><i className="fa fa-check-circle"
                 aria-hidden="true"></i></button></a>
-              <a href="!#"><button class="revisar__btn__"><i class="fas fa-exclamation-circle"></i></button></a>
+              <a href="!#"><button className="revisar__btn__"><i className="fas fa-exclamation-circle"></i></button></a>
             </div>
 
           </div>
 
-          <div class="container__datos__generales">
-            <div class="titulo">
+          <div className="container__datos__generales">
+            <div className="titulo">
               <div>
-                <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+                <i className="fa fa-caret-down" aria-hidden="true"></i>
               </div>
               <h4>DATOS GENERALES</h4>
             </div>
             <div>
-              <div class="curso__select">
+              <div className="curso__select">
                 <select name="curso" id="">
                   <option value="">Seleccione el curso</option>
                   <option value="">Programación I</option>
@@ -43,7 +43,7 @@ export const SyllabeCreateScreen = () => {
                   <option value="">Electrónica Analógica</option>
                 </select>
               </div>
-              <div class="area__select">
+              <div className="area__select">
                 <select name="area__curso" id="">
                   <option value="">Seleccione el area del curso</option>
                   <option value="">Ciencias básicas y matemáticas</option>
@@ -51,7 +51,7 @@ export const SyllabeCreateScreen = () => {
                 </select>
               </div>
 
-              <div class="sede__sem__sec">
+              <div className="sede__sem__sec">
                 <select name="sede" id="">
                   <option value="">Trujillo</option>
                   <option value="">Huamachuco</option>
@@ -69,12 +69,12 @@ export const SyllabeCreateScreen = () => {
                   <option value="">B</option>
                 </select>
               </div>
-              <div class="inicio__final">
+              <div className="inicio__final">
                 <input type="date" name="inicio" id="" />
                 <input type="date" name="final" id="" />
               </div>
 
-              <div class="tipo__unidades">
+              <div className="tipo__unidades">
                 <select name="tipo" id="">
                   <option value="">Estudios generales</option>
                   <option value="">Específico</option>
@@ -90,13 +90,13 @@ export const SyllabeCreateScreen = () => {
                 </select>
               </div>
 
-              <div class="semanas__unidad">
+              <div className="semanas__unidad">
                 <input type="text" placeholder="N° Semanas unidad 1" />
                 <input type="text" placeholder="N° Semanas unidad 2" />
                 <input type="text" placeholder="N° Semanas unidad 3" />
                 <input type="text" placeholder="N° Semanas unidad 4" />
               </div>
-              <div class="condicion__docente">
+              <div className="condicion__docente">
                 <input type="text" placeholder="Horas de retroalimentacion" />
                 <select name="condicion" id="">
                   <option value="">Seleccione su condicion docente</option>
@@ -106,32 +106,32 @@ export const SyllabeCreateScreen = () => {
               </div>
 
 
-              <div class="boton__agregar">
+              <div className="boton__agregar">
                 <button>Agregar docente</button>
               </div>
 
-              <div class="docente__agregado">
+              <div className="docente__agregado">
 
-                <div class="docente__agregado__titulo">
+                <div className="docente__agregado__titulo">
                   <h5>Equipo docente 1:</h5>
-                  <button><i class="far fa-trash-alt"></i></button>
+                  <button><i className="far fa-trash-alt"></i></button>
                 </div>
 
-                <div class="apellidos">
+                <div className="apellidos">
                   <input type="text" placeholder="Apellido Paterno" />
                   <input type="text" placeholder="Apellido Materno" />
                 </div>
-                <div class="nombre">
+                <div className="nombre">
                   <input type="text" placeholder="Nombres" />
                 </div>
-                <div class="profesion">
+                <div className="profesion">
                   <input type="text" placeholder="Profesion" />
                 </div>
-                <div class="email">
+                <div className="email">
                   <input type="email" placeholder="email" />
                 </div>
 
-                <div class="condicion__docente__agregado">
+                <div className="condicion__docente__agregado">
                   <select name="condicion__docente__agregado" id="">
                     <option value="">Condicion docente</option>
                     <option value="">Equipo docente</option>
@@ -139,28 +139,28 @@ export const SyllabeCreateScreen = () => {
                   </select>
                 </div>
               </div>
-              <div class="docente__agregado">
+              <div className="docente__agregado">
 
-                <div class="docente__agregado__titulo">
+                <div className="docente__agregado__titulo">
                   <h5>Equipo docente 2:</h5>
-                  <button><i class="far fa-trash-alt"></i></button>
+                  <button><i className="far fa-trash-alt"></i></button>
                 </div>
 
-                <div class="apellidos">
+                <div className="apellidos">
                   <input type="text" placeholder="Apellido Paterno" />
                   <input type="text" placeholder="Apellido Materno" />
                 </div>
-                <div class="nombre">
+                <div className="nombre">
                   <input type="text" placeholder="Nombres" />
                 </div>
-                <div class="profesion">
+                <div className="profesion">
                   <input type="text" placeholder="Profesion" />
                 </div>
-                <div class="email">
+                <div className="email">
                   <input type="email" placeholder="email" />
                 </div>
 
-                <div class="condicion__docente__agregado">
+                <div className="condicion__docente__agregado">
                   <select name="condicion__docente__agregado" id="">
                     <option value="">Condicion docente</option>
                     <option value="">Equipo docente</option>
@@ -172,22 +172,22 @@ export const SyllabeCreateScreen = () => {
             </div>
           </div>
 
-          <div class="programacion__academica__titulo">
+          <div className="programacion__academica__titulo">
             <h3>PROGRAMACIÓN ACADÉMICA</h3>
             <div>
-              <a href="!#"><button><i class="fa fa-circle" aria-hidden="true"></i></button></a>
-              <a href="!#"><button><i class="fa fa-check-circle" aria-hidden="true"></i></button></a>
-              <a href="!#"><button><i class="fas fa-exclamation-circle"></i></button></a>
+              <a href="!#"><button><i className="fa fa-circle" aria-hidden="true"></i></button></a>
+              <a href="!#"><button><i className="fa fa-check-circle" aria-hidden="true"></i></button></a>
+              <a href="!#"><button><i className="fas fa-exclamation-circle"></i></button></a>
             </div>
           </div>
 
 
-          <div class="container__unidad">
+          <div className="container__unidad">
 
-            <div class="unidad__titulo">
+            <div className="unidad__titulo">
               <div>
-                <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+                <i className="fa fa-caret-down" aria-hidden="true"></i>
               </div>
               <h4>UNIDAD 1</h4>
             </div>
@@ -196,13 +196,13 @@ export const SyllabeCreateScreen = () => {
               <input type="text" placeholder="Nombre o tema de la unidad" />
             </div>
 
-            <div class="agregar__capacidad">
+            <div className="agregar__capacidad">
               <button>
                 Agregar capacidad
               </button>
             </div>
 
-            <div class="capacidad__agregada">
+            <div className="capacidad__agregada">
               <select name="" id="">
                 <option value="">[CT11.1] Selecciona y utiliza técnicas, recursos y herramientas modernas de la
                   ingeniería...</option>
@@ -210,11 +210,11 @@ export const SyllabeCreateScreen = () => {
                 </option>
               </select>
               <button>
-                <i class="far fa-trash-alt"></i>
+                <i className="far fa-trash-alt"></i>
               </button>
             </div>
 
-            <div class="capacidad__agregada">
+            <div className="capacidad__agregada">
               <select name="" id="">
                 <option value="">[CT11.1] Selecciona y utiliza técnicas, recursos y herramientas modernas de la
                   ingeniería...</option>
@@ -222,37 +222,37 @@ export const SyllabeCreateScreen = () => {
                 </option>
               </select>
               <button>
-                <i class="far fa-trash-alt"></i>
+                <i className="far fa-trash-alt"></i>
               </button>
             </div>
 
-            <div class="agregar__resultado">
+            <div className="agregar__resultado">
               <button>
                 Agregar resultado
               </button>
             </div>
 
-            <div class="resultado__agregado">
+            <div className="resultado__agregado">
               <h6>Resultado de aprendizaje</h6>
               <textarea name="" id="" cols="90" rows="5"></textarea>
-              <button><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+              <button><i className="far fa-trash-alt" aria-hidden="true"></i></button>
             </div>
-            <div class="resultado__agregado">
+            <div className="resultado__agregado">
               <h6>Resultado de aprendizaje</h6>
               <textarea name="" id="" cols="90" rows="5"></textarea>
-              <button><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+              <button><i className="far fa-trash-alt" aria-hidden="true"></i></button>
             </div>
 
 
-            <div class="semana__titulo">
+            <div className="semana__titulo">
               <div>
-                <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+                <i className="fa fa-caret-down" aria-hidden="true"></i>
               </div>
               <h5>SEMANA 1</h5>
             </div>
 
-            <div class="container__semana">
+            <div className="container__semana">
               <div>
                 <h6>Contenidos:</h6>
                 <textarea name="contenidos" id="" cols="90" rows="5"></textarea>
@@ -271,14 +271,14 @@ export const SyllabeCreateScreen = () => {
               </div>
             </div>
 
-            <div class="semana__titulo">
+            <div className="semana__titulo">
               <div>
-                <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+                <i className="fa fa-caret-down" aria-hidden="true"></i>
               </div>
               <h5>SEMANA 2</h5>
             </div>
-            <div class="container__semana">
+            <div className="container__semana">
               <div>
                 <h6>Contenidos:</h6>
                 <textarea name="contenidos" id="" cols="90" rows="5"></textarea>
@@ -298,12 +298,12 @@ export const SyllabeCreateScreen = () => {
             </div>
 
           </div>
-          <div class="container__unidad">
+          <div className="container__unidad">
 
-            <div class="unidad__titulo">
+            <div className="unidad__titulo">
               <div>
-                <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+                <i className="fa fa-caret-down" aria-hidden="true"></i>
               </div>
               <h4>UNIDAD 2</h4>
             </div>
@@ -312,13 +312,13 @@ export const SyllabeCreateScreen = () => {
               <input type="text" placeholder="Nombre o tema de la unidad" />
             </div>
 
-            <div class="agregar__capacidad">
+            <div className="agregar__capacidad">
               <button>
                 Agregar capacidad
               </button>
             </div>
 
-            <div class="capacidad__agregada">
+            <div className="capacidad__agregada">
               <select name="" id="">
                 <option value="">[CT11.1] Selecciona y utiliza técnicas, recursos y herramientas modernas de la
                   ingeniería...</option>
@@ -326,11 +326,11 @@ export const SyllabeCreateScreen = () => {
                 </option>
               </select>
               <button>
-                <i class="far fa-trash-alt"></i>
+                <i className="far fa-trash-alt"></i>
               </button>
             </div>
 
-            <div class="capacidad__agregada">
+            <div className="capacidad__agregada">
               <select name="" id="">
                 <option value="">[CT11.1] Selecciona y utiliza técnicas, recursos y herramientas modernas de la
                   ingeniería...</option>
@@ -338,36 +338,36 @@ export const SyllabeCreateScreen = () => {
                 </option>
               </select>
               <button>
-                <i class="far fa-trash-alt"></i>
+                <i className="far fa-trash-alt"></i>
               </button>
             </div>
 
-            <div class="agregar__resultado">
+            <div className="agregar__resultado">
               <button>
                 Agregar resultado
               </button>
             </div>
 
-            <div class="resultado__agregado">
+            <div className="resultado__agregado">
               <h6>Resultado de aprendizaje</h6>
               <textarea name="" id="" cols="90" rows="5"></textarea>
-              <button><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+              <button><i className="far fa-trash-alt" aria-hidden="true"></i></button>
             </div>
-            <div class="resultado__agregado">
+            <div className="resultado__agregado">
               <h6>Resultado de aprendizaje</h6>
               <textarea name="" id="" cols="90" rows="5"></textarea>
-              <button><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+              <button><i className="far fa-trash-alt" aria-hidden="true"></i></button>
             </div>
 
-            <div class="semana__titulo">
+            <div className="semana__titulo">
               <div>
-                <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+                <i className="fa fa-caret-down" aria-hidden="true"></i>
               </div>
               <h5>SEMANA 1</h5>
             </div>
 
-            <div class="container__semana">
+            <div className="container__semana">
               <div>
                 <h6>Contenidos:</h6>
                 <textarea name="contenidos" id="" cols="90" rows="5"></textarea>
@@ -386,14 +386,14 @@ export const SyllabeCreateScreen = () => {
               </div>
             </div>
 
-            <div class="semana__titulo">
+            <div className="semana__titulo">
               <div>
-                <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+                <i className="fa fa-caret-down" aria-hidden="true"></i>
               </div>
               <h5>SEMANA 2</h5>
             </div>
-            <div class="container__semana">
+            <div className="container__semana">
               <div>
                 <h6>Contenidos:</h6>
                 <textarea name="contenidos" id="" cols="90" rows="5"></textarea>
@@ -415,21 +415,21 @@ export const SyllabeCreateScreen = () => {
           </div>
 
 
-          <div class="evaluacion__titulo">
+          <div className="evaluacion__titulo">
             <h3>EVALUACIÓN</h3>
             <div>
-              <a href="!#"><button><i class="fa fa-circle" aria-hidden="true"></i></button></a>
-              <a href="!#"><button><i class="fa fa-check-circle" aria-hidden="true"></i></button></a>
-              <a href="!#"><button><i class="fas fa-exclamation-circle"></i></button></a>
+              <a href="!#"><button><i className="fa fa-circle" aria-hidden="true"></i></button></a>
+              <a href="!#"><button><i className="fa fa-check-circle" aria-hidden="true"></i></button></a>
+              <a href="!#"><button><i className="fas fa-exclamation-circle"></i></button></a>
             </div>
           </div>
-          <div class="container__evaluacion">
-            <div class="descripcion__titulo">
-              <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-              <i class="fa fa-caret-down" aria-hidden="true"></i>
+          <div className="container__evaluacion">
+            <div className="descripcion__titulo">
+              <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+              <i className="fa fa-caret-down" aria-hidden="true"></i>
               <h4>DESCRIPCIÓN</h4>
             </div>
-            <div class="principios">
+            <div className="principios">
               <h5>Principios y procedimientos</h5>
               <textarea name="principios" id="" cols="90" rows="5">
                 -La evaluación por competencias se caracteriza por ser progresiva, formativa y auténtica por lo que es de procesos e integral, y se orienta a asegurar el logro de los aprendizajes esperados, capacidades y competencias respectivas.
@@ -437,13 +437,13 @@ export const SyllabeCreateScreen = () => {
                 -Las pruebas de evaluación se rendirán en las fechas señaladas por el docente y no podrán ser reprogramadas fuera de la fecha determinada.
               </textarea>
             </div>
-            <div class="detalle">
+            <div className="detalle">
               <h5>Detalle: </h5>
               <textarea name="principios" id="" cols="90" rows="5">
                 PF = (PU1 + PU2 + PU3)/3
               </textarea>
             </div>
-            <div class="criterios">
+            <div className="criterios">
               <h5>Criterios para la promoción: </h5>
               <textarea name="criterios" id="" cols="90" rows="5">
                 El sistema de calificación es vigesimal (0-20). La nota aprobatoria es 11, en el promedio promocional el medio punto (0.5) favorece al estudiante. La asistencia es obligatoria, tener más del 30% de inasistencia injustificada es causal de inhabilitación
@@ -451,25 +451,25 @@ export const SyllabeCreateScreen = () => {
             </div>
           </div>
 
-          <div class="consejeria__titulo">
+          <div className="consejeria__titulo">
             <h3>CONSEJERIA ACADÉMICA</h3>
-            <div class="">
-              <a href="!#"><button><i class="fa fa-circle" aria-hidden="true"></i></button></a>
-              <a href="!#"><button><i class="fa fa-check-circle" aria-hidden="true"></i></button></a>
-              <a href="!#"><button><i class="fas fa-exclamation-circle"></i></button></a>
+            <div className="">
+              <a href="!#"><button><i className="fa fa-circle" aria-hidden="true"></i></button></a>
+              <a href="!#"><button><i className="fa fa-check-circle" aria-hidden="true"></i></button></a>
+              <a href="!#"><button><i className="fas fa-exclamation-circle"></i></button></a>
             </div>
           </div>
-          <div class="container__consejeria">
+          <div className="container__consejeria">
 
-            <div class="lugar_titulo">
+            <div className="lugar_titulo">
               <div>
-                <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+                <i className="fa fa-caret-down" aria-hidden="true"></i>
               </div>
               <h4>LUGAR Y HORA</h4>
             </div>
 
-            <div class="consejeria__dia">
+            <div className="consejeria__dia">
               <select name="dia" id="">
                 <option value="">Dia</option>
                 <option value="">Lunes</option>
@@ -479,7 +479,7 @@ export const SyllabeCreateScreen = () => {
                 <option value="">Viernes</option>
               </select>
             </div>
-            <div class="consejeria__hora">
+            <div className="consejeria__hora">
               <input type="time" name="inicio" id="" />
               <input type="time" name="termino" id="" />
             </div>
@@ -488,69 +488,66 @@ export const SyllabeCreateScreen = () => {
             </div>
           </div>
 
-          <div class="bibliografia__titulo">
+          <div className="bibliografia__titulo">
             <h3>BIBLIOGRAFÍA</h3>
             <div>
-              <a href="!#"><button><i class="fa fa-circle" aria-hidden="true"></i></button></a>
-              <a href="!#"><button><i class="fa fa-check-circle" aria-hidden="true"></i></button></a>
-              <a href="!#"><button><i class="fas fa-exclamation-circle"></i></button></a>
+              <a href="!#"><button><i className="fa fa-circle" aria-hidden="true"></i></button></a>
+              <a href="!#"><button><i className="fa fa-check-circle" aria-hidden="true"></i></button></a>
+              <a href="!#"><button><i className="fas fa-exclamation-circle"></i></button></a>
             </div>
           </div>
-          <div class="container__bibliografia">
-            <div class="material__titulo">
-              <i class="fa fa-caret-right no-activo" aria-hidden="true"></i>
-              <i class="fa fa-caret-down" aria-hidden="true"></i>
+          <div className="container__bibliografia">
+            <div className="material__titulo">
+              <i className="fa fa-caret-right no-activo" aria-hidden="true"></i>
+              <i className="fa fa-caret-down" aria-hidden="true"></i>
               <h4>LIBROS Y MATERIAL ACADEMICO</h4>
             </div>
-            <div class="agregar__referencia">
+            <div className="agregar__referencia">
               <button>Agregar referencia</button>
             </div>
-            <div class="referencia__agregada">
+            <div className="referencia__agregada">
               <input type="text" placeholder="Referencia" />
               <input type="text" placeholder="Lugar donde se encuentra" />
-              <button><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+              <button><i className="far fa-trash-alt" aria-hidden="true"></i></button>
             </div>
-            <div class="referencia__agregada">
+            <div className="referencia__agregada">
               <input type="text" placeholder="Referencia" />
               <input type="text" placeholder="Lugar donde se encuentra" />
-              <button><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+              <button><i className="far fa-trash-alt" aria-hidden="true"></i></button>
             </div>
-            <div class="referencia__agregada">
+            <div className="referencia__agregada">
               <input type="text" placeholder="Referencia" />
               <input type="text" placeholder="Lugar donde se encuentra" />
-              <button><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+              <button><i className="far fa-trash-alt" aria-hidden="true"></i></button>
             </div>
           </div>
 
-          <div class="finalizar__revision">
+          <div className="finalizar__revision">
             <button>SOLICITAR REVISIÓN</button>
-            <button class="no-activo">FINALIZAR REVISIÓN</button>
+            <button className="no-activo">FINALIZAR REVISIÓN</button>
           </div>
 
         </section>
 
       </div>
 
-      <div class="silabo__acciones">
-        <button class="retornar" onClick={() => hist.goBack()}>
-          <i class="fas fa-undo-alt"></i>
+      <div className="silabo__acciones">
+        <button className="retornar" onClick={() => hist.goBack()}>
+          <i className="fas fa-undo-alt"></i>
         </button>
-        <button class="guardar" onClick={() => hist.push('/panel/silabos/crear')}>
-          <i class="fas fa-save"></i>
+        <button className="guardar" onClick={() => hist.push('/panel/silabos/crear')}>
+          <i className="fas fa-save"></i>
         </button>
-        <button class="descargar" onClick={() => hist.push('/panel/silabos')}>
-          <i class="fa fa-download" aria-hidden="true"></i>
+        <button className="descargar" onClick={() => hist.push('/panel/silabos')}>
+          <i className="fa fa-download" aria-hidden="true"></i>
         </button>
-        <button class="visualizar" onClick={() => hist.push('/panel/silabos/detalle')}>
-          <i class="fas fa-play"></i>
+        <button className="visualizar" onClick={() => hist.push('/panel/silabos/detalle')}>
+          <i className="fas fa-play"></i>
         </button>
-        <button class="eliminar">
-          <i class="far fa-trash-alt"></i>
+        <button className="eliminar">
+          <i className="far fa-trash-alt"></i>
         </button>
       </div>
-
-
-
 
     </>
   )
