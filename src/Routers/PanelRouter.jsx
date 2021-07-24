@@ -10,8 +10,8 @@ import {
 
 //local
 import { HeaderPanel } from '../modules/panel/components/HeaderPanel';
+import { Sidebar } from '../modules/panel/components/Sidebar';
 import { PanelMainScreen } from '../modules/panel/main/PanelMainScreen';
-import { SyllabesAppRouter } from './SyllabesAppRouter';
 
 
 //component
@@ -27,13 +27,18 @@ export const PanelRouter = () => {
   return (
     <>
       <HeaderPanel />
+      <Sidebar />
 
       <Switch>
-        <Route path='/panel/:location/:syllabe_action'>
+        <Route exact path='/panel/:location/:syllabe_action/:pk'>
           <PanelMainScreen />
         </Route>
 
-        <Route path='/panel/:location'>
+        <Route exact path='/panel/:location/:syllabe_action'>
+          <PanelMainScreen />
+        </Route>
+
+        <Route exact path='/panel/:location'>
           <PanelMainScreen />
         </Route>
 

@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { getAllSyllabeDate } from '../../helpers/syllabes-helpers'
 import { MenuTopPanel } from '../panel/components/MenuTopPanel'
 import { SyllabeDetailBibliography } from './components/SyllabeDetailBibliography'
 import { SyllabeDetailCompetences } from './components/SyllabeDetailCompetences'
@@ -13,32 +16,55 @@ import { SyllabeDetailSignatures } from './components/SyllabeDetailSignatures'
 import { SyllabeDetailSommelier } from './components/SyllabeDetailSommelier'
 
 export const SyllabeDetailScreen = () => {
+
+  const { pk } = useParams()
+  const { token } = useSelector(state => state.auth)
+  const [state, setState] = useState({
+    data: {}
+  })
+
+  useEffect(() => {
+
+    getAllSyllabeDate(pk, token)
+      .then((data) => {
+        setState({
+          ...state,
+          data: data
+        })
+      })
+
+  }, [])
+
   return (
     <>
+
       <MenuTopPanel />
+      {
+        (<div className="silabo__completo" >
 
-      <div className="silabo__completo">
-        <SyllabeDetailHeader />
+          <SyllabeDetailHeader name={state.data} />
 
-        <SyllabeDetailGeneralData />
+          <SyllabeDetailGeneralData />
 
-        <SyllabeDetailSommelier />
+          <SyllabeDetailSommelier />
 
-        <SyllabeDetailCompetences />
+          <SyllabeDetailCompetences />
 
-        <SyllabeDetailProgramming />
+          <SyllabeDetailProgramming />
 
-        <SyllabeDetailEvaluation />
+          <SyllabeDetailEvaluation />
 
-        <SyllabeDetailCounseling />
+          <SyllabeDetailCounseling />
 
-        <SyllabeDetailBibliography />
+          <SyllabeDetailBibliography />
 
-        <SyllabeDetailDate />
+          <SyllabeDetailDate />
 
-        <SyllabeDetailSignatures />
+          <SyllabeDetailSignatures />
 
-      </div>
+        </div>)
+      }
+
 
       <SyllabeDetailControls />
 

@@ -105,6 +105,7 @@ export const PanelProfileScreen = () => {
     updateUser(
       { ...formValues },
       user.media,
+      user.boss,
       token).then((data) => {
         dispatch(updateUserStore(data));
         setState({ ...state, loading: false })

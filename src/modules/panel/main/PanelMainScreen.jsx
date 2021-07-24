@@ -14,40 +14,36 @@ export const PanelMainScreen = () => {
   // console.log(location, syllabe_action);
 
   return (
-    <>
-      <div className="panel__container">
+    <div className="panel__container">
 
-        <Sidebar />
+      <main className="panel__main">
+        {
+          !location && <MainContainerPanel />
+        }
 
-        <main className="panel__main">
-          {
-            !location && <MainContainerPanel />
-          }
+        {
+          location === 'users' && <PanelUsersScreen />
+        }
 
-          {
-            location === 'users' && <PanelUsersScreen />
-          }
+        {
+          location === 'profile' && <PanelProfileScreen />
+        }
 
-          {
-            location === 'profile' && <PanelProfileScreen />
-          }
+        {
+          (location == 'syllabes' && !syllabe_action) && <SyllabesListScreen />
+        }
 
-          {
-            (location == 'syllabes' && !syllabe_action) && <SyllabesListScreen />
-          }
+        {
+          (location == 'syllabes' && syllabe_action == 'detail') && <SyllabeDetailScreen />
+        }
+        {
+          (location == 'syllabes' && syllabe_action == 'create') && <SyllabeCreateScreen />
 
-          {
-            (location == 'syllabes' && syllabe_action == 'detail') && <SyllabeDetailScreen />
-          }
-          {
-            (location == 'syllabes' && syllabe_action == 'create') && <SyllabeCreateScreen />
-
-          }
-          {
-            (location == 'syllabes' && syllabe_action == 'update') && <SyllabeCreateScreen />
-          }
-        </main>
-      </div>
-    </>
+        }
+        {
+          (location == 'syllabes' && syllabe_action == 'update') && <SyllabeCreateScreen />
+        }
+      </main>
+    </div>
   )
 }

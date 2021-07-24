@@ -94,28 +94,28 @@ export const SyllabeCard = ({
 
             <button
               className="visualizar"
-              onClick={() => history.push('/panel/syllabes/detail')}
+              onClick={() => history.push(`/panel/syllabes/detail/${syllabe_id}`)}
             >
               <i className="fas fa-info-circle"></i>
               VISUALIZAR
             </button>
             <button
               className="descargar"
-              onClick={() => history.push('/panel/syllabes/download')}
+              onClick={() => console.log('Imprimir Sílabo')}
             >
               <i className="fas fa-download"></i>
               DESCARGAR
             </button>
             <button
               className="modificar"
-              onClick={() => history.push('/panel/syllabes/update')}
+              onClick={() => history.push(`/panel/syllabes/update/${syllabe_id}`)}
             >
               <i className="fas fa-edit"></i>
               MODIFICAR
             </button>
             <button
               className="eliminar"
-              onClick={() => history.push('/panel/syllabes/delete')}
+              onClick={() => history.push(`/panel/syllabes/delete/${syllabe_id}`)}
             >
               <i className="fas fa-trash"></i>
               ELIMINAR

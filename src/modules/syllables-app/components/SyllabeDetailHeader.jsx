@@ -1,6 +1,8 @@
 import React from 'react'
 
-export const SyllabeDetailHeader = () => {
+export const SyllabeDetailHeader = ({ name }) => {
+
+
   return (
     <section className="silabo__encabezado">
 
@@ -20,7 +22,11 @@ export const SyllabeDetailHeader = () => {
         </div>
       </div>
 
-      <h2 className="silabo__detalle__titulo">SILABO DE TEORIA DE MÁQUINAS Y MECANÍSMOS</h2>
+      <h2 className="silabo__detalle__titulo">
+        {
+          (name.course?.name) && ('Sílabo de ' + name.course.name)
+        }
+      </h2>
     </section>
   )
 }

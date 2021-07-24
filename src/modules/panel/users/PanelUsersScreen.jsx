@@ -152,7 +152,7 @@ export const PanelUsersScreen = () => {
       }
     });
 
-    updateUser({ ...formValues }, formValues.media, token)
+    updateUser({ ...formValues }, formValues.media, user.boss, token)
       .then(() => {
 
         filterUsersBySchoolAndLastname(state.filterValues.school, state.filterValues.search, token)

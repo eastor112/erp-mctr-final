@@ -33,7 +33,7 @@ export const getFilteredSyllabesSummary = async (cycle, year, semester, status, 
   }
 
 
-  const response = await axios.get(url, config)
+  const response = await axios.get(url, config);
 
   if (response.status === 200) {
     return response.data;
@@ -41,4 +41,24 @@ export const getFilteredSyllabesSummary = async (cycle, year, semester, status, 
     return response.response;
   }
 
+}
+
+
+export const getAllSyllabeDate = async (id, token) => {
+  const url = `${BACKEND_URL}/${id}/full`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.get(url, config);
+
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
 }
