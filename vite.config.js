@@ -5,5 +5,6 @@ import pluginRewriteAll from 'vite-plugin-rewrite-all';
 export default defineConfig({
   base: '/erp-mctr-final/',
   // base: '/',
-  plugins: [reactRefresh(), pluginRewriteAll()]
+  // plugins: [reactRefresh(), pluginRewriteAll()]
+  plugins: [pluginRewriteAll()]
 })
