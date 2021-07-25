@@ -11,13 +11,13 @@ export const ModuleCardPanel = ({
   const history = useHistory();
 
   const handleClick = () => {
-    history.push(url)
+    history.push(import.meta.env.BASE_URL + url)
   }
   return (
     <div className={enable ? 'card__modulo' : 'card__modulo disable'}>
 
       <figure>
-        <img src={img} alt="" />
+        <img src={import.meta.env.BASE_URL + img} alt="" />
       </figure>
       {
         enable

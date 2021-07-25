@@ -32,7 +32,7 @@ export const SyllabeDetailControls = () => {
 
       <button
         className="editar"
-        onClick={() => history.push('/panel/syllabes/update')}
+        onClick={() => history.push(import.meta.env.BASE_URL + 'panel/syllabes/update')}
         data-tip data-for='edit'
       >
         <i className="far fa-edit"></i>

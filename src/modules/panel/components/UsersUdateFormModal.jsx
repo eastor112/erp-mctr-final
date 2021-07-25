@@ -6,7 +6,7 @@ export const UsersUdateFormModal = () => {
       <h2>Actualizando permisos de: emerar@unitru.edu.pe</h2>
       <section>
         <figure>
-          <img src="https://fakeimg.pl/300x300" alt="" />
+          <img src={import.meta.env.BASE_URL + "https://fakeimg.pl/300x300"} alt="" />
         </figure>
         <div>
           <h4>

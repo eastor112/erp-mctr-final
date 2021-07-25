@@ -16,13 +16,13 @@ export const SidebarMenu = ({ adminView }) => {
   return (
     <ul className="sidebar__menu">
       <li>
-        <NavLink exact to='/panel' activeClassName="seleccionado">
+        <NavLink exact to={import.meta.env.BASE_URL + 'panel'} activeClassName="seleccionado">
           <i className="fas fa-th-large"></i>Panel de control
         </NavLink>
       </li>
 
       <li>
-        <NavLink to='/panel/profile' activeClassName="seleccionado">
+        <NavLink to={import.meta.env.BASE_URL + 'panel/profile'} activeClassName="seleccionado">
           <i className="fas fa-user-circle"></i>Perfil de usuario
         </NavLink>
       </li>
@@ -31,7 +31,7 @@ export const SidebarMenu = ({ adminView }) => {
         adminView &&
         (
           <li>
-            <NavLink to='/panel/users' activeClassName="seleccionado">
+            <NavLink to={import.meta.env.BASE_URL + 'panel/users'} activeClassName="seleccionado">
               <i className="fas fa-users"></i>Cuentas de usuario
             </NavLink>
           </li>

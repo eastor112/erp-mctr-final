@@ -45,7 +45,7 @@ export const PanelUsersScreen = () => {
 
   const history = useHistory()
   if (!isAdmin) {
-    history.push('/panel')
+    history.push(import.meta.env.BASE_URL + 'panel')
   }
 
   const [state, setState] = useState({

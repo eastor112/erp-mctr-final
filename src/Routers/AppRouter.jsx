@@ -67,18 +67,18 @@ export const AppRouter = () => {
       <Switch>
 
         <PublicRoute
-          path="/login"
+          path={import.meta.env.BASE_URL + "login"}
           isAuthenticated={isAuthenticated}
           component={LoginScreen}
         />
 
         <PrivateRoute
-          path="/panel"
+          path={import.meta.env.BASE_URL + "panel"}
           component={PanelRouter}
           isAuthenticated={isAuthenticated}
         />
 
-        <Route path="/">
+        <Route path={import.meta.env.BASE_URL} >
           <HomeScreen />
         </Route>
 

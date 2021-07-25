@@ -55,7 +55,6 @@ export const UsersIndividualCard = ({
   }
 
 
-
   return (
     <>
       {
@@ -67,7 +66,7 @@ export const UsersIndividualCard = ({
                 ?
                 import.meta.env.VITE_MEDIA_URL + user.media.profile
                 :
-                '/assets/profile.jpg'
+                import.meta.env.BASE_URL + 'assets/profile.jpg'
             }
               alt=""
               width="200"

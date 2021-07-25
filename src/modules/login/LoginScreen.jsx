@@ -27,12 +27,12 @@ export const LoginScreen = () => {
   return (
     <main className="login__vista">
       <figure className="portada">
-        <img src={"/assets/electronico.jpg"} alt="" />
+        <img src={import.meta.env.BASE_URL + "assets/electronico.jpg"} alt="" />
       </figure>
 
       <div className="identificate">
         <figure>
-          <img src={"/assets/logo_mecatronica.png"} alt="" />
+          <img src={import.meta.env.BASE_URL + "assets/logo_mecatronica.png"} alt="" />
         </figure>
         <h1>Bienvenido al ERP de Ingeniería Mecatrónica</h1>
         <p>Identifiquese usando su correo:</p>
@@ -42,7 +42,7 @@ export const LoginScreen = () => {
           onClick={handleLoginGoogle}
           disabled={isLogging}
         >
-          <img src={"./assets/icon__google.png"} alt="" />
+          <img src={import.meta.env.BASE_URL + "assets/icon__google.png"} alt="" />
           &nbsp;&nbsp; Ingresa con Google
         </button>
       </div>

@@ -134,7 +134,7 @@ export const SyllabeFilters = ({ setState, schools, token }) => {
 
 
           <button
-            onClick={() => { history.push('/panel/syllabes/create') }}
+            onClick={() => { history.push(import.meta.env.BASE_URL + 'panel/syllabes/create') }}
           >
             <i className="fas fa-plus-square"></i>
             NUEVO

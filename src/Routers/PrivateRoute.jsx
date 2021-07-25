@@ -14,7 +14,7 @@ const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => {
         (isAuthenticated) ?
           <Component {...props} />
           :
-          <Redirect to='/login' />
+          <Redirect to={import.meta.env.BASE_URL + 'login'} />
       )}
     />
   )

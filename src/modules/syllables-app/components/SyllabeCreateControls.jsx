@@ -48,7 +48,7 @@ export const SyllabeCreateControls = ({ pk }) => {
       <button
         className="visualizar"
         data-tip data-for='see'
-        onClick={() => history.push(`/panel/syllabes/detail/${pk}`)}
+        onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/detail/${pk}`)}
       >
         <i className="fas fa-play"></i>
       </button>

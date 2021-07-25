@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 export const HomeScreen = () => {
+
   return (
     <>
       <header>
@@ -10,11 +11,11 @@ export const HomeScreen = () => {
           <div className="navbar__logo">
             <h1>MECATRÓNICA-UNT</h1>
             <figure>
-              <img src="./assets/logo_unt.png" alt="" width="50" />
+              <img src={import.meta.env.BASE_URL + "assets/logo_unt.png"} alt="" width="50" />
             </figure>
           </div>
           <div className="navbar__login">
-            <Link to="/login">
+            <Link to={import.meta.env.BASE_URL + "login"}>
               Iniciar sesión
               <i className="fas fa-sign-in-alt"></i>
             </Link>
@@ -25,7 +26,7 @@ export const HomeScreen = () => {
       <main className="landing__main">
 
         <figure className="landing__main__portada">
-          <img src="./assets/portada.jpg" alt="" />
+          <img src={import.meta.env.BASE_URL + "assets/portada.jpg"} alt="" />
         </figure>
 
         <article className="landing__main__historia">
@@ -34,7 +35,7 @@ export const HomeScreen = () => {
           </h2>
           <div className="landing__parrafo__imagen">
             <figure>
-              <img src="./assets/logo_mecatronica.png" alt="" />
+              <img src={import.meta.env.BASE_URL + "assets/logo_mecatronica.png"} alt="" />
             </figure>
             <p>
               La Escuela de Ingeniería Mecatrónica de la Universidad Nacional de Trujillo fue creada en el año 2006, con
@@ -53,18 +54,18 @@ export const HomeScreen = () => {
           </p>
           <div className="landing__galeria">
             <figure className="landing__galeria__derecha">
-              <img src="./assets/salaDocentes.png" alt="" />
+              <img src={import.meta.env.BASE_URL + "assets/salaDocentes.png"} alt="" />
             </figure>
             <div className="landing__galeria__izquierda">
               <figure>
-                <img src="./assets/internacionales.png" alt="" />
+                <img src={import.meta.env.BASE_URL + "assets/internacionales.png"} alt="" />
               </figure>
               <div>
                 <figure className="medallas">
-                  <img src="./assets/premiosRumania.png" alt="" />
+                  <img src={import.meta.env.BASE_URL + "assets/premiosRumania.png"} alt="" />
                 </figure>
                 <figure className="laboratorio">
-                  <img src="./assets/laboratorio.png" alt="" />
+                  <img src={import.meta.env.BASE_URL + "assets/laboratorio.png"} alt="" />
                 </figure>
               </div>
             </div>

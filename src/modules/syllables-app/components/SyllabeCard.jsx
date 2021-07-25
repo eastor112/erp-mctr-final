@@ -24,7 +24,7 @@ export const SyllabeCard = ({
   return (
     <div className="silabo__card">
       <figure>
-        <img src="/assets/silabo__card.jpg" alt="" />
+        <img src={import.meta.env.BASE_URL + "assets/silabo__card.jpg"} alt="" />
       </figure>
       <div className="silabo__card__info">
         <h4>
@@ -94,7 +94,7 @@ export const SyllabeCard = ({
 
             <button
               className="visualizar"
-              onClick={() => history.push(`/panel/syllabes/detail/${syllabe_id}`)}
+              onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/detail/${syllabe_id}`)}
             >
               <i className="fas fa-info-circle"></i>
               VISUALIZAR
@@ -108,14 +108,14 @@ export const SyllabeCard = ({
             </button>
             <button
               className="modificar"
-              onClick={() => history.push(`/panel/syllabes/update/${syllabe_id}`)}
+              onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/update/${syllabe_id}`)}
             >
               <i className="fas fa-edit"></i>
               MODIFICAR
             </button>
             <button
               className="eliminar"
-              onClick={() => history.push(`/panel/syllabes/delete/${syllabe_id}`)}
+              onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/delete/${syllabe_id}`)}
             >
               <i className="fas fa-trash"></i>
               ELIMINAR

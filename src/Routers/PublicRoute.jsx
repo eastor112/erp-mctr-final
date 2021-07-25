@@ -13,7 +13,7 @@ const PublicRoute = ({ isAuthenticated, component: Component, ...rest }) => {
         (!isAuthenticated) ?
           <Component {...props} />
           :
-          <Redirect to={lastpath ? lastpath : '/panel'} />
+          <Redirect to={lastpath ? lastpath : import.meta.env.BASE_URL + 'panel'} />
       )}
     />
   )
