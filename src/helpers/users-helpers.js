@@ -194,3 +194,21 @@ export const filterUsersBySchoolAndLastname = async (school, lastname, token) =>
     return response.response;
   }
 }
+
+
+export const getMediaFilesUser = async (user, token) => {
+  const url = `${BACKEND_URL}/users-api/v1.0/user/media/${user}`
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.get(url, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}

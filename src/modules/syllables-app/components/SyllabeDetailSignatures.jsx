@@ -1,18 +1,18 @@
 import React from 'react'
 
-export const SyllabeDetailSignatures = () => {
+export const SyllabeDetailSignatures = ({ professorSignature, directorSignature }) => {
   return (
     <section className="silabo__firmas">
       <div className="izquierda">
         <figure className="firma__docente">
-          <img src={import.meta.env.BASE_URL + "assets/firma__docente.jpg"} alt="docente" />
+          <img src={professorSignature} alt="docente" />
         </figure>
         <p>___________________________________</p>
         <h5>Firma docente</h5>
       </div>
       <div className="derecha">
         <figure className="firma__director">
-          <img src={import.meta.env.BASE_URL + "assets/firma__director.jpeg"} alt="director" />
+          <img src={directorSignature} alt="director" />
         </figure>
         <p>___________________________________</p>
         <h5>Visado director de escuela</h5>

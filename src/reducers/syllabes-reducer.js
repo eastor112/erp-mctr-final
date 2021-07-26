@@ -2,7 +2,9 @@ import { types } from "../types"
 
 const initialState = {
   actualSyllabeSummary: {},
-  actualSyllabe: {}
+  actualSyllabe: {},
+  professorMedia: {},
+  directorMedia: {}
 }
 
 export const syllabesReducer = (state = initialState, action) => {
@@ -12,7 +14,9 @@ export const syllabesReducer = (state = initialState, action) => {
       return {
         ...state,
         actualSyllabeSummary: action.payload.actualSyllabeSummary,
-        actualSyllabe: action.payload.actualSyllabe
+        actualSyllabe: action.payload.actualSyllabe,
+        professorMedia: action.payload.professorMedia,
+        directorMedia: action.payload.directorMedia
       }
 
     default:

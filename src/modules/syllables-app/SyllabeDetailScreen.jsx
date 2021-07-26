@@ -20,7 +20,11 @@ export const SyllabeDetailScreen = () => {
   const { pk } = useParams()
   const dispatch = useDispatch()
 
-  const { actualSyllabeSummary, actualSyllabe } = useSelector(state => state.syllabe)
+  const {
+    actualSyllabeSummary,
+    actualSyllabe,
+    professorMedia,
+    directorMedia } = useSelector(state => state.syllabe)
 
   const { token } = useSelector(state => state.auth)
 
@@ -72,21 +76,47 @@ export const SyllabeDetailScreen = () => {
             assistantprofessors={actualSyllabe.assistantprofessors}
           />
 
-          <SyllabeDetailSommelier />
+          <SyllabeDetailSommelier
+            sommelier={actualSyllabe.course.sommelier}
+          />
 
-          <SyllabeDetailCompetences />
+          <SyllabeDetailCompetences
+            generalcompetence={actualSyllabe.course.generalcompetence}
+            specificcompetence={actualSyllabe.course.specificcompetence}
+            unitcompetence={actualSyllabe.course.unitcompetence}
+          />
 
-          <SyllabeDetailProgramming />
+          <SyllabeDetailProgramming
+            units={actualSyllabe.units}
+          />
 
-          <SyllabeDetailEvaluation />
+          <SyllabeDetailEvaluation
+            legalbase={actualSyllabe.legalbase}
+            procedures={actualSyllabe.procedures}
+            evaluationdetail={actualSyllabe.evaluationdetail}
+            criteria={actualSyllabe.criteria}
+            achievementlevel={actualSyllabe.achievementlevel}
+          />
 
-          <SyllabeDetailCounseling />
+          <SyllabeDetailCounseling
+            counselingpurpose={actualSyllabe.counselingpurpose}
+            counselingday={actualSyllabe.counselingday}
+            counselinghour={actualSyllabe.counselinghour}
+            counselingplace={actualSyllabe.counselingplace}
+          />
 
-          <SyllabeDetailBibliography />
+          <SyllabeDetailBibliography
+            resources={actualSyllabe.bibliography.resources}
+          />
 
-          <SyllabeDetailDate />
+          <SyllabeDetailDate
+            visadate={actualSyllabe.visadate}
+          />
 
-          <SyllabeDetailSignatures />
+          <SyllabeDetailSignatures
+            professorSignature={professorMedia.signature}
+            directorSignature={directorMedia.signature}
+          />
 
         </div>)
       }

@@ -952,6 +952,10 @@ footer {
   .competencias__generales {
     font-size: $font-size-silabo;
 
+    div {
+      margin-left: $margin-silabo;
+    }
+
     p {
       margin-top: 5px;
       margin-bottom: 15px;
@@ -960,6 +964,10 @@ footer {
 
   .competencias__unidades {
     font-size: $font-size-silabo;
+
+    div {
+      margin-left: $margin-silabo;
+    }
 
     p {
       margin-top: 5px;
@@ -972,6 +980,12 @@ footer {
 
   table {
     position: relative;
+    table-layout: fixed;
+  }
+
+  td {
+    word-wrap: break-word;
+    white-space: pre-line;
   }
 
   table,
@@ -1003,12 +1017,18 @@ footer {
   }
 
   .capacidades__head,
-  .resultados__head,
-  .contenidos__head,
+  .resultados__head {
+    width: 15%;
+  }
+
   .estrategias__head,
+  .contenidos__head {
+    width: 20%;
+  }
+
   .evidencias__head,
   .instrumentos__head {
-    width: 15%;
+    width: 11%;
   }
 
   .capacidades ul {
@@ -1024,41 +1044,25 @@ footer {
     }
   }
 
-  .resultados ul {
-    list-style: none;
+  .resultados {
+    list-style: decimal;
 
     li {
       margin-bottom: 40px;
       margin-left: 5px;
     }
-
-    span {
-      font-weight: bold;
-    }
   }
 
-  .contenidos ul,
-  .estrategias ul,
-  .evidencias ul,
-  .instrumentos ul {
-    list-style: none;
-
-    li {
-      margin-bottom: 15px;
-      margin-left: 5px;
-    }
-
-    span {
-      font-weight: bold;
-    }
+  .resultados,
+  .contenidos,
+  .estrategias,
+  .evidencias,
+  .instrumentos {
+    padding: 20px 4px;
   }
 
-  .contenidos li::before,
-  .estrategias li::before,
-  .evidencias li::before,
-  .instrumentos li::before {
-    content: '-';
-  }
+
+
 
   .semana__fecha {
     text-align: center;
@@ -1068,6 +1072,7 @@ footer {
 .silabo__evaluacion {
   font-size: $font-size-silabo;
   line-height: $line-height-silabo;
+  white-space: pre-line;
 
   h5 {
     font-size: $font-size-silabo;
@@ -1087,6 +1092,7 @@ footer {
 
   pre {
     margin-bottom: 0;
+    white-space: pre-wrap;
   }
 
   .evaluacion__legal,
@@ -1100,6 +1106,12 @@ footer {
 
 .silabo__consejeria {
   font-size: $font-size-silabo;
+
+  p {
+    margin-left: $margin-silabo;
+    font-size: $font-size-silabo;
+    line-height: $line-height-silabo;
+  }
 
   .proposito,
   .desarrollo {
@@ -1915,7 +1927,6 @@ footer {
 
 
 // LOADER
-
 .lds-dual-ring {
   display: inline-block;
   width: 80px;
