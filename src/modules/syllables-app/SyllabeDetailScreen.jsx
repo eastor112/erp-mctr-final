@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getAllSyllabeDate } from '../../helpers/syllabes-helpers'
+import { startGetSyllabeDetailData } from '../../actions/syllabe-actions'
 import { MenuTopPanel } from '../panel/components/MenuTopPanel'
 import { SyllabeDetailBibliography } from './components/SyllabeDetailBibliography'
 import { SyllabeDetailCompetences } from './components/SyllabeDetailCompetences'
@@ -18,33 +18,59 @@ import { SyllabeDetailSommelier } from './components/SyllabeDetailSommelier'
 export const SyllabeDetailScreen = () => {
 
   const { pk } = useParams()
+  const dispatch = useDispatch()
+
+  const { actualSyllabeSummary, actualSyllabe } = useSelector(state => state.syllabe)
+
   const { token } = useSelector(state => state.auth)
-  const [state, setState] = useState({
-    data: {}
-  })
+
 
   useEffect(() => {
-
-    getAllSyllabeDate(pk, token)
-      .then((data) => {
-        setState({
-          ...state,
-          data: data
-        })
-      })
-
+    dispatch(startGetSyllabeDetailData(pk, token));
   }, [])
+
 
   return (
     <>
 
       <MenuTopPanel />
       {
+        Object.keys(actualSyllabeSummary).length !== 0
+        &&
         (<div className="silabo__completo" >
 
-          <SyllabeDetailHeader name={state.data} />
 
-          <SyllabeDetailGeneralData />
+          <SyllabeDetailHeader
+            program={actualSyllabeSummary.school}
+            courseName={actualSyllabeSummary.course_name}
+          />
+
+
+          <SyllabeDetailGeneralData
+            area={actualSyllabeSummary.course_category}
+            faculty={actualSyllabeSummary.faculty}
+            department={actualSyllabeSummary.department}
+            school={actualSyllabeSummary.school}
+            campus={actualSyllabeSummary.campus}
+            year={actualSyllabeSummary.syllabe_year}
+            semester={actualSyllabeSummary.syllabe_semester}
+            cycle={actualSyllabeSummary.course_cycle}
+            code={actualSyllabeSummary.course_code}
+            section={actualSyllabeSummary.syllabe_section}
+            credits={actualSyllabeSummary.course_credits}
+            prerequisite={actualSyllabe.course.prerequisite}
+            startdate={actualSyllabe.startdate}
+            finishdate={actualSyllabe.finishdate}
+            totalweeks={actualSyllabe.totalweeks}
+            type={actualSyllabe.course.type}
+            regime={actualSyllabe.course.regime}
+            units={actualSyllabe.units}
+            theoryhours={actualSyllabe.course.theoryhours}
+            practicehours={actualSyllabe.course.practicehours}
+            laboratoryhours={actualSyllabe.course.laboratoryhours}
+            principalprofessor={actualSyllabe.principalprofessor}
+            assistantprofessors={actualSyllabe.assistantprofessors}
+          />
 
           <SyllabeDetailSommelier />
 

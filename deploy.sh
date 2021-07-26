@@ -1,11 +1,9 @@
 #!/usr/bin/env sh
 
-# Modificar el vite.configjs
+# Antes de desplegar
+# 1.-Descomentar la ruta base
+# 2.-Descomentar la dirección del backend en el .Eenv
 
-# export default defineConfig({
-#   base: '/erp-mctr-final/',
-#   plugins: [reactRefresh()]
-# })
 set -e
 
 yarn build 

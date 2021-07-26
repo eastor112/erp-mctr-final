@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { getAllSyllabesSummary } from '../../helpers/syllabes-helpers'
+import { getFilteredSyllabesSummary } from '../../helpers/syllabes-helpers'
+import { getAllSchools } from '../../helpers/unt-structure-helpers'
 import { MenuTopPanel } from '../panel/components/MenuTopPanel'
 import { SyllabeCard } from './components/SyllabeCard'
 import { SyllabeFilters } from './components/SyllabeFilters'
 
+
+const actualYear = new Date().getFullYear();
+
+
 export const SyllabesListScreen = () => {
   const { token } = useSelector(state => state.auth);
-
-
 
   const [state, setState] = useState({
     syllabes: [],
@@ -16,26 +19,13 @@ export const SyllabesListScreen = () => {
     loading: false
   })
 
-  useEffect(() => {
-
-    getAllSyllabesSummary(token)
-      .then((syllabesData) => {
-        setState({
-          ...state,
-          syllabes: syllabesData
-        })
-      })
-
-  }, [])
-
-
 
   useEffect(() => {
 
     const schools = JSON.parse(localStorage.getItem('schools'));
 
     if (schools) {
-      getAllSyllabesSummary(token)
+      getFilteredSyllabesSummary('', actualYear, '', '', '', '', token)
         .then((syllabesData) => {
           setState({
             ...state,
@@ -49,7 +39,7 @@ export const SyllabesListScreen = () => {
         .then((schools) => {
           localStorage.setItem('schools', JSON.stringify(schools));
 
-          getAllSyllabesSummary(token)
+          getFilteredSyllabesSummary('', actualYear, '', '', '', '', token)
             .then((syllabesData) => {
               setState({
                 ...state,

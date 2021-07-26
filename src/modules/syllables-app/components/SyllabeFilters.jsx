@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { getFilteredSyllabesSummary } from '../../../helpers/syllabes-helpers';
 import { useForm } from '../../../hooks/useForm';
-import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 const actualYear = new Date().getFullYear()
 

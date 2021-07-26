@@ -1,8 +1,20 @@
 import React from 'react'
 
-export const SyllabeDetailHoursTable = () => {
+export const SyllabeDetailHoursTable = ({
+  weekPerUnit,
+  theoryhours,
+  practicehours,
+  laboratoryhours,
+  totalweeks
+}) => {
+  const totalHoursTheory = totalweeks * theoryhours;
+  const totalHoursPractice = totalweeks * (practicehours + laboratoryhours) - weekPerUnit.length;
+
+  const totalHours = totalweeks * (theoryhours + practicehours + laboratoryhours);
+
   return (
     <table className="datos__tabla__horas">
+
       <thead>
         <tr >
           <th className="actividades" rowSpan="2">Actividades</th>
@@ -19,28 +31,37 @@ export const SyllabeDetailHoursTable = () => {
       <tbody>
         <tr>
           <td>Teóricas</td>
-          <td>32</td>
-          <td>12</td>
-          <td>10</td>
-          <td>10</td>
+          <td>{totalHoursTheory}</td>
+          {
+            weekPerUnit.map((numberWeeks, i) => (
+              <td key={i}>{numberWeeks * theoryhours}</td>
+            ))
+          }
         </tr>
+
         <tr>
           <td>Prácticas</td>
-          <td>61</td>
-          <td>23</td>
-          <td>19</td>
-          <td>19</td>
+          <td>{totalHoursPractice}</td>
+          {
+            weekPerUnit.map((numberWeeks, i) => (
+              <td key={i * 2}>{numberWeeks * (practicehours + laboratoryhours) - 1}</td>
+            ))
+          }
         </tr>
+
         <tr>
           <td>Retroalimentación</td>
-          <td>3</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
+          <td>{weekPerUnit.length}</td>
+          {
+            weekPerUnit.map((numberWeeks, i) => (
+              <td key={i * 3}>1</td>
+            ))
+          }
         </tr>
+
         <tr>
           <td>Total horas</td>
-          <td colSpan="4">96</td>
+          <td colSpan="4">{totalHours}</td>
         </tr>
       </tbody>
     </table>

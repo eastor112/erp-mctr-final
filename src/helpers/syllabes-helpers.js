@@ -1,9 +1,10 @@
 import axios from "axios";
 
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL + '/syllabes-api/v1.0';
 
 
-
+//Trae el resumen de todos los silabos
 export const getAllSyllabesSummary = async (token) => {
   const getAllSyllabesUrl = `${BACKEND_URL}/summary`;
 
@@ -23,6 +24,27 @@ export const getAllSyllabesSummary = async (token) => {
 }
 
 
+//Trae el resumen de un silabo
+export const getSyllabeSummary = async (id, token) => {
+  const url = `${BACKEND_URL}/summary/${id}`;
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios(url, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+
+//Trae los silabos filtrados
 export const getFilteredSyllabesSummary = async (cycle, year, semester, status, school, search, token) => {
   const url = `${BACKEND_URL}/summary?cycle=${cycle}&year=${year}&semester=${semester}&status=${status}&school=${school}&search=${search}`;
 
@@ -44,7 +66,8 @@ export const getFilteredSyllabesSummary = async (cycle, year, semester, status, 
 }
 
 
-export const getAllSyllabeDate = async (id, token) => {
+
+export const getAllSyllabeData = async (id, token) => {
   const url = `${BACKEND_URL}/${id}/full`
 
   const config = {
