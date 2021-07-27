@@ -76,9 +76,11 @@ $line-height-silabo: 32px;
 .landing__main {
   .landing__main__portada {
     width: 100%;
+
     overflow: hidden;
 
     img {
+      margin-top: 80px;
       width: 100%;
     }
   }
@@ -735,8 +737,11 @@ footer {
 
     .acciones {
       display: flex;
-      flex-wrap: wrap;
+      width: 220px;
+      height: 2.6rem;
+      gap: 5px;
       justify-content: space-between;
+
     }
 
     button {
@@ -820,6 +825,12 @@ footer {
     margin-top: 30px;
     margin-bottom: 10px;
   }
+
+  @media print {
+    margin-top: 0px;
+    border: 0;
+    padding: 0 50px;
+  }
 }
 
 .silabo__encabezado {
@@ -864,6 +875,10 @@ footer {
         }
       }
     }
+
+    @media print {
+      margin-top: 0px;
+    }
   }
 
   .silabo__detalle__titulo {
@@ -871,6 +886,7 @@ footer {
     margin-top: 25px;
     margin-bottom: 20px;
   }
+
 }
 
 .silabo__datos {

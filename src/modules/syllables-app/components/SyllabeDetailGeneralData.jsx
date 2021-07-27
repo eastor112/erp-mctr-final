@@ -28,7 +28,6 @@ export const SyllabeDetailGeneralData = ({
   assistantprofessors }) => {
 
 
-
   const weekPerUnit = units?.map((unit) => unit.durationweeks)
 
 
@@ -91,7 +90,7 @@ export const SyllabeDetailGeneralData = ({
 
             <p>
               <span className="datos__subtitulo">1.12. Inicio - Término:</span>
-              {startdate.split("-").reverse().join("-")} - {finishdate.split("-").reverse().join("-")}
+              {startdate?.split("-").reverse().join("-")} - {finishdate?.split("-").reverse().join("-")}
             </p>
 
             <p><span className="datos__subtitulo">1.13. Tipo:</span> {type}</p>

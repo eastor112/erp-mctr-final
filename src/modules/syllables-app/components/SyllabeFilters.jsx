@@ -39,10 +39,17 @@ export const SyllabeFilters = ({ setState, schools, token }) => {
 
   }, [cycle, year, semester, status, school])
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
 
     <>
-      <form className="silabos__filtros">
+      <form
+        className="silabos__filtros"
+        onSubmit={handleSubmit}
+      >
         <div className="izquierda">
 
           <div className='school'>
@@ -130,9 +137,8 @@ export const SyllabeFilters = ({ setState, schools, token }) => {
 
         <div className="derecha">
 
-
-
           <button
+            type='button'
             onClick={() => { history.push(import.meta.env.BASE_URL + 'panel/syllabes/create') }}
           >
             <i className="fas fa-plus-square"></i>

@@ -2,12 +2,10 @@ import React from 'react'
 import { useHistory } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
-export const SyllabeDetailControls = () => {
+export const SyllabeDetailControls = ({ handlePrint }) => {
   const history = useHistory();
 
-  const handlePrint = () => {
-    console.log('Imprimir sílabo');
-  }
+
 
   return (
     <div className="silabo__acciones">

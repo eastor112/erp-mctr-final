@@ -1,5 +1,18 @@
 import React from 'react'
 
+const unitsRomans = [
+  'I',
+  'II',
+  'III',
+  'IV',
+  'V',
+  'VI',
+  'VII',
+  'VIII',
+  'IX',
+  'X'
+]
+
 export const SyllabeDetailHoursTable = ({
   weekPerUnit,
   theoryhours,
@@ -19,12 +32,14 @@ export const SyllabeDetailHoursTable = ({
         <tr >
           <th className="actividades" rowSpan="2">Actividades</th>
           <th className="horas" rowSpan="2">Total de horas</th>
-          <th className="unidades" colSpan="3">Unidades</th>
+          <th className="unidades" colSpan={weekPerUnit.length}>Unidades</th>
         </tr>
         <tr>
-          <th>I</th>
-          <th>II</th>
-          <th>III</th>
+          {
+            weekPerUnit.map((numberWeeks, i) => {
+              return <th>{unitsRomans[i]}</th>
+            })
+          }
         </tr>
       </thead>
 

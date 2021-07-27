@@ -97,28 +97,23 @@ export const SyllabeCard = ({
               onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/detail/${syllabe_id}`)}
             >
               <i className="fas fa-info-circle"></i>
-              VISUALIZAR
+              VER
             </button>
-            <button
-              className="descargar"
-              onClick={() => console.log('Imprimir Sílabo')}
-            >
-              <i className="fas fa-download"></i>
-              DESCARGAR
-            </button>
+
             <button
               className="modificar"
               onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/update/${syllabe_id}`)}
             >
               <i className="fas fa-edit"></i>
-              MODIFICAR
+              EDITAR
             </button>
+
             <button
               className="eliminar"
               onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/delete/${syllabe_id}`)}
             >
               <i className="fas fa-trash"></i>
-              ELIMINAR
+              BORRAR
             </button>
 
           </div>

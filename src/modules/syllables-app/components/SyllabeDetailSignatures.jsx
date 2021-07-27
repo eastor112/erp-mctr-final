@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const SyllabeDetailSignatures = ({ professorSignature, directorSignature }) => {
+export const SyllabeDetailSignatures = ({ visa, professorSignature, directorSignature }) => {
   return (
     <section className="silabo__firmas">
       <div className="izquierda">
@@ -12,7 +12,11 @@ export const SyllabeDetailSignatures = ({ professorSignature, directorSignature 
       </div>
       <div className="derecha">
         <figure className="firma__director">
-          <img src={directorSignature} alt="director" />
+          {
+            visa
+            &&
+            <img src={directorSignature} alt="director" />
+          }
         </figure>
         <p>___________________________________</p>
         <h5>Visado director de escuela</h5>
