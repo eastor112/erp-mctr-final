@@ -85,3 +85,26 @@ export const getAllSyllabeData = async (id, token) => {
     return response.response;
   }
 }
+
+
+export const createSyllabe = async (idCourse, token) => {
+  const url = `${BACKEND_URL}/`;
+
+  const data = {
+    course: idCourse
+  }
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.post(url, data, config);
+
+  if (response.status === 201) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}

@@ -232,7 +232,7 @@ export const PanelUsersScreen = () => {
         }
       </section>
 
-
+      {/* TODO pasar todo el modal a otro componente */}
       <Modal
         isOpen={state.showModal}
         style={customStyles}

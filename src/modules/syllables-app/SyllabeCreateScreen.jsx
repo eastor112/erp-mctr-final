@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { getAllCoursesSummary } from '../../helpers/courses-helpers'
 import { MenuTopPanel } from '../panel/components/MenuTopPanel'
 import { SyllabeCreateBibliography } from './components/SyllabeCreateBibliography'
 import { SyllabeCreateControls } from './components/SyllabeCreateControls'
@@ -11,8 +13,7 @@ import { SyllabeCreateProgramming } from './components/SyllabeCreateProgramming'
 export const SyllabeCreateScreen = () => {
 
   const { pk, syllabe_action } = useParams();
-
-  console.log(syllabe_action);
+  const { token } = useSelector(state => state.auth)
 
   return (
     <>

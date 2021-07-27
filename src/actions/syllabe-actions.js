@@ -1,3 +1,4 @@
+import { getAllCoursesSummary } from "../helpers/courses-helpers"
 import { getAllSyllabeData, getSyllabeSummary } from "../helpers/syllabes-helpers"
 import { getMediaFilesUser } from "../helpers/users-helpers"
 import { types } from "../types"
@@ -14,8 +15,6 @@ export const getSyllabeDetailData = (summary, syllabe, professorMedia, directorM
     }
   }
 }
-
-
 
 export const startGetSyllabeDetailData = (pk, token) => {
 
@@ -38,5 +37,31 @@ export const startGetSyllabeDetailData = (pk, token) => {
     }
 
     dispatch(getSyllabeDetailData(summary, syllabe, professorMedia, directorMedia));
+  }
+}
+
+
+export const getAllCourses = (courses) => {
+  return {
+    type: types.getAllCourses,
+    payload: [...courses]
+  }
+}
+
+
+export const startGetAllCourses = (token) => {
+  return async (dispatch) => {
+
+    const response = await getAllCoursesSummary(token);
+
+    dispatch(getAllCourses(response))
+  }
+}
+
+
+export const updateActualSyllabe = (syllabe) => {
+  return {
+    type: types.updateActualSyllabe,
+    payload: { ...syllabe }
   }
 }

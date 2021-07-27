@@ -7,8 +7,6 @@ const actualYear = new Date().getFullYear()
 
 export const SyllabeFilters = ({ setState, schools, token }) => {
 
-  const history = useHistory();
-
   const [formValues, handleInputChange] = useForm({
     cycle: '',
     semester: '',
@@ -39,9 +37,18 @@ export const SyllabeFilters = ({ setState, schools, token }) => {
 
   }, [cycle, year, semester, status, school])
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  const handleCreate = () => {
+    setState(prev => ({
+      ...prev,
+      showModal: true
+    }));
+  }
+
 
   return (
 
@@ -139,7 +146,7 @@ export const SyllabeFilters = ({ setState, schools, token }) => {
 
           <button
             type='button'
-            onClick={() => { history.push(import.meta.env.BASE_URL + 'panel/syllabes/create') }}
+            onClick={handleCreate}
           >
             <i className="fas fa-plus-square"></i>
             NUEVO

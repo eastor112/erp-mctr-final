@@ -37,7 +37,7 @@ export const SyllabeDetailHoursTable = ({
         <tr>
           {
             weekPerUnit.map((numberWeeks, i) => {
-              return <th>{unitsRomans[i]}</th>
+              return <th key={i}>{unitsRomans[i]}</th>
             })
           }
         </tr>
@@ -49,7 +49,7 @@ export const SyllabeDetailHoursTable = ({
           <td>{totalHoursTheory}</td>
           {
             weekPerUnit.map((numberWeeks, i) => (
-              <td key={i}>{numberWeeks * theoryhours}</td>
+              <td key={i * 2}>{numberWeeks * theoryhours}</td>
             ))
           }
         </tr>
@@ -59,7 +59,7 @@ export const SyllabeDetailHoursTable = ({
           <td>{totalHoursPractice}</td>
           {
             weekPerUnit.map((numberWeeks, i) => (
-              <td key={i * 2}>{numberWeeks * (practicehours + laboratoryhours) - 1}</td>
+              <td key={i * 3}>{numberWeeks * (practicehours + laboratoryhours) - 1}</td>
             ))
           }
         </tr>
@@ -69,14 +69,19 @@ export const SyllabeDetailHoursTable = ({
           <td>{weekPerUnit.length}</td>
           {
             weekPerUnit.map((numberWeeks, i) => (
-              <td key={i * 3}>1</td>
+              <td key={i * 4}>1</td>
             ))
           }
         </tr>
 
         <tr>
           <td>Total horas</td>
-          <td colSpan="4">{totalHours}</td>
+          <td>{totalHours}</td>
+          {
+            weekPerUnit.map((numberWeeks, i) => (
+              <td key={i * 5}>{numberWeeks * (theoryhours + practicehours + laboratoryhours)}</td>
+            ))
+          }
         </tr>
       </tbody>
     </table>

@@ -2,10 +2,8 @@ import React from 'react'
 import { useHistory } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
-export const SyllabeDetailControls = ({ handlePrint }) => {
+export const SyllabeDetailControls = ({ handlePrint, pk }) => {
   const history = useHistory();
-
-
 
   return (
     <div className="silabo__acciones">
@@ -30,7 +28,7 @@ export const SyllabeDetailControls = ({ handlePrint }) => {
 
       <button
         className="editar"
-        onClick={() => history.push(import.meta.env.BASE_URL + 'panel/syllabes/update')}
+        onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/update/${pk}`)}
         data-tip data-for='edit'
       >
         <i className="far fa-edit"></i>

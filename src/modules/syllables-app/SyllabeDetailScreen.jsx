@@ -48,8 +48,7 @@ export const SyllabeDetailScreen = () => {
         />
       }
 
-
-      <SyllabeDetailControls handlePrint={handlePrint} />
+      <SyllabeDetailControls handlePrint={handlePrint} pk={pk} />
 
     </>
   )

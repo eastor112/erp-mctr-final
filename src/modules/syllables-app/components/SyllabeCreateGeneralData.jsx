@@ -5,6 +5,8 @@ import { SyllabeCreateProfessorsTeam } from './SyllabeCreateProfessorsTeam'
 import { SyllabeCreateRevision } from './SyllabeCreateRevision'
 
 export const SyllabeCreateGeneralData = () => {
+
+
   return (
     <div className="container__datos__generales">
 
@@ -15,11 +17,12 @@ export const SyllabeCreateGeneralData = () => {
 
       <SyllabeCreateGeneralTitle />
 
-
       <div>
+
         <SyllabeCreateGeneralForm />
 
         <SyllabeCreateProfessorsTeam />
+
       </div>
     </div>
   )

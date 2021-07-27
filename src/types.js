@@ -7,5 +7,7 @@ export const types = {
   updateUser: '[auth] update user',
 
   //================================
-  actualSyllabe: '[syllabe] actual syllabe'
+  getAllCourses: '[syllabe] get all courses',
+  actualSyllabe: '[syllabe] actual syllabe',
+  updateActualSyllabe: '[syllabe] update actual syllabe'
 }

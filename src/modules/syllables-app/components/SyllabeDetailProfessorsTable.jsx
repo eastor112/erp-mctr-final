@@ -16,13 +16,17 @@ export const SyllabeDetailProfessorsTable = ({
       </thead>
 
       <tbody className="">
+        {
+          principalprofessor
+          &&
+          <tr>
+            <td>Coordinador(a):</td>
+            <td>{`${principalprofessor.names} ${principalprofessor.fathername} ${principalprofessor.mothername}`}</td>
+            <td>{principalprofessor.career}</td>
+            <td>{principalprofessor.email}</td>
+          </tr>
+        }
 
-        <tr>
-          <td>Coordinador(a):</td>
-          <td>{`${principalprofessor.names} ${principalprofessor.fathername} ${principalprofessor.mothername}`}</td>
-          <td>{principalprofessor.career}</td>
-          <td>{principalprofessor.email}</td>
-        </tr>
         {
           (assistantprofessors?.length > 0)
           &&

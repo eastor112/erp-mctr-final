@@ -19,3 +19,21 @@ export const getCourseDetail = async (idCourse, token) => {
     return response.response;
   }
 }
+
+
+export const getAllCoursesSummary = async (token) => {
+  const url = `${BACKEND_URL}/courses-api/v1.0/`;
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.get(url, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
