@@ -4,7 +4,7 @@ import { useForm } from '../../../hooks/useForm'
 
 export const UsersAdminFilters = ({ token, schools, userSchoolId, setState }) => {
 
-  const [formValues, handleInputChange] = useForm({
+  const { formValues, handleInputChange } = useForm({
     'school': userSchoolId,
     'search': '',
   });

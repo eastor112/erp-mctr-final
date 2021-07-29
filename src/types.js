@@ -9,5 +9,6 @@ export const types = {
   //================================
   getAllCourses: '[syllabe] get all courses',
   actualSyllabe: '[syllabe] actual syllabe',
-  updateActualSyllabe: '[syllabe] update actual syllabe'
+  updateActualSyllabe: '[syllabe] update actual syllabe',
+  getAllProfessors: '[syllabe] get all professors'
 }

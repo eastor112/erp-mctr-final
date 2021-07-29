@@ -1258,7 +1258,7 @@ footer {
 //========= SILABO EDITAR/CREAR =========
 
 .crear__silabo {
-  margin: 90px 150px 0;
+  margin: 90px 110px 0;
 
   h2 {
     text-align: center;
@@ -1295,7 +1295,6 @@ footer {
   select {
     border: none;
     border-bottom: 1px solid black;
-    margin-bottom: 25px;
   }
 
   input:only-child,
@@ -1316,7 +1315,7 @@ footer {
 
   .container__datos__generales {
     margin-bottom: 30px;
-    padding: 10px 10px 0;
+    padding: 10px 30px 20px;
     border: 1px solid gray;
 
     .titulo {

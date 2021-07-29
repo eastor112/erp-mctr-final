@@ -7,7 +7,7 @@ const actualYear = new Date().getFullYear()
 
 export const SyllabeFilters = ({ setState, schools, token }) => {
 
-  const [formValues, handleInputChange] = useForm({
+  const { formValues, handleInputChange } = useForm({
     cycle: '',
     semester: '',
     status: '',

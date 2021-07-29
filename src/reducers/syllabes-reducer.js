@@ -5,7 +5,8 @@ const initialState = {
   actualSyllabe: {},
   professorMedia: {},
   directorMedia: {},
-  courses: []
+  courses: [],
+  professors: []
 }
 
 export const syllabesReducer = (state = initialState, action) => {
@@ -14,6 +15,12 @@ export const syllabesReducer = (state = initialState, action) => {
       return {
         ...state,
         courses: action.payload
+      }
+
+    case types.getAllProfessors:
+      return {
+        ...state,
+        professors: action.payload
       }
 
     case types.updateActualSyllabe:

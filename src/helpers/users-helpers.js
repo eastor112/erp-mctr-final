@@ -212,3 +212,22 @@ export const getMediaFilesUser = async (user, token) => {
     return response.response;
   }
 }
+
+
+export const getAllProfessorList = async (school, token) => {
+  const url = `${BACKEND_URL}/users-api/v1.0/professor/?school=${school}`;
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.get(url, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}

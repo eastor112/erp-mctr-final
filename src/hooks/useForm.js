@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export const useForm = (initialState = {}) => {
-  const [state, setState] = useState(initialState)
+  const [formValues, setFormValues] = useState(initialState)
 
   const reset = (newFormState = initialState) => {
     setValues(newFormState);
@@ -9,34 +9,34 @@ export const useForm = (initialState = {}) => {
 
   //Para manejo de entradas
   const handleInputChange = ({ target }) => {
-    setState({
-      ...state,
+    setFormValues({
+      ...formValues,
       [target.name]: target.value
     });
   }
 
   //Para manejo de archivos
   const handleInputFileChange = ({ target }) => {
-    setState({
-      ...state,
+    setFormValues({
+      ...formValues,
       [target.name]: target.files[0]
     });
   }
 
   //Para actualizar todos los campos de usuario
   const allUpdateFields = (user) => {
-    setState({
+    setFormValues({
       ...user
     })
   }
 
 
 
-  return [
-    state,
+  return {
+    formValues,
     handleInputChange,
     handleInputFileChange,
     allUpdateFields,
     reset
-  ]
+  }
 }

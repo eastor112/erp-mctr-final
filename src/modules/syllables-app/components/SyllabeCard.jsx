@@ -1,8 +1,12 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+import { startGetSyllabeDetailData } from '../../../actions/syllabe-actions';
 
 export const SyllabeCard = ({
+  token,
   syllabe_id,
+  course_id,
   course_name,
   course_code,
   course_cycle,
@@ -19,7 +23,13 @@ export const SyllabeCard = ({
   syllabe_visa,
   syllabe_editable }) => {
 
-  const history = useHistory()
+  const dispatch = useDispatch()
+  const history = useHistory();
+
+  const handleUpdate = () => {
+    dispatch(startGetSyllabeDetailData(syllabe_id, token));
+    history.push(`${import.meta.env.BASE_URL}panel/syllabes/update/${syllabe_id}/${course_id}`);
+  }
 
   return (
     <div className="silabo__card">
@@ -102,7 +112,7 @@ export const SyllabeCard = ({
 
             <button
               className="modificar"
-              onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/update/${syllabe_id}`)}
+              onClick={handleUpdate}
             >
               <i className="fas fa-edit"></i>
               EDITAR

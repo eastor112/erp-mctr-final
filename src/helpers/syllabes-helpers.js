@@ -66,6 +66,26 @@ export const getFilteredSyllabesSummary = async (cycle, year, semester, status, 
 }
 
 
+export const getBaseSyllabeData = async (id, token) => {
+  const url = `${BACKEND_URL}/${id}`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.get(url, config);
+
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+
 
 export const getAllSyllabeData = async (id, token) => {
   const url = `${BACKEND_URL}/${id}/full`
@@ -85,6 +105,7 @@ export const getAllSyllabeData = async (id, token) => {
     return response.response;
   }
 }
+
 
 
 export const createSyllabe = async (idCourse, token) => {

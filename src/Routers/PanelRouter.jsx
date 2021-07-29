@@ -30,6 +30,10 @@ export const PanelRouter = () => {
       <Sidebar />
 
       <Switch>
+        <Route exact path={import.meta.env.BASE_URL + 'panel/:location/:syllabe_action/:pk/:pk_course'}>
+          <PanelMainScreen />
+        </Route>
+
         <Route exact path={import.meta.env.BASE_URL + 'panel/:location/:syllabe_action/:pk'}>
           <PanelMainScreen />
         </Route>

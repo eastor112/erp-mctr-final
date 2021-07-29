@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-modal';
-import { startGetAllCourses, updateActualSyllabe } from '../../actions/syllabe-actions'
+import { getAllProfessors, startGetAllCourses, startGetAllProfessors, startGetSyllabeDetailData } from '../../actions/syllabe-actions'
 import { createSyllabe, getFilteredSyllabesSummary } from '../../helpers/syllabes-helpers'
 import { getAllSchools } from '../../helpers/unt-structure-helpers'
 import { MenuTopPanel } from '../panel/components/MenuTopPanel'
@@ -39,7 +39,7 @@ export const SyllabesListScreen = () => {
 
   const history = useHistory();
 
-  const [formValues, handleInputChange] = useForm({
+  const { formValues, handleInputChange } = useForm({
     course: ''
   })
 
@@ -98,13 +98,12 @@ export const SyllabesListScreen = () => {
 
   const handleCreateSyllabe = () => {
     createSyllabe(formValues.course, token).then((syllabeCreated) => {
-      dispatch(updateActualSyllabe(syllabeCreated))
+      dispatch(startGetSyllabeDetailData(syllabeCreated.id, token));
       handleCloseModal();
-      history.push(`${import.meta.env.BASE_URL}panel/syllabes/create/${syllabeCreated.id}`);
+      console.log(syllabeCreated);
+      history.push(`${import.meta.env.BASE_URL}panel/syllabes/create/${syllabeCreated.id}/${syllabeCreated.course}`);
     });
   }
-
-
 
   return (
     <>
@@ -122,6 +121,7 @@ export const SyllabesListScreen = () => {
           state.syllabes.map((syllabeObj) => {
             return <SyllabeCard
               key={syllabeObj.syllabe_id}
+              token={token}
               {...syllabeObj}
             />
           })

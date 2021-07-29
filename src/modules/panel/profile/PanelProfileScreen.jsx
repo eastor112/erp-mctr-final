@@ -18,7 +18,7 @@ export const PanelProfileScreen = () => {
 
   const dispatch = useDispatch()
   const { user, token } = useSelector(state => state.auth);
-  const [formValues, handleInputChange, handleInputFileChange] = useForm({
+  const { formValues, handleInputChange, handleInputFileChange } = useForm({
 
     //General profile
     'id': user.id,

@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeStyles';
 
 export const SyllabeCreateRevision = () => {
+  const [value, setValue] = useState(0);
+  const classes = useStylesCreateSyllabe();
   return (
-    <div className="">
-      <a href="!#"><button><i className="fa fa-circle" aria-hidden="true"></i></button></a>
-      <a href="!#"><button><i className="fa fa-check-circle" aria-hidden="true"></i></button></a>
-      <a href="!#"><button><i className="fas fa-exclamation-circle"></i></button></a>
-    </div>
-  )
+    <BottomNavigation
+      value={value}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      showLabels
+      className={classes.root}
+    >
+      <BottomNavigationAction label="Recents" />
+      <BottomNavigationAction label="Favorites" />
+      <BottomNavigationAction label="Nearby" />
+    </BottomNavigation>
+  );
 }

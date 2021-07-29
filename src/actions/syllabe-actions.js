@@ -1,6 +1,7 @@
+import axios from "axios"
 import { getAllCoursesSummary } from "../helpers/courses-helpers"
 import { getAllSyllabeData, getSyllabeSummary } from "../helpers/syllabes-helpers"
-import { getMediaFilesUser } from "../helpers/users-helpers"
+import { getAllProfessorList, getMediaFilesUser } from "../helpers/users-helpers"
 import { types } from "../types"
 
 
@@ -15,6 +16,7 @@ export const getSyllabeDetailData = (summary, syllabe, professorMedia, directorM
     }
   }
 }
+
 
 export const startGetSyllabeDetailData = (pk, token) => {
 
@@ -63,5 +65,22 @@ export const updateActualSyllabe = (syllabe) => {
   return {
     type: types.updateActualSyllabe,
     payload: { ...syllabe }
+  }
+}
+
+
+export const getAllProfessors = (professors) => {
+  return {
+    type: types.getAllProfessors,
+    payload: [...professors]
+  }
+}
+
+export const startGetAllProfessors = (school, token) => {
+  return async (dispatch) => {
+
+    const professors = await getAllProfessorList(school, token);
+
+    dispatch(getAllProfessors(professors));
   }
 }

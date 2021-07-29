@@ -61,10 +61,10 @@ export const PanelUsersScreen = () => {
     }
   })
 
-  const [formValues,
+  const { formValues,
     handleInputChange,
     handleInputFileChange,
-    allUpdateFields] = useForm({
+    allUpdateFields } = useForm({
       //General profile
       'id': '',
       'names': '',
