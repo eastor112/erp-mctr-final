@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { getFilteredSyllabesSummary } from '../../../helpers/syllabes-helpers';
 import { useForm } from '../../../hooks/useForm';
+import Button from '@material-ui/core/Button';
+import PostAddIcon from '@material-ui/icons/PostAdd';
+
 
 const actualYear = new Date().getFullYear()
 
@@ -143,14 +146,14 @@ export const SyllabeFilters = ({ setState, schools, token }) => {
         </div>
 
         <div className="derecha">
-
-          <button
-            type='button'
+          <Button
+            variant="outlined"
+            color="secondary"
             onClick={handleCreate}
           >
-            <i className="fas fa-plus-square"></i>
+            <PostAddIcon />
             NUEVO
-          </button>
+          </Button>
 
         </div>
       </form>

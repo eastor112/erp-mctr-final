@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Modal from 'react-modal';
 import { startGetAllCourses, startGetSyllabeDetailData } from '../../actions/syllabe-actions'
 import { createSyllabe, getFilteredSyllabesSummary } from '../../helpers/syllabes-helpers'
 import { getAllSchools } from '../../helpers/unt-structure-helpers'
@@ -10,26 +9,25 @@ import { SyllabeFilters } from './components/SyllabeFilters'
 import { useForm } from '../../hooks/useForm';
 import { useHistory } from 'react-router-dom';
 
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+
+
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import { useStylesCreateSyllabe } from '../../materialStyles/createSyllabeStyles'
+
+
 
 const actualYear = new Date().getFullYear();
 
-
-//modal styles
-const customStyles = {
-  overlay: {
-    zIndex: '10',
-    backgroundColor: '#999b'
-  },
-  content: {
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    right: 'auto',
-    bottom: 'auto',
-  },
-};
-
-Modal.setAppElement('#root');
 
 //Component
 export const SyllabesListScreen = () => {
@@ -38,6 +36,9 @@ export const SyllabesListScreen = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
+
+  const classes = useStylesCreateSyllabe();
+
 
   const { formValues, handleInputChange } = useForm({
     course: ''
@@ -104,6 +105,7 @@ export const SyllabesListScreen = () => {
     });
   }
 
+
   return (
     <>
 
@@ -127,46 +129,57 @@ export const SyllabesListScreen = () => {
         }
       </section>
 
+
       <Modal
-        isOpen={state.showModal}
-        style={customStyles}
-        onRequestClose={handleCloseModal}
-        shouldCloseOnOverlayClick={false}
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={state.showModal}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
       >
-        <h3>Seleccione el curso</h3>
+        <Fade in={state.showModal}>
+          <div className={classes.paper}>
+            <h3 style={{ textAlign: 'center' }}>CREAR SÍLABO</h3>
 
-        <div>
-          <label htmlFor="course"></label>
-          <select
-            name="course"
-            id="course"
-            value={formValues.course}
-            onChange={handleInputChange}
-          >
-            {
-              courses.map((course) => {
-                return (
-                  <option
-                    key={course.id}
-                    value={course.id}
+            <Grid container spacing={3} alignItems='flex-end'>
+              <Grid item xs={12}>
+                <FormControl className={classes.formSelects}>
+                  <InputLabel id="course-label">Seleccione el curso</InputLabel>
+                  <Select
+                    labelId="course-label"
+                    id="course"
+                    name="course"
+                    value={formValues.course}
+                    onChange={handleInputChange}
                   >
-                    {course.cycle} ({course.code}) - {course.name}
-                  </option>)
-              })
-            }
-          </select>
-        </div>
 
-        <button
-          onClick={handleCreateSyllabe}
-        >
-          Crear
-        </button>
-        <button
-          onClick={handleCloseModal}
-        >
-          Cancelar
-        </button>
+                    {
+                      courses.map((course) => {
+                        return <MenuItem key={course.id} value={course.id}>{course.cycle} ({course.code}) - {course.name}</MenuItem>
+                      })
+                    }
+
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} align='center'>
+
+                <Button variant="contained" color="primary" onClick={handleCreateSyllabe} className={classes.formButton}>
+                  Crear
+                </Button>
+                <Button variant="contained" color="secondary" onClick={handleCloseModal} className={classes.formButton}>
+                  Cancelar
+                </Button>
+              </Grid>
+
+            </Grid>
+          </div>
+        </Fade>
       </Modal>
     </>
   )

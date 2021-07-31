@@ -18,7 +18,9 @@ export const SyllabeCreateCounseling = ({
   counselingpurpose,
   counselingday,
   counselinghour,
-  counselingplace
+  counselingplace,
+  handleInputChange,
+  handleUdpadeGeneralData
 }) => {
 
   const classes = useStylesCreateSyllabe();
@@ -36,18 +38,18 @@ export const SyllabeCreateCounseling = ({
         <Grid item xs={6} align='end'>
           <SyllabeCreateRevision />
         </Grid>
-        {/* counselingpurpose */}
 
         <Grid item xs={12}>
           <h6>Propósito:</h6>
           <TextareaAutosize
             aria-label="minimum height"
             className={classes.formSelects}
-            minRows={4}
+            minRows={2}
             placeholder="Escriba el propósito de la consejería...."
             id='counselingpurpose'
             name='counselingpurpose'
             value={counselingpurpose}
+            onChange={handleInputChange}
           />
         </Grid>
 
@@ -59,6 +61,7 @@ export const SyllabeCreateCounseling = ({
               id="counselingday"
               name="counselingday"
               value={counselingday}
+              onChange={handleInputChange}
             >
               <MenuItem value='lunes'>Lunes</MenuItem>
               <MenuItem value='martes'>Martes</MenuItem>
@@ -72,19 +75,35 @@ export const SyllabeCreateCounseling = ({
         </Grid>
 
         <Grid item xs={3}>
-          <TextField id="standard-basic" label="Hora" className={classes.formSelects} />
+          <TextField
+            id="standard-basic"
+            label="Hora"
+            className={classes.formSelects}
+            id='counselinghour'
+            name='counselinghour'
+            value={counselinghour}
+            onChange={handleInputChange}
+          />
         </Grid>
 
         <Grid item xs={6}>
-          <TextField id="standard-basic" label="Lugar" className={classes.formSelects} />
+          <TextField
+            id="standard-basic"
+            label="Lugar"
+            className={classes.formSelects}
+            id='counselingplace'
+            name='counselingplace'
+            value={counselingplace}
+            onChange={handleInputChange}
+          />
         </Grid>
 
         <Grid item xs={12} align='center'>
           <Button
             variant="contained"
             color="primary"
-          // className={classes.formButton}
-          // onClick={handleUdpadeGeneralData}
+            className={classes.formButton}
+            onClick={handleUdpadeGeneralData}
           >
             Guardar datos
           </Button>

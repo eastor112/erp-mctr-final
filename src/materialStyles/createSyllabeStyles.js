@@ -19,6 +19,8 @@ export const useStylesCreateSyllabe = makeStyles((theme) => ({
   formSelects: {
     // margin: theme.spacing(1),
     width: '100%',
+    outline: 'none',
+    padding: '4px'
   },
   addButton: {
     marginTop: '5%',
@@ -27,6 +29,7 @@ export const useStylesCreateSyllabe = makeStyles((theme) => ({
 
   formButton: {
     width: '30%',
+    margin: '0 10px'
   },
 
   textField: {
@@ -51,5 +54,17 @@ export const useStylesCreateSyllabe = makeStyles((theme) => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    width: '600px'
   },
 }));

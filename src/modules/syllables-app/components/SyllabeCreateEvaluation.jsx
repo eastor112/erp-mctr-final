@@ -12,7 +12,9 @@ export const SyllabeCreateEvaluation = ({
   procedures,
   evaluationdetail,
   criteria,
-  achievementlevel }) => {
+  achievementlevel,
+  handleInputChange,
+  handleUdpadeGeneralData }) => {
 
   const classes = useStylesCreateSyllabe();
 
@@ -38,6 +40,7 @@ export const SyllabeCreateEvaluation = ({
             id='legalbase'
             name='legalbase'
             value={legalbase}
+            onChange={handleInputChange}
           />
         </Grid>
 
@@ -51,6 +54,8 @@ export const SyllabeCreateEvaluation = ({
             id='procedures'
             name='procedures'
             value={procedures}
+            onChange={handleInputChange}
+
           />
         </Grid>
 
@@ -64,6 +69,8 @@ export const SyllabeCreateEvaluation = ({
             id='evaluationdetail'
             name='evaluationdetail'
             value={evaluationdetail}
+            onChange={handleInputChange}
+
           />
         </Grid>
 
@@ -77,6 +84,8 @@ export const SyllabeCreateEvaluation = ({
             id='criteria'
             name='criteria'
             value={criteria}
+            onChange={handleInputChange}
+
           />
         </Grid>
 
@@ -90,6 +99,8 @@ export const SyllabeCreateEvaluation = ({
             id='achievementlevel'
             name='achievementlevel'
             value={achievementlevel}
+            onChange={handleInputChange}
+
           />
         </Grid>
 
@@ -98,7 +109,7 @@ export const SyllabeCreateEvaluation = ({
             variant="contained"
             color="primary"
             className={classes.formButton}
-          // onClick={handleUdpadeGeneralData}
+            onClick={handleUdpadeGeneralData}
           >
             Guardar datos
           </Button>

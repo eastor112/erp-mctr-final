@@ -36,7 +36,7 @@ export const SyllabeCreateScreen = () => {
   const classes = useStylesCreateSyllabe();
 
   const [state, setState] = useState({
-    navValue: 0,
+    navValue: +localStorage.getItem('syllabe_location') || 0,
     isLoading: false
   })
 
@@ -110,6 +110,12 @@ export const SyllabeCreateScreen = () => {
       })
   }, [pk])
 
+
+  useEffect(() => {
+    localStorage.setItem('syllabe_location', state.navValue);
+  }, [state.navValue]);
+
+
   const handleUdpadeGeneralData = () => {
     setState({ ...state, isLoading: true });
     Swal.fire({
@@ -127,7 +133,6 @@ export const SyllabeCreateScreen = () => {
         setState({ ...state, isLoading: false })
         Swal.close();
         document.location = "#";
-
       }
 
     });
@@ -200,6 +205,8 @@ export const SyllabeCreateScreen = () => {
               evaluationdetail={evaluationdetail}
               criteria={criteria}
               achievementlevel={achievementlevel}
+              handleInputChange={handleInputChange}
+              handleUdpadeGeneralData={handleUdpadeGeneralData}
             />
           }
 
@@ -212,6 +219,8 @@ export const SyllabeCreateScreen = () => {
               counselingday={counselingday}
               counselinghour={counselinghour}
               counselingplace={counselingplace}
+              handleInputChange={handleInputChange}
+              handleUdpadeGeneralData={handleUdpadeGeneralData}
             />
           }
 
