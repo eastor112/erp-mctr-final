@@ -1,53 +1,44 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { startGetAllCourses, startGetAllProfessors, startGetSyllabeDetailData } from '../../actions/syllabe-actions'
-import { getBaseSyllabeData } from '../../helpers/syllabes-helpers'
-import { useForm } from '../../hooks/useForm'
-import { MenuTopPanel } from '../panel/components/MenuTopPanel'
-import { SyllabeCreateBibliography } from './components/SyllabeCreateBibliography'
-import { SyllabeCreateControls } from './components/SyllabeCreateControls'
-import { SyllabeCreateCounseling } from './components/SyllabeCreateCounseling'
-import { SyllabeCreateEvaluation } from './components/SyllabeCreateEvaluation'
-import { SyllabeCreateGeneralData } from './components/SyllabeCreateGeneralData'
-import { SyllabeCreateProgramming } from './components/SyllabeCreateProgramming'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js'
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import InfoIcon from '@material-ui/icons/Info';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import GavelIcon from '@material-ui/icons/Gavel';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import {
+  startGetAllCourses,
+  startGetAllProfessors,
+  startGetSyllabeDetailData
+} from '../../actions/syllabe-actions';
+import { getBaseSyllabeData, updateGeneralData } from '../../helpers/syllabes-helpers';
+import { useForm } from '../../hooks/useForm';
+import { MenuTopPanel } from '../panel/components/MenuTopPanel';
+import { SyllabeCreateBibliography } from './components/SyllabeCreateBibliography';
+import { SyllabeCreateControls } from './components/SyllabeCreateControls';
+import { SyllabeCreateCounseling } from './components/SyllabeCreateCounseling';
+import { SyllabeCreateEvaluation } from './components/SyllabeCreateEvaluation';
+import { SyllabeCreateGeneralData } from './components/SyllabeCreateGeneralData';
+import { SyllabeCreateProgramming } from './components/SyllabeCreateProgramming';
+import { useStylesCreateSyllabe } from '../../materialStyles/createSyllabeStyles';
 //
 
-const actualYear = new Date().getFullYear();
-
-const valores = {
-  "course": null,
-  "principalprofessor": null,
-  "assistantprofessors": [],
-  "director": null,
-  "year": null,
-  "semester": null,
-  "section": null,
-  "startdate": null,
-  "finishdate": null,
-  "totalweeks": null,
-  "legalbase": "",
-  "procedures": "",
-  "evaluationdetail": "",
-  "criteria": "",
-  "achievementlevel": "",
-  "counselingpurpose": "",
-  "counselingday": "",
-  "counselinghour": "",
-  "counselingplace": "",
-  "completed": false,
-  "observed": false,
-  "visa": false,
-  "visadate": null
-}
 
 export const SyllabeCreateScreen = () => {
 
-  const { pk, pk_course, syllabe_action } = useParams();
+  const { pk, syllabe_action } = useParams();
   const { token } = useSelector(state => state.auth);
   const { actualSyllabe, courses, professors } = useSelector(state => state.syllabe);
   const dispatch = useDispatch();
+  const classes = useStylesCreateSyllabe();
 
+  const [state, setState] = useState({
+    navValue: 0,
+    isLoading: false
+  })
 
   useEffect(() => {
     if (Object.keys(actualSyllabe).length === 0) {
@@ -63,8 +54,8 @@ export const SyllabeCreateScreen = () => {
     }
   }, [actualSyllabe]);
 
-
-  const { formValues, handleInputChange, ignore, allUpdateFields } = useForm({
+  const { formValues, handleInputChange, allUpdateFields, setFormValues } = useForm({
+    'id': null,
     "course": null,
     "principalprofessor": null,
     "assistantprofessors": [],
@@ -91,6 +82,7 @@ export const SyllabeCreateScreen = () => {
   })
 
   const {
+    id,
     course,
     principalprofessor,
     assistantprofessors,
@@ -100,7 +92,16 @@ export const SyllabeCreateScreen = () => {
     section,
     startdate,
     finishdate,
-    totalweeks } = formValues;
+    totalweeks,
+    legalbase,
+    procedures,
+    evaluationdetail,
+    criteria,
+    achievementlevel,
+    counselingpurpose,
+    counselingday,
+    counselinghour,
+    counselingplace } = formValues;
 
   useEffect(() => {
     getBaseSyllabeData(pk, token)
@@ -109,60 +110,129 @@ export const SyllabeCreateScreen = () => {
       })
   }, [pk])
 
+  const handleUdpadeGeneralData = () => {
+    setState({ ...state, isLoading: true });
+    Swal.fire({
+      title: 'Actualizando...',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
+    updateGeneralData(pk, formValues, token).then((data) => {
+      if (data.id) {
+        setState({ ...state, isLoading: false })
+        Swal.close();
+        document.location = "#";
+
+      }
+
+    });
+
+
+  }
 
   return (
     <>
-
-
       <MenuTopPanel />
 
       <div className="crear__silabo">
 
-        <h2>
-          {
-            (syllabe_action === 'create')
-              ?
-              'CREANDO NUEVO SÍLABO'
-              :
-              'ACTUALIZANDO SÍLABO'
-          }
-        </h2>
+        <BottomNavigation
+          value={state.navValue}
+          onChange={(event, newValue) => {
+            setState({
+              ...state,
+              navValue: newValue
+            });
+          }}
+          showLabels
+          className={classes.root}
+        >
+          <BottomNavigationAction label="Datos generales" icon={<InfoIcon />} />
+          <BottomNavigationAction label="Programación " icon={<ScheduleIcon />} />
+          <BottomNavigationAction label="Reglas de Evaluación" icon={<GavelIcon />} />
+          <BottomNavigationAction label="Consejería académica" icon={<SupervisorAccountIcon />} />
+          <BottomNavigationAction label="Bibliografía" icon={<MenuBookIcon />} />
+        </BottomNavigation>
+
+
         <section className="crear__datos">
 
-          <SyllabeCreateGeneralData
-            course={course}
-            year={year}
-            semester={semester}
-            section={section}
-            totalweeks={totalweeks}
-            startdate={startdate}
-            finishdate={finishdate}
-            principalprofessor={principalprofessor}
-            assistantprofessors={assistantprofessors}
-            director={director}
-            handleInputChange={handleInputChange}
-            courses={courses}
-            professors={professors}
-          />
+          {
+            state.navValue === 0
+            &&
+            <SyllabeCreateGeneralData
+              id={id}
+              course={course}
+              year={year}
+              semester={semester}
+              section={section}
+              totalweeks={totalweeks}
+              startdate={startdate}
+              finishdate={finishdate}
+              principalprofessor={principalprofessor}
+              assistantprofessors={assistantprofessors}
+              director={director}
+              handleInputChange={handleInputChange}
+              courses={courses}
+              professors={professors}
+              setFormValues={setFormValues}
+              handleUdpadeGeneralData={handleUdpadeGeneralData}
+            />
+          }
 
-          <SyllabeCreateProgramming />
+          {
+            state.navValue === 1
+            &&
+            <SyllabeCreateProgramming />
+          }
 
-          <SyllabeCreateEvaluation />
+          {
+            state.navValue === 2
+            &&
+            <SyllabeCreateEvaluation
+              legalbase={legalbase}
+              procedures={procedures}
+              evaluationdetail={evaluationdetail}
+              criteria={criteria}
+              achievementlevel={achievementlevel}
+            />
+          }
 
-          <SyllabeCreateCounseling />
 
-          <SyllabeCreateBibliography />
+          {
+            state.navValue === 3
+            &&
+            <SyllabeCreateCounseling
+              counselingpurpose={counselingpurpose}
+              counselingday={counselingday}
+              counselinghour={counselinghour}
+              counselingplace={counselingplace}
+            />
+          }
 
-          <div className="finalizar__revision">
+          {
+            state.navValue === 4
+            &&
+            <SyllabeCreateBibliography />
+          }
+
+          {/* TODO, PARA CUANDO EL SILABO ESTÉ COMPLETO */}
+          {/* <div className="finalizar__revision">
             <button>SOLICITAR REVISIÓN</button>
             <button className="no-activo">FINALIZAR REVISIÓN</button>
-          </div>
+          </div> */}
 
         </section>
 
       </div>
 
       <SyllabeCreateControls pk={pk} />
+
 
     </>
   )

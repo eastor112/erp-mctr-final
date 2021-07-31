@@ -1258,7 +1258,7 @@ footer {
 //========= SILABO EDITAR/CREAR =========
 
 .crear__silabo {
-  margin: 90px 110px 0;
+  margin: 60px 110px 0;
 
   h2 {
     text-align: center;
@@ -1282,141 +1282,11 @@ footer {
     font-size: $font-size-silabo - 5px;
   }
 
-  button {
-    cursor: pointer;
-  }
-
-  textarea {
-    outline: none;
-    padding: 10px;
-  }
-
-  input,
-  select {
-    border: none;
-    border-bottom: 1px solid black;
-  }
-
-  input:only-child,
-  select:only-child {
-    width: 100%
-  }
-
-  .datos__identificacion__titulo,
-  .programacion__academica__titulo,
-  .evaluacion__titulo,
-  .consejeria__titulo,
-  .bibliografia__titulo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-  }
 
   .container__datos__generales {
     margin-bottom: 30px;
-    padding: 10px 30px 20px;
+    padding: 10px 30px 40px;
     border: 1px solid gray;
-
-    .titulo {
-      margin-bottom: 15px;
-      display: flex;
-
-      i {
-        font-size: 20px;
-        margin-right: 10px;
-      }
-
-      .no-activo {
-        display: none;
-      }
-    }
-
-    .sede__sem__sec {
-      display: flex;
-      justify-content: space-between;
-
-      select {
-        width: 32%;
-      }
-    }
-
-    .inicio__final {
-      display: flex;
-      justify-content: space-between;
-
-      input {
-        width: 49%;
-      }
-    }
-
-    .tipo__unidades {
-      display: flex;
-      justify-content: space-around;
-
-      select {
-        width: 49%;
-      }
-    }
-
-    .semanas__unidad {
-      display: flex;
-      justify-content: space-around;
-
-      input {
-        width: 24%;
-      }
-    }
-
-    .condicion__docente {
-      display: flex;
-      justify-content: space-around;
-
-      input,
-      select {
-        width: 49%;
-      }
-    }
-
-    .boton__agregar {
-      margin: 20px 0 10px;
-
-      button {
-        padding: 5px 20px;
-        background-color: $color-primario;
-        color: white;
-        border-radius: 4px;
-      }
-    }
-
-    .docente__agregado {
-      border: 1px inset lightgray;
-      padding: 10px 10px;
-      margin-bottom: 10px;
-
-      .docente__agregado__titulo {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-
-        button {
-          color: white;
-          background-color: $color-secundario;
-          width: 25px;
-          height: 25px;
-          border-radius: 4px;
-        }
-      }
-
-      .apellidos {
-        display: flex;
-        justify-content: space-around;
-
-        input {
-          width: 49%;
-        }
-      }
-    }
   }
 
   .container__unidad {

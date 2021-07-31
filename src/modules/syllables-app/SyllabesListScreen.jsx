@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-modal';
-import { getAllProfessors, startGetAllCourses, startGetAllProfessors, startGetSyllabeDetailData } from '../../actions/syllabe-actions'
+import { startGetAllCourses, startGetSyllabeDetailData } from '../../actions/syllabe-actions'
 import { createSyllabe, getFilteredSyllabesSummary } from '../../helpers/syllabes-helpers'
 import { getAllSchools } from '../../helpers/unt-structure-helpers'
 import { MenuTopPanel } from '../panel/components/MenuTopPanel'
@@ -100,7 +100,6 @@ export const SyllabesListScreen = () => {
     createSyllabe(formValues.course, token).then((syllabeCreated) => {
       dispatch(startGetSyllabeDetailData(syllabeCreated.id, token));
       handleCloseModal();
-      console.log(syllabeCreated);
       history.push(`${import.meta.env.BASE_URL}panel/syllabes/create/${syllabeCreated.id}/${syllabeCreated.course}`);
     });
   }

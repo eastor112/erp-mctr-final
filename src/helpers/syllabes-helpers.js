@@ -129,3 +129,24 @@ export const createSyllabe = async (idCourse, token) => {
     return response.response;
   }
 }
+
+
+export const updateGeneralData = async (pk, data, token) => {
+  const url = `${BACKEND_URL}/${pk}`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+
+  const response = await axios.patch(url, data, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+
+}

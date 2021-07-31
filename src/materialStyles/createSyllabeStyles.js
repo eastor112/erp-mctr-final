@@ -20,15 +20,36 @@ export const useStylesCreateSyllabe = makeStyles((theme) => ({
     // margin: theme.spacing(1),
     width: '100%',
   },
+  addButton: {
+    marginTop: '5%',
+    width: '100%',
+  },
+
+  formButton: {
+    width: '30%',
+  },
 
   textField: {
     width: '100%',
 
   },
   root: {
-    width: 500,
+    width: '100%',
   },
   title: {
-    margin: theme.spacing(4, 0, 2),
+    margin: theme.spacing(1, 0),
+  },
+  toggleContainer: {
+    margin: theme.spacing(0, 0),
+  },
+
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0,
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
   },
 }));
