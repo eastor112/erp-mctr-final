@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 # Antes de desplegar
-# 1.-Descomentar la ruta base
-# 2.-Descomentar la dirección del backend en el .Eenv
+# 1.-Descomentar la ruta base en el vite.config.js
+# 2.-Descomentar la dirección del backend en el .env
 
 set -e
 
