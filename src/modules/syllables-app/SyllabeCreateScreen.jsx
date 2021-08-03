@@ -26,7 +26,6 @@ import { SyllabeCreateProgramming } from './components/SyllabeCreateProgramming'
 import { useStylesCreateSyllabe } from '../../materialStyles/createSyllabeStyles';
 //
 
-
 export const SyllabeCreateScreen = () => {
 
   const { pk, syllabe_action } = useParams();
@@ -134,10 +133,7 @@ export const SyllabeCreateScreen = () => {
         Swal.close();
         document.location = "#";
       }
-
     });
-
-
   }
 
   return (
@@ -193,7 +189,8 @@ export const SyllabeCreateScreen = () => {
           {
             state.navValue === 1
             &&
-            <SyllabeCreateProgramming />
+            <SyllabeCreateProgramming
+            />
           }
 
           {
@@ -227,7 +224,14 @@ export const SyllabeCreateScreen = () => {
           {
             state.navValue === 4
             &&
-            <SyllabeCreateBibliography />
+            (
+              actualSyllabe.bibliography
+              &&
+              <SyllabeCreateBibliography
+                actualSyllabe={actualSyllabe}
+                token={token}
+              />
+            )
           }
 
           {/* TODO, PARA CUANDO EL SILABO ESTÉ COMPLETO */}

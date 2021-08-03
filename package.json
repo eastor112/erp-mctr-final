@@ -21,6 +21,7 @@
     "react-router-dom": "^5.2.0",
     "react-to-print": "^2.12.6",
     "react-tooltip": "^4.2.21",
+    "react-uuid": "^1.0.2",
     "redux-thunk": "^2.3.0",
     "sweetalert2": "^11.0.18",
     "sweetalert2-react-content": "^4.1.0"

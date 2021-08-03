@@ -131,6 +131,7 @@ export const createSyllabe = async (idCourse, token) => {
 }
 
 
+
 export const updateGeneralData = async (pk, data, token) => {
   const url = `${BACKEND_URL}/${pk}`
 
@@ -149,4 +150,48 @@ export const updateGeneralData = async (pk, data, token) => {
     return response.response;
   }
 
+}
+
+
+
+export const createResource = async (resource, token) => {
+  const url = `${BACKEND_URL}/resource`
+
+  const data = {
+    ...resource
+  }
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.post(url, data, config);
+
+  if (response.status === 201) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+
+export const deleteResource = async (id, token) => {
+  const url = `${BACKEND_URL}/resource/${id}`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.delete(url, config);
+
+
+  if (response.status === 204) {
+    return 'resource deleted';
+  } else {
+    return response.response;
+  }
 }

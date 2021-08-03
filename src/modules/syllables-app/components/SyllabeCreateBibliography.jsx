@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SyllabeCreateRevision } from './SyllabeCreateRevision'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -13,32 +13,114 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import PersonIcon from '@material-ui/icons/Person';
 import BookIcon from '@material-ui/icons/Book';
 import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeStyles';
 import ListItemText from '@material-ui/core/ListItemText';
+import { useForm } from '../../../hooks/useForm';
+import { createResource, deleteResource } from '../../../helpers/syllabes-helpers';
+import { updateActualSyllabe } from '../../../actions/syllabe-actions';
+import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 
 
+export const SyllabeCreateBibliography = ({ actualSyllabe, token }) => {
 
+  const dispatch = useDispatch();
 
-
-
-
-
-export const SyllabeCreateBibliography = () => {
-  const classes = useStylesCreateSyllabe();
-
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedF: true,
-    checkedG: true,
+  const { formValues, handleInputChange, handleInputCheckChange, setFormValues } = useForm({
+    resources: actualSyllabe.bibliography.resources,
+    reference: '',
+    location: '',
+    principalresource: false
   });
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  const {
+    resources,
+    reference,
+    location,
+    principalresource
+  } = formValues;
+
+  const classes = useStylesCreateSyllabe();
+
+
+
+  const handleAddResource = () => {
+
+    Swal.fire({
+      title: 'Agregando recurso',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
+    createResource({
+      bibliography: actualSyllabe.bibliography.id,
+      reference: reference,
+      location: location,
+      principalresource: principalresource
+    }, token)
+      .then((resourceCreated) => {
+
+        const newResources = [...resources, { ...resourceCreated }]
+
+        setFormValues(prev => ({
+          ...prev,
+          resources: newResources,
+          reference: '',
+          location: '',
+          principalresource: false
+        }));
+
+        const syllabeUpdated = {
+          ...actualSyllabe,
+          bibliography: { ...actualSyllabe.bibliography, resources: newResources }
+        };
+        dispatch(updateActualSyllabe(syllabeUpdated));
+
+        Swal.close();
+      });
   };
+
+
+
+  const handDeleteResource = (id) => {
+
+    Swal.fire({
+      title: 'Eliminando recurso',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
+    deleteResource(id, token)
+      .then(() => {
+
+        const newResources = resources.filter(res => res.id !== id);
+
+        setFormValues(prev => ({
+          ...prev,
+          resources: newResources
+        }));
+
+        const syllabeUpdated = {
+          ...actualSyllabe,
+          bibliography: { ...actualSyllabe.bibliography, resources: newResources }
+        };
+        dispatch(updateActualSyllabe(syllabeUpdated));
+
+        Swal.close();
+      });
+  }
+
+
   return (
     <div className="container__datos__generales">
       <Grid container spacing={3} alignItems='flex-end'>
@@ -55,25 +137,25 @@ export const SyllabeCreateBibliography = () => {
 
         <Grid item xs={12}>
           {
-            ([1, 2].length > 0)
+            (resources.length > 0)
               ?
               <div className={classes.demo}>
                 <List>
                   {
-                    [1, 2].map((profe) => {
-                      {/* const ind = professors.find(pro => pro.id === profe) */ }
+                    resources.map((resource) => {
+
                       return (
-                        <ListItem key={profe}>
+                        <ListItem key={resource.id}>
                           <ListItemAvatar>
                             <Avatar>
                               <BookIcon color='primary' />
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
-                          // primary={`${ind?.fathername} ${ind?.mothername}, ${ind?.names} (${ind?.codeprofessor})`}
+                            primary={`${resource.reference} ${resource.principalresource ? ' - [Recurso principal]' : ''} - (Ubicado en: ${resource.location}) `}
                           />
                           <ListItemSecondaryAction
-                          // onClick={() => handDeleteProfessor(profe)}
+                            onClick={() => handDeleteResource(resource.id)}
                           >
                             <IconButton edge="end" aria-label="delete">
                               <HighlightOffIcon color='secondary' />
@@ -93,39 +175,29 @@ export const SyllabeCreateBibliography = () => {
 
         <Grid item xs={12}>
           <TextField
-            id="standard-basic"
             label="Referencia en formato APA:"
             className={classes.formSelects}
+            id="reference"
+            name='reference'
+            value={reference}
+            onChange={handleInputChange}
           />
 
 
           <TextField
-            id="standard-basic"
             label="Ubicación del recurso:"
             className={classes.formSelects}
+            id="location"
+            name='location'
+            value={location}
+            onChange={handleInputChange}
           />
 
 
           <FormControlLabel
-            control={<Checkbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
+            control={<Checkbox checked={principalresource} onChange={handleInputCheckChange} name="principalresource" />}
             label="Recurso principal:"
-          // labelPlacement="start"
           />
-
-        </Grid>
-
-        <Grid item xs={12}
-          align='start'
-        >
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.formButton}
-
-          // onClick={handleAddProfessor}
-          >
-            Agregar recurso
-          </Button>
         </Grid>
 
 
@@ -134,9 +206,9 @@ export const SyllabeCreateBibliography = () => {
             variant="contained"
             color="primary"
             className={classes.formButton}
-          // onClick={handleUdpadeGeneralData}
+            onClick={handleAddResource}
           >
-            Guardar datos
+            Agregar recurso
           </Button>
         </Grid>
 

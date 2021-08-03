@@ -26,7 +26,8 @@ export const SyllabeDetailBibliography = ({ resources }) => {
                   <td className="lugar">
                     {resource.location}
                   </td>
-                </tr>)
+                </tr>
+              )
             })
           }
         </tbody>

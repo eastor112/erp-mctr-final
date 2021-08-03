@@ -23,6 +23,13 @@ export const useForm = (initialState = {}) => {
     });
   }
 
+  const handleInputCheckChange = ({ target }) => {
+    setFormValues({
+      ...formValues,
+      [target.name]: target.checked
+    });
+  }
+
   //Para actualizar todos los campos de usuario
   const allUpdateFields = (user) => {
     setFormValues({
@@ -36,6 +43,7 @@ export const useForm = (initialState = {}) => {
     formValues,
     handleInputChange,
     handleInputFileChange,
+    handleInputCheckChange,
     allUpdateFields,
     setFormValues,
     reset
