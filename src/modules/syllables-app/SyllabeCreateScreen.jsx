@@ -189,8 +189,16 @@ export const SyllabeCreateScreen = () => {
           {
             state.navValue === 1
             &&
-            <SyllabeCreateProgramming
-            />
+
+            (
+              actualSyllabe.units
+              &&
+              <SyllabeCreateProgramming
+                actualSyllabe={actualSyllabe}
+                setFormValues={setFormValues}
+                token={token}
+              />
+            )
           }
 
           {

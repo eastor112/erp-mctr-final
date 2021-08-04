@@ -195,3 +195,66 @@ export const deleteResource = async (id, token) => {
     return response.response;
   }
 }
+
+
+export const createUnit = async (unit, token) => {
+  const url = `${BACKEND_URL}/units`
+
+  const data = {
+    ...unit
+  }
+
+  const config = {
+    headers: {
+      Authorization: `token ${token}`
+    }
+  }
+
+  const response = await axios.post(url, data, config);
+
+
+  if (response.status === 201) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+
+export const getFullUnitInfo = async (id, token) => {
+  const url = `${BACKEND_URL}/units/${id}/full`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.get(url, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+
+export const deleteUnit = async (id, token) => {
+  const url = `${BACKEND_URL}/units/${id}`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.delete(url, config);
+
+  if (response.status === 204) {
+    return 'unit deleted';
+  } else {
+    return response.response;
+  }
+}
+
