@@ -177,6 +177,7 @@ export const createResource = async (resource, token) => {
 }
 
 
+
 export const deleteResource = async (id, token) => {
   const url = `${BACKEND_URL}/resource/${id}`
 
@@ -195,6 +196,7 @@ export const deleteResource = async (id, token) => {
     return response.response;
   }
 }
+
 
 
 export const createUnit = async (unit, token) => {
@@ -221,6 +223,7 @@ export const createUnit = async (unit, token) => {
 }
 
 
+
 export const getFullUnitInfo = async (id, token) => {
   const url = `${BACKEND_URL}/units/${id}/full`
 
@@ -238,6 +241,7 @@ export const getFullUnitInfo = async (id, token) => {
     return response.response;
   }
 }
+
 
 
 export const deleteUnit = async (id, token) => {

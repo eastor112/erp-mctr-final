@@ -1,38 +1,48 @@
 import React, { useState } from 'react'
 import Typography from '@material-ui/core/Typography';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
-import Select from '@material-ui/core/Select';
 import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeStyles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { SyllabeCreateWeek } from './SyllabeCreateWeek';
 import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import BookIcon from '@material-ui/icons/Book';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { SyllabeCreateRevision } from './SyllabeCreateRevision';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useForm } from '../../../hooks/useForm';
+import { SyllabeCreateUnitCapacities } from './SyllabeCreateUnitCapacities';
+import { SyllabeCreateUnitOutcomes } from './SyllabeCreateUnitOutcomes';
 
-export const SyllabeCreateUnit = ({ id, unitnumber, handleDeleteUnit }) => {
+export const SyllabeCreateUnit = ({
+  id,
+  name,
+  unitnumber,
+  capabilities,
+  outcomes,
+  weeks,
+  syllabeCapabilities,
+  handleDeleteUnit
+}) => {
+
 
   const classes = useStylesCreateSyllabe();
 
+  const { formValues, handleInputChange } = useForm({
+    unitName: name,
+    capability: '',
+    outcome: ''
+  });
+
+  const {
+    unitName,
+    capability,
+    outcome
+  } = formValues;
 
   return (
-    <Accordion>
+    <Accordion >
 
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
@@ -40,20 +50,20 @@ export const SyllabeCreateUnit = ({ id, unitnumber, handleDeleteUnit }) => {
         id="panel2a-header"
       >
 
-        <h4>
-          Unidad {unitnumber}
-        </h4>
-        <Typography className={classes.secondaryHeading}></Typography>
+        <Typography className={classes.heading}><b>Unidad {unitnumber}</b></Typography>
+
+        <Typography
+          className={classes.secondaryHeading}>
+          {name.length > 70 ? name.substring(0, 70) + '...' : name}
+        </Typography>
 
       </AccordionSummary>
 
       <AccordionDetails>
 
 
-        {/* // */}
-        <Grid container spacing={3}>
+        <Grid container spacing={3} alignItems='flex-end'>
           <Grid item xs={5} >
-
 
             <Button
               variant="contained"
@@ -72,7 +82,7 @@ export const SyllabeCreateUnit = ({ id, unitnumber, handleDeleteUnit }) => {
 
 
 
-          <Grid item xs={12}>
+          <Grid item xs={9}>
             <TextField
               label="Nombre de la unidad"
               type="text"
@@ -81,143 +91,49 @@ export const SyllabeCreateUnit = ({ id, unitnumber, handleDeleteUnit }) => {
               InputLabelProps={{
                 shrink: true,
               }}
-              id="name"
-              name='name'
-            // value={name}
-            // onChange={handleInputChange}
+              name='unitName'
+              value={unitName}
+              onChange={handleInputChange}
             />
           </Grid>
 
-          <Grid item xs={12}>
-            <h5>
-              Capacidades:
-            </h5>
-            <div className={classes.demo}>
-              <List>
-                {
-                  [1, 2].map((resource) => {
-
-                    return (
-                      <ListItem key={resource}>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <BookIcon color='primary' />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                          primary={`capacidad ${resource}`}
-                        />
-                        <ListItemSecondaryAction
-                          onClick={() => handDeleteResource(resource)}
-                        >
-                          <IconButton edge="end" aria-label="delete">
-                            <HighlightOffIcon color='secondary' />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      </ListItem>)
-                  })
-                }
-              </List>
-            </div>
-          </Grid>
-
-
-          <Grid item xs={12}>
-            <FormControl className={classes.formSelects}>
-              <InputLabel id="course-label">Capacidad terminal</InputLabel>
-              <Select
-                labelId="course-label"
-                id="course"
-                name="course"
-              // value={course}
-              // onChange={handleInputChange}
-              >
-                <MenuItem value={'1'}>CT1.1. Conocimientos de ingeniería</MenuItem>
-                <MenuItem value={'2'}>CT1.2. Herramientas modernas</MenuItem>
-                <MenuItem value={'3'}>CT1.3. Trabajo en equipo</MenuItem>
-
-
-              </Select>
-            </FormControl>
-          </Grid>
-
-
-
-          <Grid item xs={12} align='center'>
+          <Grid item xs={3} align='center'>
             <Button
-              variant="contained"
+              variant="outlined"
               color="primary"
-              className={classes.formButton}
+              className={classes.root}
             // onClick={handleAddProfessor}
             >
-              Agregar capacidad
+              Cambiar nombre
             </Button>
           </Grid>
 
 
-          <Grid item xs={12}>
-            <h5>
-              Resultados de aprendizaje:
-            </h5>
-            <div className={classes.demo}>
-              <List>
-                {
-                  [1, 2].map((resource) => {
+          {/* capabilities */}
+          <SyllabeCreateUnitCapacities
+            capabilities={capabilities}
+            syllabeCapabilities={syllabeCapabilities}
+            handleInputChange={handleInputChange}
+            capability={capability}
+          />
 
-                    return (
-                      <ListItem key={resource}>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <BookIcon color='primary' />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                          primary={`Resultado de aprendizaje ${resource}`}
-                        />
-                        <ListItemSecondaryAction
-                          onClick={() => handDeleteResource(resource)}
-                        >
-                          <IconButton edge="end" aria-label="delete">
-                            <HighlightOffIcon color='secondary' />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      </ListItem>)
-                  })
-                }
-              </List>
-            </div>
-          </Grid>
 
-          <Grid item xs={12}>
-            <h6 style={{ marginTop: '30px' }}>Resultados de aprendizaje:</h6>
-            <TextareaAutosize
-              aria-label="minimum height"
-              className={classes.formSelects}
-              minRows={5}
-              placeholder="Escriba los principios y procedimientos del curso..."
-              id='procedures'
-              name='procedures'
-            // value={procedures}
-            />
-          </Grid>
+          {/* outcomes */}
+          <SyllabeCreateUnitOutcomes
+            outcomes={outcomes}
+            outcome={outcome}
+            handleInputChange={handleInputChange}
+          />
 
-          <Grid item xs={12} align='center'>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.formButton}
-            // onClick={handleAddProfessor}
-            >
-              Agregar resultado
-            </Button>
-          </Grid>
 
-          {/* semanas */}
+          {/* weeks */}
+          {
+            weeks.map((wk) => {
+              return <SyllabeCreateWeek key={wk.id} {...wk} />
+            })
+          }
 
-          <SyllabeCreateWeek />
 
-          <Grid item xs={12}>
-          </Grid>
         </Grid>
 
       </AccordionDetails>

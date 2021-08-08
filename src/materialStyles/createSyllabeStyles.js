@@ -48,9 +48,8 @@ export const useStylesCreateSyllabe = makeStyles((theme) => ({
 
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
+    flexBasis: '15%',
     flexShrink: 0,
-    fontWeight: 'bold'
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
