@@ -27,7 +27,9 @@ export const SyllabeCreateUnitCapacities = ({
   capabilities,
   syllabeCapabilities,
   handleInputChange,
-  capability }) => {
+  capability,
+  addCapacity,
+  deleteCapability }) => {
 
   const classes = useStylesCreateSyllabe();
 
@@ -66,7 +68,7 @@ export const SyllabeCreateUnitCapacities = ({
                             primary={`(${cap.capacity.code} - ${cap.capacity.indicatoricacit}) ${cap.capacity.description.substring(0, 60)}...`}
                           />
                           <ListItemSecondaryAction
-                          // onClick={() => handDeleteResource(resource)}
+                            onClick={() => deleteCapability(cap.id)}
                           >
                             <IconButton edge="end" aria-label="delete">
                               <HighlightOffIcon color='secondary' />
@@ -96,6 +98,15 @@ export const SyllabeCreateUnitCapacities = ({
               >
                 {
                   syllabeCapabilities.map(cap => {
+
+                    const capacitiesExist = capabilities.map((capUnit) => {
+                      return capUnit.capacity.id
+                    })
+
+                    if (capacitiesExist.includes(cap.id)) {
+                      return
+                    }
+
                     return (
                       <MenuItem
                         key={cap.id}
@@ -117,7 +128,7 @@ export const SyllabeCreateUnitCapacities = ({
               variant="contained"
               color="primary"
               className={classes.formButton}
-            // onClick={handleAddProfessor}
+              onClick={addCapacity}
             >
               Agregar capacidad
             </Button>

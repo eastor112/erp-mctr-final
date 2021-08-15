@@ -262,3 +262,86 @@ export const deleteUnit = async (id, token) => {
   }
 }
 
+
+export const updateUnit = async (id, unit, token) => {
+  const url = `${BACKEND_URL}/units/${id}`
+
+  const data = { ...unit }
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+
+  const response = await axios.patch(url, data, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+
+export const createCapability = async (capability, token) => {
+  const url = `${BACKEND_URL}/capabilities`
+
+  const data = {
+    ...capability
+  }
+
+  const config = {
+    headers: {
+      Authorization: `token ${token}`
+    }
+  }
+
+  const response = await axios.post(url, data, config);
+
+
+  if (response.status === 201) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+
+export const getFullCapability = async (id, token) => {
+  const url = `${BACKEND_URL}/capabilities/${id}/full`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.get(url, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+export const deleteCapabilityUnit = async (id, token) => {
+  const url = `${BACKEND_URL}/capabilities/${id}`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.delete(url, config);
+
+  if (response.status === 204) {
+    return 'capability deleted';
+  } else {
+    return response.response;
+  }
+}
+

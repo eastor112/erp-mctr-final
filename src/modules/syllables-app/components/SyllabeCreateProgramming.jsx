@@ -53,6 +53,9 @@ export const SyllabeCreateProgramming = ({ actualSyllabe, token }) => {
                       {...unit}
                       handleDeleteUnit={handleDeleteUnit}
                       syllabeCapabilities={actualSyllabe.course.terminalcapacity}
+                      actualSyllabe={actualSyllabe}
+                      dispatch={dispatch}
+                      token={token}
                     />
                   )
                 })

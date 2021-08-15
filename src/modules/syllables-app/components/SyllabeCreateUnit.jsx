@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -14,6 +14,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { useForm } from '../../../hooks/useForm';
 import { SyllabeCreateUnitCapacities } from './SyllabeCreateUnitCapacities';
 import { SyllabeCreateUnitOutcomes } from './SyllabeCreateUnitOutcomes';
+import { createCapability, deleteCapabilityUnit, getFullCapability, updateUnit } from '../../../helpers/syllabes-helpers';
+import { updateActualSyllabe } from '../../../actions/syllabe-actions';
 
 export const SyllabeCreateUnit = ({
   id,
@@ -23,13 +25,16 @@ export const SyllabeCreateUnit = ({
   outcomes,
   weeks,
   syllabeCapabilities,
-  handleDeleteUnit
+  handleDeleteUnit,
+  actualSyllabe,
+  dispatch,
+  token
 }) => {
 
 
   const classes = useStylesCreateSyllabe();
 
-  const { formValues, handleInputChange } = useForm({
+  const { formValues, handleInputChange, setFormValues } = useForm({
     unitName: name,
     capability: '',
     outcome: ''
@@ -40,6 +45,69 @@ export const SyllabeCreateUnit = ({
     capability,
     outcome
   } = formValues;
+
+  const handleChangeName = () => {
+    updateUnit(id, { name: unitName }, token)
+      .then((updatedUnit) => {
+
+        const units = actualSyllabe.units.map((unit) => {
+          if (unit.id === updatedUnit.id) {
+            unit.name = updatedUnit.name
+          }
+          return unit
+        })
+
+        dispatch(updateActualSyllabe({ ...actualSyllabe, units: [...units] }))
+      })
+  }
+
+
+  const addCapacity = () => {
+
+    createCapability({ unit: id, capacity: capability }, token)
+      .then(({ id: idCapability }) => {
+        getFullCapability(idCapability, token)
+          .then((cap) => {
+
+            const unitsUpdated = actualSyllabe.units.map((unit) => {
+
+              if (unit.id === id) {
+                unit.capabilities = [...unit.capabilities, cap]
+              }
+              return unit
+            })
+
+            setFormValues(prev => ({ ...prev, capability: '' }));
+
+            dispatch(updateActualSyllabe({
+              ...actualSyllabe,
+              units: [...unitsUpdated]
+            }))
+          })
+      })
+  }
+
+
+  const deleteCapability = (idCapability) => {
+    deleteCapabilityUnit(idCapability, token)
+      .then(() => {
+        const unitsUpdated = actualSyllabe.units.map((unit) => {
+
+          if (unit.id === id) {
+            unit.capabilities = unit.capabilities.filter((cap) => cap.id !== idCapability)
+          }
+          return unit
+        })
+
+        dispatch(updateActualSyllabe({
+          ...actualSyllabe,
+          units: [...unitsUpdated]
+        }))
+
+
+      })
+  }
+
 
   return (
     <Accordion >
@@ -63,6 +131,8 @@ export const SyllabeCreateUnit = ({
 
 
         <Grid container spacing={3} alignItems='flex-end'>
+
+          {/* delete unit */}
           <Grid item xs={5} >
 
             <Button
@@ -81,7 +151,7 @@ export const SyllabeCreateUnit = ({
           </Grid>
 
 
-
+          {/* change name  */}
           <Grid item xs={9}>
             <TextField
               label="Nombre de la unidad"
@@ -97,12 +167,13 @@ export const SyllabeCreateUnit = ({
             />
           </Grid>
 
+          {/* button change name  */}
           <Grid item xs={3} align='center'>
             <Button
               variant="outlined"
               color="primary"
               className={classes.root}
-            // onClick={handleAddProfessor}
+              onClick={handleChangeName}
             >
               Cambiar nombre
             </Button>
@@ -115,6 +186,9 @@ export const SyllabeCreateUnit = ({
             syllabeCapabilities={syllabeCapabilities}
             handleInputChange={handleInputChange}
             capability={capability}
+            addCapacity={addCapacity}
+            deleteCapability={deleteCapability}
+            setFormValues={setFormValues}
           />
 
 
@@ -125,6 +199,8 @@ export const SyllabeCreateUnit = ({
             handleInputChange={handleInputChange}
           />
 
+          <Grid item xs={3} align='center'>
+          </Grid>
 
           {/* weeks */}
           {
