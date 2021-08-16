@@ -14,7 +14,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { useForm } from '../../../hooks/useForm';
 import { SyllabeCreateUnitCapacities } from './SyllabeCreateUnitCapacities';
 import { SyllabeCreateUnitOutcomes } from './SyllabeCreateUnitOutcomes';
-import { createCapability, deleteCapabilityUnit, getFullCapability, updateUnit } from '../../../helpers/syllabes-helpers';
+import {
+  createCapability,
+  createOutcome,
+  deleteCapabilityUnit,
+  deleteOutcomeUnit,
+  getFullCapability,
+  updateUnit
+} from '../../../helpers/syllabes-helpers';
 import { updateActualSyllabe } from '../../../actions/syllabe-actions';
 
 export const SyllabeCreateUnit = ({
@@ -94,17 +101,53 @@ export const SyllabeCreateUnit = ({
         const unitsUpdated = actualSyllabe.units.map((unit) => {
 
           if (unit.id === id) {
-            unit.capabilities = unit.capabilities.filter((cap) => cap.id !== idCapability)
+            unit.capabilities = unit.capabilities.filter((cap) => cap.id !== idCapability);
           }
           return unit
-        })
+        });
+
+        dispatch(updateActualSyllabe({
+          ...actualSyllabe,
+          units: [...unitsUpdated]
+        }));
+      })
+  }
+
+
+  const addOutcome = () => {
+    createOutcome({ unit: id, description: outcome }, token)
+      .then((createdOutcome) => {
+
+        const unitsUpdated = actualSyllabe.units.map((unit) => {
+          if (unit.id === id) {
+            unit.outcomes = [...unit.outcomes, createdOutcome];
+          }
+          return unit;
+        });
+
+        setFormValues(prev => ({ ...prev, outcome: '' }));
 
         dispatch(updateActualSyllabe({
           ...actualSyllabe,
           units: [...unitsUpdated]
         }))
+      })
+  }
 
+  const deleteOutcome = (idOutcome) => {
+    deleteOutcomeUnit(idOutcome, token)
+      .then(() => {
+        const unitsUpdated = actualSyllabe.units.map((unit) => {
+          if (unit.id === id) {
+            unit.outcomes = unit.outcomes.filter(out => out.id !== idOutcome);
+          }
+          return unit;
+        });
 
+        dispatch(updateActualSyllabe({
+          ...actualSyllabe,
+          units: [...unitsUpdated]
+        }))
       })
   }
 
@@ -118,7 +161,9 @@ export const SyllabeCreateUnit = ({
         id="panel2a-header"
       >
 
-        <Typography className={classes.heading}><b>Unidad {unitnumber}</b></Typography>
+        <Typography className={classes.heading}>
+          <b>Unidad {unitnumber}</b>
+        </Typography>
 
         <Typography
           className={classes.secondaryHeading}>
@@ -195,7 +240,9 @@ export const SyllabeCreateUnit = ({
           {/* outcomes */}
           <SyllabeCreateUnitOutcomes
             outcomes={outcomes}
-            outcome={outcome}
+            addOutcome={addOutcome}
+            deleteOutcome={deleteOutcome}
+            outcome={outcome}  //es el control del formulario
             handleInputChange={handleInputChange}
           />
 

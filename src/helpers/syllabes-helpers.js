@@ -327,6 +327,7 @@ export const getFullCapability = async (id, token) => {
   }
 }
 
+
 export const deleteCapabilityUnit = async (id, token) => {
   const url = `${BACKEND_URL}/capabilities/${id}`
 
@@ -344,4 +345,48 @@ export const deleteCapabilityUnit = async (id, token) => {
     return response.response;
   }
 }
+
+
+export const createOutcome = async (outcome, token) => {
+  const url = `${BACKEND_URL}/outcomes`
+
+  const data = {
+    ...outcome
+  }
+
+  const config = {
+    headers: {
+      Authorization: `token ${token}`
+    }
+  }
+
+  const response = await axios.post(url, data, config);
+
+
+  if (response.status === 201) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+
+export const deleteOutcomeUnit = async (id, token) => {
+  const url = `${BACKEND_URL}/outcomes/${id}`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.delete(url, config);
+
+  if (response.status === 204) {
+    return 'outcome deleted';
+  } else {
+    return response.response;
+  }
+}
+
 

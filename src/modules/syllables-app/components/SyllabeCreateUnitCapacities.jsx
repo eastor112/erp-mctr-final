@@ -116,8 +116,6 @@ export const SyllabeCreateUnitCapacities = ({
                       </MenuItem>)
                   })
                 }
-
-
               </Select>
             </FormControl>
           </Grid>

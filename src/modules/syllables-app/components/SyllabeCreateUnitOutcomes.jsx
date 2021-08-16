@@ -1,7 +1,6 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -11,15 +10,18 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeStyles';
+import { SyllabeCreateUnitOutcomeInput } from './SyllabeCreateUnitOutcomeInput';
 
 export const SyllabeCreateUnitOutcomes = ({
-  outcomes, outcome,
+  outcomes,
+  addOutcome,
+  deleteOutcome,
+  outcome,
   handleInputChange }) => {
 
   const classes = useStylesCreateSyllabe();
@@ -61,7 +63,7 @@ export const SyllabeCreateUnitOutcomes = ({
                             primary={`${outcome.description}`}
                           />
                           <ListItemSecondaryAction
-                            onClick={() => handDeleteResource(outcome)}
+                            onClick={() => deleteOutcome(outcome.id)}
                           >
                             <IconButton edge="end" aria-label="delete">
                               <HighlightOffIcon color='secondary' />
@@ -78,32 +80,14 @@ export const SyllabeCreateUnitOutcomes = ({
             </div>
           </Grid>
 
-          <Grid item xs={12}>
-            <h6 style={{ marginTop: '30px' }}>Resultado de aprendizaje:</h6>
-            <TextareaAutosize
-              aria-label="minimum height"
-              className={classes.formSelects}
-              minRows={3}
-              placeholder="Escriba los principios y procedimientos del curso..."
-              id='outcome'
-              name='outcome'
-              value={outcome}
-              onChange={handleInputChange}
+          <SyllabeCreateUnitOutcomeInput
+            outcome={outcome}
+            addOutcome={addOutcome}
+            handleInputChange={handleInputChange}
+          />
 
-            />
-          </Grid>
-
-          <Grid item xs={12} align='center'>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.formButton}
-            // onClick={handleAddProfessor}
-            >
-              Agregar resultado
-            </Button>
-          </Grid>
         </Grid>
+
 
       </AccordionDetails>
     </Accordion>
