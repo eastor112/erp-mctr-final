@@ -13,14 +13,43 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { useForm } from '../../../hooks/useForm';
+import { useSelector } from 'react-redux';
+import { updateWeekUnit } from '../../../helpers/syllabes-helpers';
 
 
 
 
 
-export const SyllabeCreateWeek = ({ weeknumber, contents, strategies, evidences, instruments }) => {
+export const SyllabeCreateWeek = ({
+  id,
+  weeknumber,
+  contents,
+  strategies,
+  evidences,
+  instruments,
+  token }) => {
 
   const classes = useStylesCreateSyllabe();
+
+
+  const { formValues, handleInputChange } = useForm({
+    weeknumber: weeknumber,
+    contents: contents,
+    strategies: strategies,
+    evidences: evidences,
+    instruments: instruments,
+    startweekdate: '2021-08-07',
+    finishweekdate: '2021-08-07',
+  })
+
+
+  const updateWeek = () => {
+    updateWeekUnit(id, formValues, token)
+      .then(() => {
+        console.log('semana actualizada');
+      })
+  }
 
   return (
 
@@ -31,34 +60,25 @@ export const SyllabeCreateWeek = ({ weeknumber, contents, strategies, evidences,
         aria-controls="panel2bh-content"
         id="panel2bh-header"
       >
-        <Typography className={classes.heading}>Semana {weeknumber}</Typography>
+        <Typography className={classes.heading}>Semana {formValues.weeknumber}</Typography>
         <Typography className={classes.secondaryHeading}>
           {contents.substring(0, 70)}...
         </Typography>
       </AccordionSummary>
 
       <AccordionDetails>
-        <Grid container spacing={3} spacing={1} >
+        <Grid container spacing={3} spacing={3} >
 
           <Grid item xs={3}>
-            <FormControl className={classes.formSelects}>
-              <InputLabel id="course-label">Numero de semana</InputLabel>
-              <Select
-                labelId="course-label"
-                // id="capability"
-                name="capability"
-              // value={capability}
-              // onChange={handleInputChange}
-              >
-
-                <MenuItem
-                >
-                  hola
-                </MenuItem>)
-
-
-              </Select>
-            </FormControl>
+            <TextField
+              id="weeknumber"
+              name='weeknumber'
+              label="Número de semana"
+              type="number"
+              className={classes.textField}
+              value={formValues.weeknumber}
+              onChange={handleInputChange}
+            />
           </Grid>
 
           <Grid item xs={3}>
@@ -69,9 +89,10 @@ export const SyllabeCreateWeek = ({ weeknumber, contents, strategies, evidences,
               InputLabelProps={{
                 shrink: true,
               }}
-              name='startdate'
-            // value={startdate}
-            // onChange={handleInputChange}
+              name='startweekdate'
+              value={formValues.startweekdate}
+              onChange={handleInputChange}
+
             />
           </Grid>
 
@@ -83,16 +104,14 @@ export const SyllabeCreateWeek = ({ weeknumber, contents, strategies, evidences,
               InputLabelProps={{
                 shrink: true,
               }}
-              name='startdate'
-            // value={startdate}
-            // onChange={handleInputChange}
+              name='finishweekdate'
+              value={formValues.finishweekdate}
+              onChange={handleInputChange}
             />
           </Grid>
 
           <Grid item xs={3}>
           </Grid>
-
-
 
 
           <Grid item xs={3} >
@@ -101,10 +120,11 @@ export const SyllabeCreateWeek = ({ weeknumber, contents, strategies, evidences,
               aria-label="minimum height"
               className={classes.formSelects}
               minRows={8}
-              placeholder="Escriba los principios y procedimientos del curso..."
-              id='procedures'
-              name='procedures'
-              value={contents}
+              placeholder="Escriba los contenidos de la semana"
+              id='contents'
+              name='contents'
+              value={formValues.contents}
+              onChange={handleInputChange}
             />
           </Grid>
 
@@ -114,10 +134,12 @@ export const SyllabeCreateWeek = ({ weeknumber, contents, strategies, evidences,
               aria-label="minimum height"
               className={classes.formSelects}
               minRows={8}
-              placeholder="Escriba los principios y procedimientos del curso..."
-              id='procedures'
-              name='procedures'
-              value={strategies}
+              placeholder="Escriba las estrategias que se utilizarán"
+              id='strategies'
+              name='strategies'
+              value={formValues.strategies}
+              onChange={handleInputChange}
+
             />
           </Grid>
 
@@ -127,10 +149,11 @@ export const SyllabeCreateWeek = ({ weeknumber, contents, strategies, evidences,
               aria-label="minimum height"
               className={classes.formSelects}
               minRows={8}
-              placeholder="Escriba los principios y procedimientos del curso..."
-              id='procedures'
-              name='procedures'
-              value={evidences}
+              placeholder="Escriba las evidencias que se tendrán"
+              id='evidences'
+              name='evidences'
+              value={formValues.evidences}
+              onChange={handleInputChange}
             />
           </Grid>
 
@@ -140,10 +163,11 @@ export const SyllabeCreateWeek = ({ weeknumber, contents, strategies, evidences,
               aria-label="minimum height"
               className={classes.formSelects}
               minRows={8}
-              placeholder="Escriba los principios y procedimientos del curso..."
-              id='procedures'
-              name='procedures'
-              value={instruments}
+              placeholder="Escriba los instrumentos que se utilizará"
+              id='instruments'
+              name='instruments'
+              value={formValues.instruments}
+              onChange={handleInputChange}
             />
           </Grid>
 
@@ -152,7 +176,7 @@ export const SyllabeCreateWeek = ({ weeknumber, contents, strategies, evidences,
               variant="contained"
               color="primary"
               className={classes.formButton}
-            // onClick={handleAddProfessor}
+              onClick={updateWeek}
             >
               Actualizar semana
             </Button>

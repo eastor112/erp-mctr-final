@@ -47,8 +47,6 @@ export const SyllabeCreateGeneralForm = () => {
               labelId="course-label"
               id="course"
               name="course"
-            // value={age}
-            // onChange={handleChange}
             >
               {
                 courses?.map((course) => {
@@ -89,8 +87,6 @@ export const SyllabeCreateGeneralForm = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-            // value={age}
-            // onChange={handleChange}
             >
               <MenuItem value={'1'}>I (impar)</MenuItem>
               <MenuItem value={'2'}>II (par)</MenuItem>
@@ -105,8 +101,6 @@ export const SyllabeCreateGeneralForm = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-            // value={age}
-            // onChange={handleChange}
             >
               <MenuItem value={'a'}>A</MenuItem>
               <MenuItem value={'b'}>B</MenuItem>

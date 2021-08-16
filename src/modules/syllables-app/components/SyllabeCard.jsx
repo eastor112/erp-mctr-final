@@ -27,6 +27,7 @@ export const SyllabeCard = ({
   const history = useHistory();
 
   const handleUpdate = () => {
+
     dispatch(startGetSyllabeDetailData(syllabe_id, token));
     history.push(`${import.meta.env.BASE_URL}panel/syllabes/update/${syllabe_id}/${course_id}`);
   }

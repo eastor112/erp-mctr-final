@@ -12,6 +12,7 @@ import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeSty
 import { createUnit, deleteUnit, getFullUnitInfo } from '../../../helpers/syllabes-helpers';
 import { useDispatch } from 'react-redux';
 import { updateActualSyllabe } from '../../../actions/syllabe-actions';
+import { useParams } from 'react-router-dom';
 
 
 
@@ -19,12 +20,13 @@ export const SyllabeCreateAddNewUnit = ({ actualSyllabe, token }) => {
 
   const classes = useStylesCreateSyllabe();
   const dispatch = useDispatch();
+  const { pk } = useParams()
 
   const { formValues, handleInputChange } = useForm({
     unitnumber: '',
     name: '',
     durationweeks: '',
-    syllabe: actualSyllabe.id
+    syllabe: pk
   });
 
   const {

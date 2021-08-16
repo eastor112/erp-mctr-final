@@ -11,7 +11,7 @@ import { SyllabeCreateScreen } from '../../syllables-app/SyllabeCreateScreen'
 export const PanelMainScreen = () => {
 
   const { location, syllabe_action } = useParams();
-  // console.log(location, syllabe_action);
+
 
   return (
     <div className="panel__container">

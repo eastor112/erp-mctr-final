@@ -390,3 +390,25 @@ export const deleteOutcomeUnit = async (id, token) => {
 }
 
 
+export const updateWeekUnit = async (id, week, token) => {
+  const url = `${BACKEND_URL}/week/${id}`
+
+  const data = { ...week }
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+
+  const response = await axios.patch(url, data, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response.response;
+  }
+}
+
+

@@ -98,11 +98,12 @@ export const SyllabesListScreen = () => {
   }
 
   const handleCreateSyllabe = () => {
-    createSyllabe(formValues.course, token).then((syllabeCreated) => {
-      dispatch(startGetSyllabeDetailData(syllabeCreated.id, token));
-      handleCloseModal();
-      history.push(`${import.meta.env.BASE_URL}panel/syllabes/create/${syllabeCreated.id}/${syllabeCreated.course}`);
-    });
+    createSyllabe(formValues.course, token)
+      .then((syllabeCreated) => {
+        dispatch(startGetSyllabeDetailData(syllabeCreated.id, token));
+        handleCloseModal();
+        history.push(`${import.meta.env.BASE_URL}panel/syllabes/create/${syllabeCreated.id}/${syllabeCreated.course}`);
+      });
   }
 
 

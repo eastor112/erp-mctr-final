@@ -252,7 +252,7 @@ export const SyllabeCreateUnit = ({
           {/* weeks */}
           {
             weeks.map((wk) => {
-              return <SyllabeCreateWeek key={wk.id} {...wk} />
+              return <SyllabeCreateWeek key={wk.id} {...wk} token={token} />
             })
           }
 
