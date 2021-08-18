@@ -5,12 +5,15 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
-import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeStyles';
 import Button from '@material-ui/core/Button';
-import { SyllabeCreateWeek } from './SyllabeCreateWeek';
-import TextField from '@material-ui/core/TextField';
-import { SyllabeCreateRevision } from './SyllabeCreateRevision';
 import DeleteIcon from '@material-ui/icons/Delete';
+import TextField from '@material-ui/core/TextField';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js';
+
+
+import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeStyles';
+import { SyllabeCreateWeek } from './SyllabeCreateWeek';
+import { SyllabeCreateRevision } from './SyllabeCreateRevision';
 import { useForm } from '../../../hooks/useForm';
 import { SyllabeCreateUnitCapacities } from './SyllabeCreateUnitCapacities';
 import { SyllabeCreateUnitOutcomes } from './SyllabeCreateUnitOutcomes';
@@ -54,6 +57,17 @@ export const SyllabeCreateUnit = ({
   } = formValues;
 
   const handleChangeName = () => {
+
+    Swal.fire({
+      title: 'Cambiando nombre',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
     updateUnit(id, { name: unitName }, token)
       .then((updatedUnit) => {
 
@@ -61,15 +75,27 @@ export const SyllabeCreateUnit = ({
           if (unit.id === updatedUnit.id) {
             unit.name = updatedUnit.name
           }
-          return unit
+          return unit;
         })
 
-        dispatch(updateActualSyllabe({ ...actualSyllabe, units: [...units] }))
-      })
+        dispatch(updateActualSyllabe({ ...actualSyllabe, units: [...units] }));
+
+        Swal.close();
+      });
   }
 
 
   const addCapacity = () => {
+
+    Swal.fire({
+      title: 'Agregando Capacidad...',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
 
     createCapability({ unit: id, capacity: capability }, token)
       .then(({ id: idCapability }) => {
@@ -81,21 +107,34 @@ export const SyllabeCreateUnit = ({
               if (unit.id === id) {
                 unit.capabilities = [...unit.capabilities, cap]
               }
-              return unit
-            })
+              return unit;
+            });
 
             setFormValues(prev => ({ ...prev, capability: '' }));
 
             dispatch(updateActualSyllabe({
               ...actualSyllabe,
               units: [...unitsUpdated]
-            }))
+            }));
+
+            Swal.close();
           })
       })
   }
 
 
   const deleteCapability = (idCapability) => {
+
+    Swal.fire({
+      title: 'Eliminando Capacidad...',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
     deleteCapabilityUnit(idCapability, token)
       .then(() => {
         const unitsUpdated = actualSyllabe.units.map((unit) => {
@@ -110,11 +149,25 @@ export const SyllabeCreateUnit = ({
           ...actualSyllabe,
           units: [...unitsUpdated]
         }));
+
+        Swal.close();
+
       })
   }
 
 
   const addOutcome = () => {
+
+    Swal.fire({
+      title: 'Agregando Resultado...',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
     createOutcome({ unit: id, description: outcome }, token)
       .then((createdOutcome) => {
 
@@ -130,11 +183,26 @@ export const SyllabeCreateUnit = ({
         dispatch(updateActualSyllabe({
           ...actualSyllabe,
           units: [...unitsUpdated]
-        }))
+        }));
+
+        Swal.close();
       })
   }
 
+
   const deleteOutcome = (idOutcome) => {
+
+    Swal.fire({
+      title: 'Eliminando Resultado...',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
+
     deleteOutcomeUnit(idOutcome, token)
       .then(() => {
         const unitsUpdated = actualSyllabe.units.map((unit) => {
@@ -147,8 +215,10 @@ export const SyllabeCreateUnit = ({
         dispatch(updateActualSyllabe({
           ...actualSyllabe,
           units: [...unitsUpdated]
-        }))
-      })
+        }));
+
+        Swal.close();
+      });
   }
 
 
@@ -261,8 +331,5 @@ export const SyllabeCreateUnit = ({
 
       </AccordionDetails>
     </Accordion>
-
-
-
   )
 }

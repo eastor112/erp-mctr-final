@@ -2,9 +2,12 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { startGetSyllabeDetailData } from '../../../actions/syllabe-actions';
+import { deleteSyllabe, getFilteredSyllabesSummary } from '../../../helpers/syllabes-helpers';
 
 export const SyllabeCard = ({
   token,
+  setState,
+  year,
   syllabe_id,
   course_id,
   course_name,
@@ -30,6 +33,19 @@ export const SyllabeCard = ({
 
     dispatch(startGetSyllabeDetailData(syllabe_id, token));
     history.push(`${import.meta.env.BASE_URL}panel/syllabes/update/${syllabe_id}/${course_id}`);
+  }
+
+  const handleDelete = () => {
+    deleteSyllabe(syllabe_id, token).
+      then(() => {
+        getFilteredSyllabesSummary('', year, '', '', '', '', token)
+          .then((syllabesData) => {
+            setState(prevState => ({
+              ...prevState,
+              syllabes: syllabesData
+            }));
+          });
+      })
   }
 
   return (
@@ -121,7 +137,7 @@ export const SyllabeCard = ({
 
             <button
               className="eliminar"
-              onClick={() => history.push(`${import.meta.env.BASE_URL}panel/syllabes/delete/${syllabe_id}`)}
+              onClick={handleDelete}
             >
               <i className="fas fa-trash"></i>
               BORRAR

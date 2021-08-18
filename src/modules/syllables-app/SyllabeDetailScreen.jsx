@@ -9,8 +9,8 @@ import { SyllabeDetailContainer } from './components/SyllabeDetailContainer';
 
 export const SyllabeDetailScreen = () => {
 
-  const { pk } = useParams()
-  const dispatch = useDispatch()
+  const { pk } = useParams();
+  const dispatch = useDispatch();
   const componentRef = useRef();
 
   const handlePrint = useReactToPrint({
@@ -48,7 +48,11 @@ export const SyllabeDetailScreen = () => {
         />
       }
 
-      <SyllabeDetailControls handlePrint={handlePrint} pk={pk} />
+      <SyllabeDetailControls
+        handlePrint={handlePrint}
+        pk={pk}
+        token={token}
+      />
 
     </>
   )

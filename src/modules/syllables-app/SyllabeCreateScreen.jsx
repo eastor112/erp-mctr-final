@@ -117,6 +117,7 @@ export const SyllabeCreateScreen = () => {
 
   const handleUdpadeGeneralData = () => {
     setState({ ...state, isLoading: true });
+
     Swal.fire({
       title: 'Actualizando...',
       html: 'Espere...',
@@ -252,7 +253,7 @@ export const SyllabeCreateScreen = () => {
 
       </div>
 
-      <SyllabeCreateControls pk={pk} />
+      <SyllabeCreateControls pk={pk} token={token} />
 
 
     </>

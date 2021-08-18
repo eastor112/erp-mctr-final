@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { SyllabeCreateRevision } from './SyllabeCreateRevision'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -48,42 +48,46 @@ export const SyllabeCreateBibliography = ({ actualSyllabe, token }) => {
 
   const handleAddResource = () => {
 
-    Swal.fire({
-      title: 'Agregando recurso',
-      html: 'Espere...',
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading()
-      }
-    });
+    if (reference.length > 0 && location.length > 0) {
 
-    createResource({
-      bibliography: actualSyllabe.bibliography.id,
-      reference: reference,
-      location: location,
-      principalresource: principalresource
-    }, token)
-      .then((resourceCreated) => {
-
-        const newResources = [...resources, { ...resourceCreated }]
-
-        setFormValues(prev => ({
-          ...prev,
-          resources: newResources,
-          reference: '',
-          location: '',
-          principalresource: false
-        }));
-
-        const syllabeUpdated = {
-          ...actualSyllabe,
-          bibliography: { ...actualSyllabe.bibliography, resources: newResources }
-        };
-        dispatch(updateActualSyllabe(syllabeUpdated));
-
-        Swal.close();
+      Swal.fire({
+        title: 'Agregando recurso',
+        html: 'Espere...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
       });
+
+      createResource({
+        bibliography: actualSyllabe.bibliography.id,
+        reference: reference,
+        location: location,
+        principalresource: principalresource
+      }, token)
+        .then((resourceCreated) => {
+
+          const newResources = [...resources, { ...resourceCreated }]
+
+          setFormValues(prev => ({
+            ...prev,
+            resources: newResources,
+            reference: '',
+            location: '',
+            principalresource: false
+          }));
+
+          const syllabeUpdated = {
+            ...actualSyllabe,
+            bibliography: { ...actualSyllabe.bibliography, resources: newResources }
+          };
+          dispatch(updateActualSyllabe(syllabeUpdated));
+
+          Swal.close();
+        });
+
+    }
   };
 
 

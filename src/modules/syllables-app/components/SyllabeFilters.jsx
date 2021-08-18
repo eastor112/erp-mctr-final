@@ -34,7 +34,8 @@ export const SyllabeFilters = ({ setState, schools, token }) => {
       .then((syllabesData) => {
         setState(prev => ({
           ...prev,
-          syllabes: syllabesData
+          syllabes: syllabesData,
+          year: year
         }));
       })
 

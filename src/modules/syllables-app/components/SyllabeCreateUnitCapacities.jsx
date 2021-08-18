@@ -22,7 +22,6 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
-
 export const SyllabeCreateUnitCapacities = ({
   capabilities,
   syllabeCapabilities,
@@ -41,7 +40,7 @@ export const SyllabeCreateUnitCapacities = ({
         aria-controls="panel2bh-content"
         id="panel2bh-header"
       >
-        <Typography className={classes.heading}>Capacidades</Typography>
+        <Typography >Capacidades terminales</Typography>
 
       </AccordionSummary>
 

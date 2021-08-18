@@ -6,10 +6,11 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 
 import { useForm } from '../../../hooks/useForm';
 import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeStyles';
-import { createUnit, deleteUnit, getFullUnitInfo } from '../../../helpers/syllabes-helpers';
+import { createUnit, getFullUnitInfo } from '../../../helpers/syllabes-helpers';
 import { useDispatch } from 'react-redux';
 import { updateActualSyllabe } from '../../../actions/syllabe-actions';
 import { useParams } from 'react-router-dom';
@@ -36,13 +37,27 @@ export const SyllabeCreateAddNewUnit = ({ actualSyllabe, token }) => {
     syllabe } = formValues;
 
   const handleAddUnit = () => {
+
+    Swal.fire({
+      title: 'Agregando unidad...',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
     createUnit(formValues, token)
       .then(({ id }) => {
 
         getFullUnitInfo(id, token).then((unitFull) => {
           dispatch(updateActualSyllabe({ ...actualSyllabe, units: [...actualSyllabe.units, unitFull] }));
         });
+
+        Swal.close();
       });
+
   }
 
 

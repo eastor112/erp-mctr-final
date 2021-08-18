@@ -412,3 +412,23 @@ export const updateWeekUnit = async (id, week, token) => {
 }
 
 
+export const deleteSyllabe = async (id, token) => {
+  const url = `${BACKEND_URL}/${id}`
+
+  const config = {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }
+
+  const response = await axios.delete(url, config);
+
+  if (response.status === 204) {
+    return 'syllabe deleted';
+  } else {
+    return response.response;
+  }
+}
+
+
+

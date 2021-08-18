@@ -4,21 +4,15 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js';
+
 import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeStyles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useForm } from '../../../hooks/useForm';
-import { useSelector } from 'react-redux';
 import { updateWeekUnit } from '../../../helpers/syllabes-helpers';
-
-
-
 
 
 export const SyllabeCreateWeek = ({
@@ -45,10 +39,22 @@ export const SyllabeCreateWeek = ({
 
 
   const updateWeek = () => {
+
+    Swal.fire({
+      title: 'Actualizando semana',
+      html: 'Espere...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
     updateWeekUnit(id, formValues, token)
       .then(() => {
         console.log('semana actualizada');
-      })
+        Swal.close();
+      });
   }
 
   return (

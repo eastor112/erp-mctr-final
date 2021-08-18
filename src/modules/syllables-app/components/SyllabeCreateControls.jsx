@@ -1,8 +1,9 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
+import { deleteSyllabe } from '../../../helpers/syllabes-helpers';
 
-export const SyllabeCreateControls = ({ pk }) => {
+export const SyllabeCreateControls = ({ pk, token }) => {
 
   const history = useHistory();
 
@@ -10,12 +11,12 @@ export const SyllabeCreateControls = ({ pk }) => {
     console.log('guardar silabo')
   }
 
-  const handlePrint = () => {
-    console.log('Imprimir sílabo');
-  }
 
   const handleDelete = () => {
-    console.log('Borrar sílabo')
+    deleteSyllabe(pk, token).
+      then(() => {
+        history.push(`${import.meta.env.BASE_URL}panel/syllabes`)
+      })
   }
 
   return (
@@ -37,13 +38,7 @@ export const SyllabeCreateControls = ({ pk }) => {
         <i className="fas fa-save"></i>
       </button>
 
-      <button
-        className="descargar"
-        data-tip data-for='download'
-        onClick={handlePrint}
-      >
-        <i className="fa fa-download" aria-hidden="true"></i>
-      </button>
+
 
       <button
         className="visualizar"
@@ -63,7 +58,7 @@ export const SyllabeCreateControls = ({ pk }) => {
 
       <ReactTooltip id='back'>Atrás</ReactTooltip>
       <ReactTooltip id='save'>Guardar</ReactTooltip>
-      <ReactTooltip id='download'>Descargar</ReactTooltip>
+      {/* <ReactTooltip id='download'>Descargar</ReactTooltip> */}
       <ReactTooltip id='see'>Visualizar</ReactTooltip>
       <ReactTooltip id='delete'>Eliminar</ReactTooltip>
     </div>

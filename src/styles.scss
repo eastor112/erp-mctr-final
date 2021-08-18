@@ -18,6 +18,10 @@ $line-height-silabo: 32px;
   font-family: $font-stack;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 //============= INDEX HTML =============
 .navbar {
   font-weight: bold;

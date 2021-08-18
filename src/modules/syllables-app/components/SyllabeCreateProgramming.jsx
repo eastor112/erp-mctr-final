@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { SyllabeCreateUnit } from './SyllabeCreateUnit'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
+import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 
 import { useStylesCreateSyllabe } from '../../../materialStyles/createSyllabeStyles';
 import { updateActualSyllabe } from '../../../actions/syllabe-actions';
@@ -23,9 +23,30 @@ export const SyllabeCreateProgramming = ({ actualSyllabe, token }) => {
   }
 
   const handleDeleteUnit = (id) => {
-    deleteUnit(id, token).then((data) => {
-      const unitsFiltereds = actualSyllabe.units.filter((unit) => unit.id !== id);
-      dispatch(updateActualSyllabe({ ...actualSyllabe, units: unitsFiltereds }));
+    Swal.fire({
+      title: `¿Esta seguro de eliminar esta unidad?`,
+      text: "No podrá revertir esta acción luego!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        deleteUnit(id, token)
+          .then((data) => {
+            const unitsFiltereds = actualSyllabe.units.filter((unit) => unit.id !== id);
+            dispatch(updateActualSyllabe({ ...actualSyllabe, units: unitsFiltereds }));
+
+            Swal.fire(
+              'Eliminado!',
+              'La unidad ha sido eliminada con éxito',
+              'success'
+            );
+          });
+      }
     })
   }
 
@@ -73,7 +94,5 @@ export const SyllabeCreateProgramming = ({ actualSyllabe, token }) => {
         token={token}
       />
     </>
-
-
   )
 }

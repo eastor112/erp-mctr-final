@@ -19,7 +19,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import { useStylesCreateSyllabe } from '../../materialStyles/createSyllabeStyles'
@@ -47,6 +46,7 @@ export const SyllabesListScreen = () => {
   const [state, setState] = useState({
     syllabes: [],
     schools: [],
+    year: actualYear,
     loading: false,
     showModal: false
   });
@@ -124,6 +124,8 @@ export const SyllabesListScreen = () => {
             return <SyllabeCard
               key={syllabeObj.syllabe_id}
               token={token}
+              setState={setState}
+              year={state.year}
               {...syllabeObj}
             />
           })
